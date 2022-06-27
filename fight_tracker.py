@@ -47,8 +47,8 @@ def fight():
     for i in initiative:
         print(f"Név: {i[0]}, HP: {i[1]} ||", end=" ")
     print()
-    name = input("Ki kapott sebzést? ")
-    dmg = int(input("Mennyi sebzést kapott?"))
+    name = input("Ki kapott sebzést/healt? ")
+    dmg = int(input("Mennyi sebzést kapott? (Healhez negatív számot írj!)"))
     for fighter in fighters:
         if fighter["Name"] == name:
             fighter["HP"] = fighter["HP"] - dmg
