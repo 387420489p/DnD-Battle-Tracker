@@ -1,13 +1,8 @@
-#TODO csata lekezelése
-#TODO aktuális állás kiprintelése
-
-
 initiative = []
 fighters = []
 
-def get_character(name, ac, hp, ini):
+def get_character(name, hp, ini):
     fighters.append({"Name": name,
-                    "AC": ac,
                     "HP": hp,
                     "Initiative": ini
                     })
@@ -21,10 +16,9 @@ def get_started():
             build_initiative()
             break
         else:
-            ac = int(input("AC: "))
             hp = int(input("HP: "))
             ini = int(input("Initiative: "))
-            get_character(nev, ac, hp, ini)
+            get_character(nev, hp, ini)
 
 
 def build_initiative():
@@ -32,7 +26,8 @@ def build_initiative():
     for fighter in fighters:
         initiative.append([fighter["Initiative"], fighter["Name"], fighter["HP"]])
     initiative.sort(reverse=True)
-    print(initiative)
+    for char in initiative:
+        char.pop(0)
     fight()
 
 def get_new_ini():
@@ -41,17 +36,25 @@ def get_new_ini():
     for fighter in fighters:
         if fighter["HP"] > 0:
             initiative.append([fighter["Initiative"], fighter["Name"], fighter["HP"]])
-            initiative.sort(reverse=True)
+    initiative.sort(reverse=True)
+    for char in initiative:
+        char.pop(0)
     fight()
 
 def fight():
     global initiative, fighters
-    print(f"Initiative: {initiative}")
+    print("Initiative: ", end=" ")
+    for i in initiative:
+        print(f"Név: {i[0]}, HP: {i[1]} ||", end=" ")
+    print()
     name = input("Ki kapott sebzést? ")
     dmg = int(input("Mennyi sebzést kapott?"))
     for fighter in fighters:
         if fighter["Name"] == name:
             fighter["HP"] = fighter["HP"] - dmg
+    print("        /")
+    print(f"*//////[<>==================- {name} - {dmg}")
+    print(r"""        \ """)
     get_new_ini()
 
 
