@@ -1,30 +1,36 @@
+#TODO földre kerülés PC-knek DONE
+#TODO exception handling
 initiative = []
 fighters = []
 
-def get_character(name, hp, ini):
+def get_character(name, hp, ini, pc):
     fighters.append({"Name": name,
-                    "HP": hp,
-                    "Initiative": ini
+                    "HP": int(hp),
+                    "Initiative": ini,
+                     "PC": pc,
                     })
 
 
 def get_started():
     global fighters
     while True:
-        nev = input("Add meg a karakter nevét! Type FIGHT for fight! ")
-        if nev == "fight" or nev == "FIGHT":
+        pc = input("PC or NPC? Type FIGHT to start the fight!")
+        if pc.lower() == "fight":
             build_initiative()
-            break
+        elif pc.lower() == 'pc':
+            pc = True
         else:
-            hp = int(input("HP: "))
-            ini = int(input("Initiative: "))
-            get_character(nev, hp, ini)
+            pc = False
+        nev = input("Name: ")
+        hp = int(input("HP: "))
+        ini = int(input("Initiative: "))
+        get_character(nev, hp, ini, pc)
 
 
 def build_initiative():
     global fighters, initiative
     for fighter in fighters:
-        initiative.append([fighter["Initiative"], fighter["Name"], fighter["HP"]])
+        initiative.append([fighter["Initiative"], fighter["Name"], fighter["HP"], fighter["PC"]])
     initiative.sort(reverse=True)
     for char in initiative:
         char.pop(0)
@@ -35,7 +41,10 @@ def get_new_ini():
     initiative = []
     for fighter in fighters:
         if fighter["HP"] > 0:
-            initiative.append([fighter["Initiative"], fighter["Name"], fighter["HP"]])
+            initiative.append([fighter["Initiative"], fighter["Name"], fighter["HP"], fighter["PC"]])
+        else:
+            if fighter["PC"] == True:
+                initiative.append([fighter["Initiative"], fighter["Name"], fighter["HP"], fighter["PC"]])
     initiative.sort(reverse=True)
     for char in initiative:
         char.pop(0)
@@ -45,14 +54,17 @@ def fight():
     global initiative, fighters
     print("Initiative: ", end=" ")
     for i in initiative:
-        print(f"Név: {i[0]}, HP: {i[1]} ||", end=" ")
+        if i[2] == True and i[1] <= 0:
+            print(f"Name: {i[0]}, PLAYER DOWN!||", end=" ")
+        else:
+            print(f"Name: {i[0]}, HP: {i[1]} ||", end=" ")
     print()
-    name = input("Ki kapott sebzést/healt? ")
-    dmg = int(input("Mennyi sebzést kapott? (Healhez negatív számot írj!)"))
+    name = input("Who got dmg? ")
+    dmg = int(input("How much dmg? (Type negative for heal) "))
     for fighter in fighters:
         if fighter["Name"] == name:
             fighter["HP"] = fighter["HP"] - dmg
-    print("        /")
+    print(r"""        /""")
     print(f"*//////[<>==================- {name} - {dmg}")
     print(r"""        \ """)
     get_new_ini()
