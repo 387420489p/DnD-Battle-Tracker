@@ -64,6 +64,8 @@ def fight():
     for fighter in fighters:
         if fighter["Name"] == name:
             fighter["HP"] = fighter["HP"] - dmg
+            if fighter["HP"] < 0:
+                fighter["HP"] = 0
     print(r"""        /""")
     print(f"*//////[<>==================- {name} - {dmg}")
     print(r"""        \ """)
