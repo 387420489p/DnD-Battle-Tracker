@@ -445,7 +445,7 @@ elif Race == "Elf":
         CON = StatIncrease(CON, 1)
     elif Subrace == "Wood":
         WIS = StatIncrease(WIS, 1)
-    elif Subrace == "Eladrin":
+    if Subrace == "Eladrin":
         SizeMod = Normal(2, 24)
     elif Subrace == "Drow":
         SizeMod = Normal(2, 12)
@@ -453,7 +453,7 @@ elif Race == "Elf":
         SizeMod = Normal(2, 20)
     elif Subrace == "Sea" or Subrace == "Shadar-Kai":
         SizeMod = Normal(2, 16)
-    elif Subrace == "Eladrin":
+    if Subrace == "Eladrin":
         Height = 4 * 12 + 6 + SizeMod
         Weight = 90 + SizeMod * random.randint(1, 4)
     elif Subrace == "Drow":
@@ -471,7 +471,7 @@ elif Race == "Elf":
     elif Subrace == "Wood":
         Height = 4 * 12 + 6 + SizeMod
         Weight = 100 + SizeMod * random.randint(1, 4)
-    elif Subrace == "Eladrin":
+    if Subrace == "Eladrin":
         Subrace = ["Eladrin of Autumn", "Eladrin of Winter", "Eladrin of Spring", "Eladrin of Summer"]
         Subrace = random.choice(Subrace)
         Traits.extend(["Darkvision (60ft)", "Fey Step"])
@@ -525,7 +525,7 @@ elif Race == "Genasi":
         INT = StatIncrease(INT, 1)
     elif Subrace == "Water":
         WIS = StatIncrease(WIS, 1)
-    elif Subrace == "Air":
+    if Subrace == "Air":
         Eyes = "Pale Blue"
         Skin = "Blueish Silver"
         Hair = "Blue and Gray Crystalline Hair"
@@ -541,7 +541,7 @@ elif Race == "Genasi":
         Eyes = "Deep Blue"
         Skin = "Green"
         Hair = "Dark Green"
-    elif Subrace == "Air":
+    if Subrace == "Air":
         Traits.extend(["Unending Breath", "Mingle with the Wind"])
     elif Subrace == "Earth":
         Traits.extend(["Earth Walk", "Merge with Stone"])
@@ -568,13 +568,13 @@ elif Race == "Gith":
         STR = StatIncrease(STR, 2)
     elif Subrace == "Githzerai":
         WIS = StatIncrease(WIS, 2)
-    elif Subrace == "Githyanki":
+    if Subrace == "Githyanki":
         Height = 5 * 12 + SizeMod
         Weight = 100 + SizeMod * Normal(2, 8)
     elif Subrace == "Githzerai":
         Height = 4 * 12 + 11 + SizeMod
         Weight = 90 + SizeMod * Normal(2, 8)
-    elif Subrace == "Githyanki":
+    if Subrace == "Githyanki":
         ArmourProficiencies.extend(["Light Armour", "Medium Armour"])
         WeaponProficiencies.extend(["Shortswords", "Longswords", "Greatswords"])
         Traits.extend(["Decadent Mastery", "Githyanki Psionics"])
@@ -603,7 +603,7 @@ elif Race == "Gnome":
         DEX = StatIncrease(DEX, 1)
     elif Subrace == "Rock":
         CON = StatIncrease(CON, 1)
-    elif Subrace == "Deep":
+    if Subrace == "Deep":
         Traits.extend(["Darkvision (120ft)", "Stone Camoflage"])
     elif Subrace == "Forest":
         Traits.extend(["Darkvision (60ft)", "Natural Illusionist", "Speak with Small Beasts"])
@@ -708,7 +708,7 @@ elif Race == "Halfling":
         CHA = StatIncrease(CHA, 1)
     elif Subrace == "Stout":
         CON = StatIncrease(CON, 1)
-    elif Subrace == "Ghostwise":
+    if Subrace == "Ghostwise":
         Traits.extend(["Silent Speech"])
     elif Subrace == "Lightfoot":
         Traits.extend(["Naturally Stealthy"])
@@ -792,7 +792,7 @@ elif Race == "Juiblexian":
         CHA = StatIncrease(CHA, 1)
     elif Subrace == "Mnemonic":
         INT = StatIncrease(INT, 1)
-    elif Subrace == "Corrosive":
+    if Subrace == "Corrosive":
         Traits.extend(["Caustic Touch", "Corrosive Body"])
         Resistances.extend(["Acid"])
     elif Subrace == "Blasphemy":
@@ -970,7 +970,7 @@ elif Race == "Tiefling":
     elif Subrace == "Zariel":
         CHA = StatIncrease(CHA, 2)
         STR = StatIncrease(STR, 1)
-    elif Subrace == "Asmodeus" or Subrace == "Feral":
+    if Subrace == "Asmodeus" or Subrace == "Feral":
         Traits.extend(["Infernal Legacy"])
     elif Subrace == "Baalzebul":
         Traits.extend(["Legacy of Maladomini"])
