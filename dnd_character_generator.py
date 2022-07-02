@@ -2,6 +2,7 @@
 Created on Tuesday April 30 2019
 
 @author: terreratman
+@the_guy_who_took_the_code_and_"improved"_it: 387420489
 """
 # DONE optional user inputs for race, class
 # DONE STR, WIS, ... stats distribution according to spell casting ability (max stat shoud be WIS for Cleric, STR for Barbarian....)
@@ -16,13 +17,17 @@ Created on Tuesday April 30 2019
 # TODO Does not account for Personality Traits, Ideals or Bonds because I don't want to write a random.choice for things that bulky, trying to find another way
 # Not all Skin/Hair/Eye colours may be correct, I just put some in quickly
 # TODO It does not print class traits
+# TODO missing classes:  Blood Hunter, Cardcaster, Diabolist, Feywalker, Morph, Occultist
 # =============================================================================
 
+from ast import Sub
 import random
 import collections
+from secrets import choice
 
 # --------------------------------------USER INPUTS----------------------------------------------------------------
-Level = input("What LEVEL do you want? Hit ENTER for random. ")  # This is where you change Character Level
+# This is where you change Character Level
+Level = input("What LEVEL do you want? Hit ENTER for random. ")
 if Level == "":
     Level = random.randint(1, 20)
 else:
@@ -54,7 +59,8 @@ else:
 
 # ------------------------------------------HP, STAT, GENERATING---------------------------------------------------------
 def Normal(Min, Max):  # Not exactly sure how this one is working, but it gives a more realistic result for age, height and weight
-    r = round(random.triangular(low=Min, high=Max))  # Round gives us a whole number for a character's age
+    # Round gives us a whole number for a character's age
+    r = round(random.triangular(low=Min, high=Max))
     return r
 
 
@@ -187,7 +193,7 @@ def StatRoll():
         CON = all_stats[2]
         INT = all_stats[3]
         CHA = all_stats[4]
-    elif Class == "Wizard":
+    elif Class == "Wizard" or Class == "Artificer" or Class == "Blood hunter":
         INT = max(all_stats)
         all_stats.remove(max(all_stats))
         random.shuffle(all_stats)
@@ -200,7 +206,7 @@ def StatRoll():
 
 StatRoll()
 
-#Level 4, 8, 12, 16 stat increase (it's random, just like everything!)
+# Level 4, 8, 12, 16 stat increase (it's random, just like everything!)
 
 stats_for_incr = [STR, DEX, CON, INT, WIS, CHA]
 
@@ -210,7 +216,7 @@ if Level >= 16:
 elif Level >= 12:
     for i in range(6):
         StatIncrease(random.choice(stats_for_incr), 1)
-elif Level >= 8:    
+elif Level >= 8:
     for i in range(4):
         StatIncrease(random.choice(stats_for_incr), 1)
 elif Level >= 4:
@@ -219,7 +225,7 @@ elif Level >= 4:
 
 # =============================================================================
 
-Stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"] #this is for variant human
+Stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"]  # this is for variant human
 # STR = random.randint(1, 20)
 # DEX = random.randint(1, 20)
 # CON = random.randint(1, 20)
@@ -259,8 +265,10 @@ ArtisanTools = ["Alchemist's Supplies", "Brewer's Supplies", "Calligrapher's Sup
                 "Cartographer's Tools", "Cobbler's Tools", "Cook's Utensils", "Glassblower's Tools", "Jeweler's Tools",
                 "Leatherworker's Tools", "Mason's Tools", "Painter's Tools", "Potter's Tools", "Smith's Tools",
                 "Tinker's Tools", "Weaver's Tools", "Woodcarver's Tools"]
-GamingSets = ["Dice Set", "Dragonchess Set", "Playing Card Set", "Three-Dragon Ante Set"]
-MusicalInstruments = ["Bagpipes", "Drum", "Dulcimer", "Flute", "Lute", "Lyre", "Horn", "Pan Flute", "Shawm", "Viol"]
+GamingSets = ["Dice Set", "Dragonchess Set",
+              "Playing Card Set", "Three-Dragon Ante Set"]
+MusicalInstruments = ["Bagpipes", "Drum", "Dulcimer", "Flute",
+                      "Lute", "Lyre", "Horn", "Pan Flute", "Shawm", "Viol"]
 MartialWeapons = ["Battleaxe", "Flail", "Glaive", "Greataxe", "Greatsword", "Halberd", "Lance", "Longsword", "Maul",
                   "Morningstar", "Pike", "Rapier", "Scimitar", "Shortsword", "Trident", "War Pick", "Warhammer", "Whip",
                   "Blowgun", "Hand Crossbow", "Heavy Crossbow", "Longbow", "Net"]
@@ -270,7 +278,8 @@ SimpleWeapons = ["Club", "Dagger", "Greatclub", "Handaxe", "Javelin", "Light Ham
                  "Spear", "Light Crossbow", "Dart", "Shortbow", "Sling"]
 SimpleMelee = ["Club", "Dagger", "Greatclub", "Handaxe", "Javelin", "Light Hammer", "Mace", "Quarterstaff", "Sickle",
                "Spear"]
-Languages = ["Common", "Dwarvish", "Elvish", "Giant", "Gnomish", "Goblin", "Halfling", "Orc", "Abyssal", "Celestial", "Deep Speech", "Draconic", "Infernal", "Primordial", "Sylvan", "Undercommon"]
+Languages = ["Common", "Dwarvish", "Elvish", "Giant", "Gnomish", "Goblin", "Halfling", "Orc",
+             "Abyssal", "Celestial", "Deep Speech", "Draconic", "Infernal", "Primordial", "Sylvan", "Undercommon"]
 
 # -----------------------------------------------RACE BUILDING-----------------------------------------------------------
 # Abomination Currently Removed
@@ -290,7 +299,8 @@ if Race == "Aasimar":
     SizeMod = Normal(2, 20)
     Height = 4 * 12 + 10 + SizeMod
     Weight = 110 + SizeMod * Normal(2, 8)
-    Eyes = ["Pupil-less Pale White", "Pupil-less Gold", "Pupil-less Gray", "Pupil-less Topaz"]
+    Eyes = ["Pupil-less Pale White", "Pupil-less Gold",
+            "Pupil-less Gray", "Pupil-less Topaz"]
     Eyes = random.choice(Eyes)
     Skin = ["Light/Pale White", "White/Fair", "Lightly Tanned", "Medium/Tanned", "Olive/Moderate Brown", "Brown",
             "Dark Brown", "Very Dark Brown/Black", "Emerald", "Gold", "Silver"]
@@ -326,11 +336,13 @@ elif Race == "Bugbear":
     Hair = ["Brown", "Red"]
     Hair = random.choice(Hair)
     Speed = 30
-    Traits.extend(["Darkvision (60ft)", "Long-Limbed", "Powerful Build", "Surprise Attack"])
+    Traits.extend(["Darkvision (60ft)", "Long-Limbed",
+                  "Powerful Build", "Surprise Attack"])
     SkillProficiencies.extend(["Stealth"])
 
 elif Race == "Dragonborn":
-    Subrace = ["Red", "Green", "Blue", "White", "Black", "Gold", "Silver", "Brass", "Copper", "Bronze"]
+    Subrace = ["Red", "Green", "Blue", "White", "Black",
+               "Gold", "Silver", "Brass", "Copper", "Bronze"]
     Subrace = random.choice(Subrace)
     STR = StatIncrease(STR, 2)
     CHA = StatIncrease(CHA, 1)
@@ -373,8 +385,10 @@ elif Race == "Dragonborn":
         Resistances.extend(["Cold"])
         Traits.extend(["Cold Breath"])
 
-elif Race == "Dryad":  # Extra Race I found https://www.dandwiki.com/wiki/Dryad_(5e_Race)
-    Subrace = ["Watcher"]  # Leaving this as a list in case I can find a balanced version of the Guardian subclass
+# Extra Race I found https://www.dandwiki.com/wiki/Dryad_(5e_Race)
+elif Race == "Dryad":
+    # Leaving this as a list in case I can find a balanced version of the Guardian subclass
+    Subrace = ["Watcher"]
     Subrace = random.choice(Subrace)
     DEX = StatIncrease(DEX, 1)
     WIS = StatIncrease(WIS, 2)
@@ -387,7 +401,8 @@ elif Race == "Dryad":  # Extra Race I found https://www.dandwiki.com/wiki/Dryad_
     Skin = random.choice(Skin)
     Hair = "Leaves that Change with the Seasons"
     Speed = 30
-    Traits.extend(["Barkskin", "Forest Blend", "Photosynthesis", "Tree Stride", "Nature Whisperer"])
+    Traits.extend(["Barkskin", "Forest Blend", "Photosynthesis",
+                  "Tree Stride", "Nature Whisperer"])
     Vulnerabilities.extend(["Fire"])
 
 elif Race == "Dwarf":
@@ -404,7 +419,8 @@ elif Race == "Dwarf":
     Hair = ["Bald", "Brown", "Black", "Blond", "Red"]
     Hair = random.choice(Hair)
     Speed = 25
-    WeaponProficiencies.extend(["Battleaxe", "Handaxe", "Throwing Hammer", "Warhammer"])
+    WeaponProficiencies.extend(
+        ["Battleaxe", "Handaxe", "Throwing Hammer", "Warhammer"])
     Traits.extend(["Dwarven Resilience"])
     if Subrace == "Hill":
         WIS = StatIncrease(WIS, 1)
@@ -422,7 +438,8 @@ elif Race == "Dwarf":
         STR = StatIncrease(STR, 1)
         Height = 3 * 12 + 8 + SizeMod
         Weight = 115 + SizeMod * Normal(2, 12)
-        Traits.extend(["Darkvision (120ft)", "Duergar Resilience", "Duergar Magic", "Sunlight Sensitivity"])
+        Traits.extend(["Darkvision (120ft)", "Duergar Resilience",
+                      "Duergar Magic", "Sunlight Sensitivity"])
 
 elif Race == "Elf":
     Subrace = ["Eladrin", "Drow", "High", "Sea", "Shadar-Kai", "Wood"]
@@ -472,24 +489,30 @@ elif Race == "Elf":
         Height = 4 * 12 + 6 + SizeMod
         Weight = 100 + SizeMod * random.randint(1, 4)
     if Subrace == "Eladrin":
-        Subrace = ["Eladrin of Autumn", "Eladrin of Winter", "Eladrin of Spring", "Eladrin of Summer"]
+        Subrace = ["Eladrin of Autumn", "Eladrin of Winter",
+                   "Eladrin of Spring", "Eladrin of Summer"]
         Subrace = random.choice(Subrace)
         Traits.extend(["Darkvision (60ft)", "Fey Step"])
     elif Subrace == "Drow":
-        WeaponProficiencies.extend(["Rapiers", "Shortswords", "Hand Crossbows"])
-        Traits.extend(["Darkvision (120ft)", "Sunlight Sensitivity", "Drow Magic"])
+        WeaponProficiencies.extend(
+            ["Rapiers", "Shortswords", "Hand Crossbows"])
+        Traits.extend(
+            ["Darkvision (120ft)", "Sunlight Sensitivity", "Drow Magic"])
     elif Subrace == "High":
-        WeaponProficiencies.extend(["Longswords", "Shortswords", "Shortbows", "Longbows"])
+        WeaponProficiencies.extend(
+            ["Longswords", "Shortswords", "Shortbows", "Longbows"])
         Traits.extend(["Wizard Cantrip"])
     elif Subrace == "Sea":
-        WeaponProficiencies.extend(["Spears", "Tridents", "Light Crossbows", "Nets"])
+        WeaponProficiencies.extend(
+            ["Spears", "Tridents", "Light Crossbows", "Nets"])
         Traits.extend(["Swim (30ft)", "Child of the Sea", "Friend of the Sea"])
     elif Subrace == "Shadar-Kai":
         Resistances.extend(["Necrotic"])
         Traits.extend(["Blessing of the Raven Queen"])
     elif Subrace == "Wood":
         Speed = 35
-        WeaponProficiencies.extend(["Longswords", "Shortswords", "Shortbows", "Longbows"])
+        WeaponProficiencies.extend(
+            ["Longswords", "Shortswords", "Shortbows", "Longbows"])
         Traits.extend(["Mask of the Wild"])
 
 elif Race == "Firbolg":
@@ -506,7 +529,8 @@ elif Race == "Firbolg":
     Hair = ["Red", "Blonde", "Dark Brown"]
     Hair = random.choice(Hair)
     Speed = 30
-    Traits.extend(["Firbolg Magic", "Hidden Step", "Powerful Build", "Speech of Beast and Leaf"])
+    Traits.extend(["Firbolg Magic", "Hidden Step",
+                  "Powerful Build", "Speech of Beast and Leaf"])
 
 elif Race == "Genasi":
     Subrace = ["Air", "Earth", "Fire", "Water"]
@@ -558,7 +582,8 @@ elif Race == "Gith":
     Age = Normal(20, 80)
     SizeMod = Normal(2, 24)
     Eyes = "Yellow"
-    Skin = ["Fair", "Pale Yellow with Green Tones", "Pale Yellow with Brown Tones"]
+    Skin = ["Fair", "Pale Yellow with Green Tones",
+            "Pale Yellow with Brown Tones"]
     Skin = random.choice(Skin)
     Hair = ["Russet", "Black", "Gray"]
     Hair = random.choice(Hair)
@@ -576,7 +601,8 @@ elif Race == "Gith":
         Weight = 90 + SizeMod * Normal(2, 8)
     if Subrace == "Githyanki":
         ArmourProficiencies.extend(["Light Armour", "Medium Armour"])
-        WeaponProficiencies.extend(["Shortswords", "Longswords", "Greatswords"])
+        WeaponProficiencies.extend(
+            ["Shortswords", "Longswords", "Greatswords"])
         Traits.extend(["Decadent Mastery", "Githyanki Psionics"])
     elif Subrace == "Githzerai":
         Traits.extend(["Mental Discipline", "Githzerai Psionics"])
@@ -593,7 +619,8 @@ elif Race == "Gnome":
     Skin = ["Lightly Tanned", "Medium/Tanned", "Olive/Moderate Brown", "Brown", "Dark Brown", "Very Dark Brown/Black",
             "Rocky Gray"]
     Skin = random.choice(Skin)
-    Hair = ["Red", "Black", "Grey", "Dark Brown", "Brown", "Dirty Blonde", "Blonde", "White"]
+    Hair = ["Red", "Black", "Grey", "Dark Brown",
+            "Brown", "Dirty Blonde", "Blonde", "White"]
     Hair = random.choice(Hair)
     Speed = 25
     Traits.extend(["Gnome Cunning"])
@@ -606,7 +633,8 @@ elif Race == "Gnome":
     if Subrace == "Deep":
         Traits.extend(["Darkvision (120ft)", "Stone Camoflage"])
     elif Subrace == "Forest":
-        Traits.extend(["Darkvision (60ft)", "Natural Illusionist", "Speak with Small Beasts"])
+        Traits.extend(
+            ["Darkvision (60ft)", "Natural Illusionist", "Speak with Small Beasts"])
     elif Subrace == "Rock":
         ToolProficiencies.extend(["Artisan's Tools"])
         Traits.extend(["Artificer's Lore", "Tinker"])
@@ -659,7 +687,8 @@ elif Race == "Hobgoblin":
     Traits.extend(["Darkvision (60ft)", "Martial Training", "Saving Face"])
 
 elif Race == "Half-Elf":
-    Subrace = ["N/A", "Drow", "Sun", "Moon", "Wood"]  # Keen Senses subrace removed because it is obsolete
+    # Keen Senses subrace removed because it is obsolete
+    Subrace = ["N/A", "Drow", "Sun", "Moon", "Wood"]
     Subrace = random.choice(Subrace)
     CHA = StatIncrease(CHA, 2)
     Age = Normal(20, 160)
@@ -683,7 +712,8 @@ elif Race == "Half-Elf":
         Choice = random.choice(["Elf Weapon Training", "Wizard Cantrip"])
         Traits.extend([Choice])
     elif Subrace == "Wood":
-        Choice = random.choice(["Elf Weapon Training", "Fleet of Foot", "Mask of the Wild"])
+        Choice = random.choice(
+            ["Elf Weapon Training", "Fleet of Foot", "Mask of the Wild"])
         Traits.extend([Choice])
 
 elif Race == "Halfling":
@@ -730,10 +760,12 @@ elif Race == "Half-Orc":
     Hair = random.choice(Hair)
     Speed = 30
     SkillProficiencies.extend(["Intimidation"])
-    Traits.extend(["Darkvision (60ft)", "Relentless Endurance", "Savage Attacks"])
+    Traits.extend(
+        ["Darkvision (60ft)", "Relentless Endurance", "Savage Attacks"])
 
 elif Race == "Human":  # I have not accounted for the different Human ethnicities
-    Subrace = ["Stat Increase", "Variant", "Variant"]  # Two chances for variant, just to spice things up
+    # Two chances for variant, just to spice things up
+    Subrace = ["Stat Increase", "Variant", "Variant"]
     Subrace = random.choice(Subrace)
     if Subrace == "Stat Increase":
         STR = StatIncrease(STR, 1)
@@ -743,7 +775,8 @@ elif Race == "Human":  # I have not accounted for the different Human ethnicitie
         WIS = StatIncrease(WIS, 1)
         CHA = StatIncrease(CHA, 1)
     elif Subrace == "Variant":
-        Choices = random.sample(Stats, 2)  # Stats list is found on line 101 above the STR/DEX/CON/INT/WIS/CHA = 0
+        # Stats list is found on line 101 above the STR/DEX/CON/INT/WIS/CHA = 0
+        Choices = random.sample(Stats, 2)
         if "STR" in Choices:
             STR = StatIncrease(STR, 1)
         if "DEX" in Choices:
@@ -780,7 +813,9 @@ elif Race == "Juiblexian":
     Height = 4 * 12 + 10 + SizeMod
     Weight = 80 + SizeMod * Normal(2, 8)
     Eyes = "N/A"
-    Skin = "Transparent " + random.choice(["Green", "Blueish White", "Yellow", "Orange", "Blue", "Red"])
+    Skin = "Transparent " + \
+        random.choice(["Green", "Blueish White",
+                      "Yellow", "Orange", "Blue", "Red"])
     Hair = "N/A"
     Speed = 30
     Immunities.extend(["Poison", "Poisoned"])
@@ -847,7 +882,8 @@ elif Race == "Kobold":
     Skin = random.choice(Skin)
     Hair = "N/A"
     Speed = 30
-    Traits.extend(["Darkvision (60ft)", "Grovel, Cower and Beg", "Pack Tactics", "Sunlight Sensitivity"])
+    Traits.extend(["Darkvision (60ft)", "Grovel, Cower and Beg",
+                  "Pack Tactics", "Sunlight Sensitivity"])
 
 elif Race == "Lizardfolk":
     CON = StatIncrease(CON, 2)
@@ -858,13 +894,16 @@ elif Race == "Lizardfolk":
     Weight = 120 + SizeMod * Normal(2, 12)
     Eyes = ["Red", "Green", "Gold", "Orange", "Blue"]
     Eyes = random.choice(Eyes)
-    Skin = ["Green Scales", "Greenish Brown", "Brown Scales", "Black Scales", "Tan Scales", "Albino Scales"]
+    Skin = ["Green Scales", "Greenish Brown", "Brown Scales",
+            "Black Scales", "Tan Scales", "Albino Scales"]
     Skin = random.choice(Skin)
     Hair = ["Pair of Spikes", "Lots of Spikes", "N/A"]
     Hair = random.choice(Hair)
     Speed = 30
-    Traits.extend(["Bite", "Cunning Artisan", "Hold Breath", "Natural Armour", "Hungry Jaws"])
-    LizardfolkSkills = ["Animal Handling", "Nature", "Perception", "Stealth", "Survival"]
+    Traits.extend(["Bite", "Cunning Artisan", "Hold Breath",
+                  "Natural Armour", "Hungry Jaws"])
+    LizardfolkSkills = ["Animal Handling", "Nature",
+                        "Perception", "Stealth", "Survival"]
     SkillProficiencies.extend(random.sample(LizardfolkSkills, 2))
 
 elif Race == "Mousefolk":  # Extra Race I found https://www.dndbeyond.com/races/61879-mousefolk
@@ -928,7 +967,8 @@ elif Race == "Tabaxi":
     Eyes = ["Green", "Yellow"]
     Eyes = random.choice(Eyes)
     Skin = "Pink"
-    Hair = ["Yelow", "Spotted Yellow", "Orange", "Spotted Orange", "Red", "Spotted Red"]
+    Hair = ["Yelow", "Spotted Yellow", "Orange",
+            "Spotted Orange", "Red", "Spotted Red"]
     Hair = random.choice(Hair)
     Speed = 30
     Traits.extend(["Darkvision (60ft)", "Feline Agility", "Cat Claws"])
@@ -942,7 +982,8 @@ elif Race == "Tiefling":
     SizeMod = Normal(2, 16)
     Height = 4 * 12 + 9 + SizeMod
     Weight = 110 + SizeMod * Normal(2, 8)
-    Eyes = ["Solid Orb of Red", "Solid Orb of Black", "Solid Orb of White", "Solid Orb of Silver", "Solid Orb of Gold"]
+    Eyes = ["Solid Orb of Red", "Solid Orb of Black",
+            "Solid Orb of White", "Solid Orb of Silver", "Solid Orb of Gold"]
     Eyes = random.choice(Eyes)
     Skin = ["Light/Pale White", "White/Fair", "Lightly Tanned", "Medium/Tanned", "Olive/Moderate Brown", "Brown",
             "Dark Brown", "Very Dark Brown/Black", "Light Red", "Maroon", "Burgundy", "Dark Red", "Red"]
@@ -1024,7 +1065,8 @@ elif Race == "Triton":
     Hair = ["Deep Blue", "Greenish Blue", "Green"]
     Hair = random.choice(Hair)
     Speed = 30
-    Traits.extend(["Amphibious", "Control Air and Water", "Emissary of the Sea", "Guardians of the Depths"])
+    Traits.extend(["Amphibious", "Control Air and Water",
+                  "Emissary of the Sea", "Guardians of the Depths"])
 
 elif Race == "Yuan-Ti Pureblood":
     CHA = StatIncrease(CHA, 2)
@@ -1042,7 +1084,8 @@ elif Race == "Yuan-Ti Pureblood":
     Hair = random.choice(Hair)
     Speed = 30
     Immunities.extend(["Poison", "Poisoned"])
-    Traits.extend(["Darkvision (60ft)", "Innate Spellcasting", "Magic Resistance"])
+    Traits.extend(
+        ["Darkvision (60ft)", "Innate Spellcasting", "Magic Resistance"])
 
 STRMOD = STATMOD(STR)
 DEXMOD = STATMOD(DEX)
@@ -1052,15 +1095,31 @@ WISMOD = STATMOD(WIS)
 CHAMOD = STATMOD(CHA)
 
 # -----------------------------------------------CLASS GENERATOR---------------------------------------------------------
-# =============================================================================
-# if Class == "Alchemist":
-# =============================================================================
 
 # =============================================================================
-# if Class == "Artificer":
-# =============================================================================
+if Class == "Artificer":
+    SpellCastingAbility = "INT"
+    HP = HP + HitPoints(8)
+    ArmourProficiencies.extend(["Light Armor", "Medium Armor", "Shields"])
+    WeaponProficiencies.extend(["Simple Weapons"])
+    SavingThrowProficiencies.extend(["CON", "INT"])
+    SkillProficiencies.extend(random.sample(
+        ["Arcana", "History", "Investigation", "Medicine", "Nature", "Perception", "Sleight of Hand"], 2))
+    Equipment.extend([random.choice(SimpleWeapons), random.choice(SimpleWeapons), "Light Crossbow and 20 Bolts",
+                     random.choice(["Studded Leather", "Scale Mail"]), "Thieves' Tool", "Dungeoneer's Pack"])
+    ToolProficiencies.extend(
+        ["Thieves' Tools", "Tinker's Tool", random.choice(ArtisanTools)])
+    if Level >= 3:
+        Subclass = ["Alchemist", "Armorer", "Artillerist", "Battle Smith"]
+        Subclass = random.choice(Subclass)
+    if Subclass == "Alchemist":
+        ToolProficiencies.append("Alchemist's Supplies")
+    elif Subclass == "Armorer" or Subclass == "Battle Smith":
+        ToolProficiencies.append("Smith's Tools")
+    elif Subclass == "Artillerist":
+        ToolProficiencies.append("Woodcarver's Tool")
 
-if Class == "Barbarian":
+elif Class == "Barbarian":
     SpellCastingAbility = "STR"
     if Level >= 3:
         Subclass = ["Path of the Ancestral Guardian", "Path of the Battlerager", "Path of the Berserker",
@@ -1073,7 +1132,8 @@ if Class == "Barbarian":
     SkillProficiencies.extend(
         random.sample(["Animal Handling", "Athletics", "Intimidation", "Nature", "Perception", "Survival"], 2))
     Equipment.extend([random.choice(["Greataxe", random.choice(MartialMelee)]),
-                      random.choice(["Two Handaxes", random.choice(SimpleWeapons)]), "Explorer's Pack",
+                      random.choice(["Two Handaxes", random.choice(
+                          SimpleWeapons)]), "Explorer's Pack",
                       "Four Javelins"])
 
 elif Class == "Bard":
@@ -1083,7 +1143,8 @@ elif Class == "Bard":
         Subclass = random.choice(Subclass)
     HP = HP + HitPoints(8)
     ArmourProficiencies.extend(["Light Armour"])
-    WeaponProficiencies.extend(["Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords"])
+    WeaponProficiencies.extend(
+        ["Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords"])
     ToolProficiencies.extend(random.sample(MusicalInstruments, 3))
     SavingThrowProficiencies.extend(["DEX", "CHA"])
     SkillProficiencies.extend(random.sample(Skills, 3))
@@ -1091,9 +1152,35 @@ elif Class == "Bard":
                       random.choice(["Diplomat's Pack", "Entertainer's Pack"]),
                       random.choice(["Lute", random.choice(MusicalInstruments)]), "Leather Armour", "Dagger"])
 
-# =============================================================================
-# if Class == "Blood Hunter":
-# =============================================================================
+elif Class == "Blood hunter":
+    if Level >= 3:
+        Subclass = ["Ghostslayer", "Lycan", "Mutant", "Profane Soul"]
+        Subclass = random.choice(Subclass)
+    HP = HP + HitPoints(8)
+    ArmourProficiencies.extend(["Light Armour", "Medium Armour", "Shields"])
+    WeaponProficiencies.extend(["Simple Weapons", "Martial Weapons"])
+    SavingThrowProficiencies.extend(["DEX", "INT"])
+    SkillProficiencies.extend(random.sample(["Acrobatics", "Arcanauence without repetit",
+                              "Athletics", "History", "Insight", "Investigation", "Religion", "Survival"], 3))
+    coinflip = random.randint(1, 2)
+    if coinflip == 1:
+        Equipment.extend(random.choice(MartialWeapons))
+    else:
+        Equipment.extend(random.sample(SimpleWeapons, 2))
+    Equipment.append(random.choice(["Light Crossbow with 20 Bolts", "Hand Crossbow and 20 Bolts"]))
+    Equipment.extend([random.choice(["Studded Leather Armor", "Scale Mail Armor"]), "Explorer's Pack", "Alchemist's Supplies"])
+    if Level >= 2:
+        FightingStyle = ["Arcery", "Dueling",
+                         "Great Weapon Fighting", "Two-Weapon Fighting"]
+        FightingStyle = random.choice(FightingStyle)
+    if Subclass == "Ghostslayer":
+        Resistances.append("Necrotic Damage")
+    elif Subclass == "Lycan":
+        Resistances.append(
+            "You have resistance to bludgeoning, piercing, and slashing damage from nonmagical attacks not made with silvered weapons")
+    elif Subclass == "Mutant":
+        Equipment.append("Mutagen (See subclass)")
+
 
 # =============================================================================
 # if Class == "Cardcaster":
@@ -1109,13 +1196,15 @@ elif Class == "Cleric":
     ArmourProficiencies.extend(["Light Armour", "Medium Armour", "Shields"])
     WeaponProficiencies.extend(["Simple Weapons"])
     SavingThrowProficiencies.extend(["WIS", "CHA"])
-    SkillProficiencies.extend(random.sample(["History", "Insight", "Medicine", "Persuasion", "Religion"], 2))
+    SkillProficiencies.extend(random.sample(
+        ["History", "Insight", "Medicine", "Persuasion", "Religion"], 2))
     if "Warhammer" in WeaponProficiencies or "Martial Weapons" in WeaponProficiencies:
         Equipment.extend([random.choice(["Mace", "Warhammer"])])
     else:
         Equipment.extend(["Mace"])
     if "Chain Mail" in ArmourProficiencies or "Heavy Armour" in ArmourProficiencies:
-        Equipment.extend([random.choice(["Scale Mail", "Leather Armour", "Chain Mail"])])
+        Equipment.extend(
+            [random.choice(["Scale Mail", "Leather Armour", "Chain Mail"])])
     else:
         Equipment.extend([random.choice(["Scale Mail", "Leather Armour"])])
     Equipment.extend([random.choice(["Light Crossbow with 20 Bolts", random.choice(SimpleWeapons)]),
@@ -1143,7 +1232,8 @@ elif Class == "Druid":
     SkillProficiencies.extend(random.sample(
         ["Arcana", "Animal Handling", "Insight", "Medicine", "Nature", "Perception", "Religion", "Survival"], 2))
     Equipment.extend([random.choice(["Wooden Shield", random.choice(SimpleWeapons)]),
-                      random.choice(["Scimitar", random.choice(SimpleMelee)]), "Leather Armour", "Explorer's Pack",
+                      random.choice(["Scimitar", random.choice(
+                          SimpleMelee)]), "Leather Armour", "Explorer's Pack",
                       "Druidic Focus"])
 
 # =============================================================================
@@ -1151,26 +1241,31 @@ elif Class == "Druid":
 # =============================================================================
 
 elif Class == "Fighter":
-    FightingStyle = ["Archery", "Defense", "Dueling", "Great Weapon Fighting", "Protection", "Two-Weapon Fighting"]
+    FightingStyle = ["Archery", "Defense", "Dueling",
+                     "Great Weapon Fighting", "Protection", "Two-Weapon Fighting"]
     FightingStyle = random.choice(FightingStyle)
     if Level >= 3:
         Subclass = ["Arcane Archer", "Battle Master", "Brute", "Cavalier", "Champion", "Eldritch Knight",
                     "Purple Dragon Knight", "Samurai", "Scout", "Sharpshooter"]
         Subclass = random.choice(Subclass)
     HP = HP + HitPoints(10)
-    ArmourProficiencies.extend(["Light Armour, Medium Armour, Heavy Armour", "Shields"])
+    ArmourProficiencies.extend(
+        ["Light Armour, Medium Armour, Heavy Armour", "Shields"])
     WeaponProficiencies.extend(["Simple Weapons", "Martial Weapons"])
     SavingThrowProficiencies.extend(["STR", "CON"])
     SkillProficiencies.extend(random.sample(
-        ["Acrobatics", "Animal Handling", "Athletics", "History", "Insight", "Intimidation", "Perception", "Survival"],
+        ["Acrobatics", "Animal Handling", "Athletics", "History",
+            "Insight", "Intimidation", "Perception", "Survival"],
         2))
     # =============================================================================
     #   This whole equipment section got messed up because one choice of equipment gives multiple items, which gives my code lists within lists. My print functions don't work with lists within lists. I'm looking for a way to simplify this. Similar issue encountered with Paladin and Ranger
     # =============================================================================
     EqptExtnd = [random.choice(["Light Crossbow with 20 Bolts", "Two Handaxes"]),
                  random.choice(["Dungeoneer's Pack", "Explorer's Pack"])]
-    EqptExtnd.extend(random.choice([["Chain Mail"], ["Leather Armour", "Longbow with 20 Arrows"]]))
-    EqptExtnd.extend(random.choice([[random.choice(MartialWeapons), "Shield"], random.sample(MartialWeapons, 2)]))
+    EqptExtnd.extend(random.choice(
+        [["Chain Mail"], ["Leather Armour", "Longbow with 20 Arrows"]]))
+    EqptExtnd.extend(random.choice(
+        [[random.choice(MartialWeapons), "Shield"], random.sample(MartialWeapons, 2)]))
     Equipment.extend(EqptExtnd)
 
 elif Class == "Monk":
@@ -1181,7 +1276,8 @@ elif Class == "Monk":
         Subclass = random.choice(Subclass)
     HP = HP + HitPoints(8)
     WeaponProficiencies.extend(["Simple Weapons", "Shortswords"])
-    ToolProficiencies.extend([random.choice([random.choice(MusicalInstruments), random.choice(ArtisanTools)])])
+    ToolProficiencies.extend([random.choice(
+        [random.choice(MusicalInstruments), random.choice(ArtisanTools)])])
     SavingThrowProficiencies.extend(["STR", "DEX"])
     SkillProficiencies.extend(
         random.sample(["Acrobatics", "Athletics", "History", "Insight", "Religion", "Stealth"], 2))
@@ -1198,29 +1294,35 @@ elif Class == "Monk":
 
 elif Class == "Paladin":
     if Level >= 2:
-        FightingStyle = ["Defense", "Dueling", "Great Weapon Fighting", "Protection"]
+        FightingStyle = ["Defense", "Dueling",
+                         "Great Weapon Fighting", "Protection"]
         FightingStyle = random.choice(FightingStyle)
     if Level >= 3:
         Subclass = ["Oath of the Ancients", "Oath of Conquests", "Oath of the Crown", "Oath of Devotion",
                     "Oath of Redemption", "Oath of Vengeance", "Oathbreaker", "Oath of Treachery"]
         Subclass = random.choice(Subclass)
     HP = HP + HitPoints(10)
-    ArmourProficiencies.extend(["Light Armour", "Medium Armour", "Heavy Armour", "Shields"])
+    ArmourProficiencies.extend(
+        ["Light Armour", "Medium Armour", "Heavy Armour", "Shields"])
     WeaponProficiencies.extend(["Simple Weapons", "Martial Weapons"])
     SavingThrowProficiencies.extend(["WIS", "CHA"])
     SkillProficiencies.extend(
         random.sample(["Athletics", "Insight", "Intimidation", "Medicine", "Persuasion", "Religion"], 2))
-    EqptExtnd = random.choice([[random.choice(MartialWeapons), "Shield"], random.sample(MartialWeapons, 2)])
-    EqptExtnd.extend([random.choice(["5 Javelins", random.choice(SimpleMelee)])])
+    EqptExtnd = random.choice(
+        [[random.choice(MartialWeapons), "Shield"], random.sample(MartialWeapons, 2)])
+    EqptExtnd.extend(
+        [random.choice(["5 Javelins", random.choice(SimpleMelee)])])
     EqptExtnd.extend(["Chain Mail", "Holy Symbol"])
     Equipment.extend(EqptExtnd)
 
 elif Class == "Ranger":
     if Level >= 2:
-        FightingStyle = ["Archery", "Defense", "Dueling", "Two-Weapon Fighting"]
+        FightingStyle = ["Archery", "Defense",
+                         "Dueling", "Two-Weapon Fighting"]
         FightingStyle = random.choice(FightingStyle)
     elif Level >= 3:
-        Subclass = ["Beast Master", "Gloom Stalker", "Horizon Walker", "Hunter", "Monster Slayer", "Primeval Guardian"]
+        Subclass = ["Beast Master", "Gloom Stalker", "Horizon Walker",
+                    "Hunter", "Monster Slayer", "Primeval Guardian"]
         Subclass = random.choice(Subclass)
     HP = HP + HitPoints(10)
     ArmourProficiencies.extend(["Light Armour", "Medium Armour", "Shields"])
@@ -1229,25 +1331,29 @@ elif Class == "Ranger":
     SkillProficiencies.extend(random.sample(
         ["Animal Handling", "Athletics", "Insight", "Investigation", "Nature", "Perception", "Stealth", "Survival"], 3))
     EqptExtnd = [random.choice(["Scale Mail", "Leather Armour"])]
-    EqptExtnd.extend(random.choice([["Two Shortswords"], random.sample(SimpleMelee, 2)]))
+    EqptExtnd.extend(random.choice(
+        [["Two Shortswords"], random.sample(SimpleMelee, 2)]))
     EqptExtnd.extend([random.choice(["Dungeoneer's Pack", "Explorer's Pack"])])
     EqptExtnd.extend(["Longbow with 20 Arrows"])
     Equipment.extend(EqptExtnd)
 
 elif Class == "Rogue":
     if Level >= 3:
-        Subclass = ["Arcane Trickster", "Assassin", "Inquisitive", "Mastermind", "Scout", "Swashbuckler", "Thief"]
+        Subclass = ["Arcane Trickster", "Assassin", "Inquisitive",
+                    "Mastermind", "Scout", "Swashbuckler", "Thief"]
         Subclass = random.choice(Subclass)
     HP = HP + HitPoints(8)
     ArmourProficiencies.extend(["Light Armour"])
-    WeaponProficiencies.extend(["Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords"])
+    WeaponProficiencies.extend(
+        ["Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords"])
     ToolProficiencies.extend(["Thieves' Tools"])
     SavingThrowProficiencies.extend(["DEX", "INT"])
     SkillProficiencies.extend(random.sample(
         ["Acrobatics", "Athletics", "Deception", "Insight", "Intimidation", "Investigation", "Perception",
          "Performance", "Persuasion", "Sleight of Hand", "Stealth"], 4))
     Equipment.extend([random.choice(["Rapier", "Shortsword"]), random.choice(["Shortbow with 20 Arrows", "Shortsword"]),
-                      random.choice(["Burglar's Pack", "Dungeoneer's Pack", "Explorer's Pack"]), "Leather Armour",
+                      random.choice(
+                          ["Burglar's Pack", "Dungeoneer's Pack", "Explorer's Pack"]), "Leather Armour",
                       "Two Daggers", "Thieves's Tools"])
 
 elif Class == "Sorcerer":
@@ -1255,7 +1361,8 @@ elif Class == "Sorcerer":
                 "Shadow Magic", "Stone Soercery", "Storm Sorcery", "Wild Magic"]
     Subclass = random.choice(Subclass)
     HP = HP + HitPoints(6)
-    WeaponProficiencies.extend(["Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows"])
+    WeaponProficiencies.extend(
+        ["Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows"])
     SavingThrowProficiencies.extend(["CON", "CHA"])
     SkillProficiencies.extend(
         random.sample(["Arcana", "Deception", "Insight", "Intimidation", "Persuasion", "Religion"], 2))
@@ -1268,7 +1375,8 @@ elif Class == "Warlock":
                 "The Hexblade", "The Raven Queen", "The Seeker", "The Undying"]
     Subclass = random.choice(Subclass)
     if Level >= 3:
-        FightingStyle = ["Pact of the Chain", "Pact of the Blade", "Pact of the Tome"]
+        FightingStyle = ["Pact of the Chain",
+                         "Pact of the Blade", "Pact of the Tome"]
         FightingStyle = random.choice(FightingStyle)
     HP = HP + HitPoints(8)
     ArmourProficiencies.extend(["Light Armour"])
@@ -1278,7 +1386,8 @@ elif Class == "Warlock":
         random.sample(["Arcana", "Deception", "History", "Intimidation", "Investigation", "Nature", "Religion"], 2))
     Equipment.extend([random.choice(["Light Crossbow with 20 Bolts", random.choice(SimpleWeapons)]),
                       random.choice(["Component Pouch", "Arcane Focus"]),
-                      random.choice(["Scholar's Pack", "Dungeoneer's Pack"]), "Leather Armour",
+                      random.choice(
+                          ["Scholar's Pack", "Dungeoneer's Pack"]), "Leather Armour",
                       random.choice(SimpleWeapons), "Two Daggers"])
 
 elif Class == "Wizard":
@@ -1289,7 +1398,8 @@ elif Class == "Wizard":
                     "War Magic"]
         Subclass = random.choice(Subclass)
     HP = HP + HitPoints(6)
-    WeaponProficiencies.extend(["Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows"])
+    WeaponProficiencies.extend(
+        ["Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows"])
     SavingThrowProficiencies.extend(["INT", "WIS"])
     SkillProficiencies.extend(
         random.sample(["Arcana", "History", "Insight", "Investigation", "Medicine", "Religion"], 2))
@@ -1320,7 +1430,8 @@ elif Background == "Anthropologist":
 
 elif Background == "Archaeologist":
     SkillProficiencies.extend(["History", "Survival"])
-    ToolProficiencies.extend([random.choice(["Cartographer's Tools", "Navigator's Tools"])])
+    ToolProficiencies.extend(
+        [random.choice(["Cartographer's Tools", "Navigator's Tools"])])
     Equipment.extend(
         [random.choice(["Wooden Case Containing a Map to a Ruin", "Wooden Case Containing a Map to a Dungeon"]),
          "Bullseye Lantern", "Miner's Pick", "Set of Traveler's Clothes", "Shovel", "Two-Person Tent",
@@ -1328,7 +1439,8 @@ elif Background == "Archaeologist":
 
 elif Background == "Black Fist Double Agent":
     SkillProficiencies.extend(["Deception", "Insight"])
-    BlackFistDoubleAgentTool = random.choice([random.choice(GamingSets), random.choice(ArtisanTools)])
+    BlackFistDoubleAgentTool = random.choice(
+        [random.choice(GamingSets), random.choice(ArtisanTools)])
     ToolProficiencies.extend(["Disguise Kit", BlackFistDoubleAgentTool])
     Equipment.extend(
         ["Disguise Kit", "Common Clothes", "Tears of Virulence Emblem", "Writ of Free Agency Signed by the Lord Regent",
@@ -1337,7 +1449,8 @@ elif Background == "Black Fist Double Agent":
 elif Background == "Caravan Specialist":
     SkillProficiencies.extend(["Animal Handling", "Survival"])
     ToolProficiencies.extend(["Land Vehicles"])
-    Equipment.extend(["Whip", "Tent", "Regional Map", "Traveling Clothes", "10 gp"])
+    Equipment.extend(["Whip", "Tent", "Regional Map",
+                     "Traveling Clothes", "10 gp"])
 
 elif Background == "Charlatan":
     SkillProficiencies.extend(["Deception", "Sleight of Hand"])
@@ -1347,7 +1460,8 @@ elif Background == "Charlatan":
          "Signet Ring of an Imaginary Duke"]), "15 gp"])
 
 elif Background == "City Watch":
-    Background = random.choice(["City Watch Patrol", "City Watch Investigator"])
+    Background = random.choice(
+        ["City Watch Patrol", "City Watch Investigator"])
     SkillProficiencies.extend(["Insight"])
     if Background == "City Watch Patrol":
         SkillProficiencies.extend(["Athletics"])
@@ -1360,10 +1474,12 @@ elif Background == "Clan Crafter":
     SkillProficiencies.extend(["History", "Insight"])
     ClanCrafterArtisanTools = random.choice(ArtisanTools)
     ToolProficiencies.extend([ClanCrafterArtisanTools])
-    Equipment.extend([ClanCrafterArtisanTools, "Maker's Mark Chisel", "Traveler's Clothes", "Gem Worth 10 gp", "5 gp"])
+    Equipment.extend([ClanCrafterArtisanTools, "Maker's Mark Chisel",
+                     "Traveler's Clothes", "Gem Worth 10 gp", "5 gp"])
 
 elif Background == "Cloistered Scholar":
-    SkillProficiencies.extend(["History", random.choice(["Arcana", "Nature", "Religion"])])
+    SkillProficiencies.extend(
+        ["History", random.choice(["Arcana", "Nature", "Religion"])])
     Equipment.extend(
         ["Scholar's Robes of Your Cloister", "Writing Kit", "Borrowed Book on the Subject of Your Current Study",
          "10 gp"])
@@ -1373,7 +1489,8 @@ elif Background == "Cormanthor Refugee":
     CormanthorRefugeeArtisanTools = random.choice(
         ArtisanTools)  # Introducing a temporary variable so the same artisan's tools will be included in the equipment and proficiencies
     ToolProficiencies.extend([CormanthorRefugeeArtisanTools])
-    Equipment.extend(["Two-Person Tent", CormanthorRefugeeArtisanTools, "Holy Symbol", "Traveler's Clothes", "5 gp"])
+    Equipment.extend(["Two-Person Tent", CormanthorRefugeeArtisanTools,
+                     "Holy Symbol", "Traveler's Clothes", "5 gp"])
 
 elif Background == "Courtier":
     SkillProficiencies.extend(["Insight", "Persuasion"])
@@ -1401,15 +1518,18 @@ elif Background == "Dragon Casualty":  # Tool proficiency is based on origin
     elif Origin == "Tradesperson/Merchant":
         ToolProficiencies.extend([random.choice(ArtisanTools)])
     elif Origin == "Black Fist Soldier":
-        ToolProficiencies.extend([random.choice([random.choice(ArtisanTools), "Land Vehicles"])])
+        ToolProficiencies.extend(
+            [random.choice([random.choice(ArtisanTools), "Land Vehicles"])])
     elif Origin == "Adventurer":
         ToolProficiencies.extend(["Land Vehicles"])
     elif Origin == "Entertainer":
         ToolProficiencies.extend([random.choice(MusicalInstruments)])
     elif Origin == "Scholar/Healer":
-        ToolProficiencies.extend([random.choice(["Alchemist's Supplies", "Herbalism Kit"])])
+        ToolProficiencies.extend(
+            [random.choice(["Alchemist's Supplies", "Herbalism Kit"])])
     elif Origin == "Criminal":
-        ToolProficiencies.extend([random.choice(["Thieves' Tools", "Forgery Kit", "Disguise Kit"])])
+        ToolProficiencies.extend(
+            [random.choice(["Thieves' Tools", "Forgery Kit", "Disguise Kit"])])
     elif Origin == "Unskilled Labourer":
         ToolProficiencies.extend([random.choice(GamingSets)])
     SkillProficiencies.extend(["Intimidation", "Survival"])
@@ -1434,7 +1554,7 @@ elif Background == "Entertainer":
     ToolProficiencies.extend(["Disguise Kit", EntertainerMusicalInstrument])
     Equipment.extend([EntertainerMusicalInstrument, random.choice(
         ["Love Letter from an Admirer", "Lock of Hair from an Admirer", "Trinket from an Admirer"]), "Costume",
-                      "15 gp"])
+        "15 gp"])
     if "a Gladiator" in Routine:
         GladiatorWeapon = random.choice(["Trident", "Net"])
         WeaponProficiencies.extend([GladiatorWeapon])
@@ -1459,14 +1579,18 @@ elif Background == "Faction Agent":
         Equipment.extend(["Copy of a Code-Book from " + Faction])
     else:
         Equipment.extend(["Copy of a Seminal Text from " + Faction])
-    Equipment.extend([random.choice(["Badge of " + Faction, "Emblem of " + Faction]), "Set of Common Clothes", "15 gp"])
+    Equipment.extend([random.choice(["Badge of " + Faction,
+                     "Emblem of " + Faction]), "Set of Common Clothes", "15 gp"])
 
 elif Background == "Far Traveler":
-    Reason = random.choice(["Emissary", "Exile", "Fugitive", "Pilgrim", "Sightseer", "Wanderer"])
-    Origin = random.choice(["Evermeet", "Halruaa", "Kara-Tur", "Mulhorand", "Sossal", "Zakhara", "The Underdark"])
+    Reason = random.choice(
+        ["Emissary", "Exile", "Fugitive", "Pilgrim", "Sightseer", "Wanderer"])
+    Origin = random.choice(["Evermeet", "Halruaa", "Kara-Tur",
+                           "Mulhorand", "Sossal", "Zakhara", "The Underdark"])
     Background = "Far Traveler " + Reason + " from " + Origin
     SkillProficiencies.extend(["Insight", "Perception"])
-    FarTravelerTool = random.choice([random.choice(MusicalInstruments), random.choice(GamingSets)])
+    FarTravelerTool = random.choice(
+        [random.choice(MusicalInstruments), random.choice(GamingSets)])
     ToolProficiencies.extend([FarTravelerTool])
     Equipment.extend(
         [FarTravelerTool, "Poorly Wrought Maps from " + Origin, "Small Piece of Jewelry Worth 10 gp from " + Origin,
@@ -1476,30 +1600,35 @@ elif Background == "Folk Hero":
     SkillProficiencies.extend(["Animal Handling", "Survival"])
     FolkHeroTools = random.choice(ArtisanTools)
     ToolProficiencies.extend([FolkHeroTools, "Land Vehicles"])
-    Equipment.extend([FolkHeroTools, "Shovel", "Iron Pot", "Set of Common Clothes", "10 gp"])
+    Equipment.extend([FolkHeroTools, "Shovel", "Iron Pot",
+                     "Set of Common Clothes", "10 gp"])
 
 elif Background == "Gate Urchin":
     SkillProficiencies.extend(["Deception", "Sleight of Hand"])
     GateUrchinMusicalInstrument = random.choice(MusicalInstruments)
     ToolProficiencies.extend(["Thieves' Tools", GateUrchinMusicalInstrument])
     Equipment.extend(["Battered Alms Box", GateUrchinMusicalInstrument,
-                      random.choice(["Cast-Off Military Jacket", "Cast-Off Cap", "Cast-Off Scarf"]),
+                      random.choice(["Cast-Off Military Jacket",
+                                    "Cast-Off Cap", "Cast-Off Scarf"]),
                       "Set of Common Clothes", "10 gp"])
 
 elif Background == "Guild Artisan":
     SkillProficiencies.extend(["Insight", "Persuasion"])
     GuildArtisanTools = random.choice(ArtisanTools)
     ToolProficiencies.extend([GuildArtisanTools])
-    Equipment.extend([GuildArtisanTools, "Letter of Introduction from Your Guild", "15 gp"])
+    Equipment.extend(
+        [GuildArtisanTools, "Letter of Introduction from Your Guild", "15 gp"])
 
 elif Background == "Harborfolk":
     SkillProficiencies.extend(["Athletics", "Sleight of Hand"])
     HarborfolkGamingSet = random.choice(GamingSets)
     ToolProficiencies.extend([HarborfolkGamingSet, "Water Vehicles"])
-    Equipment.extend([HarborfolkGamingSet, "Fishing Tackle", "Set of Common Clothes", "Rowboat", "5 gp"])
+    Equipment.extend([HarborfolkGamingSet, "Fishing Tackle",
+                     "Set of Common Clothes", "Rowboat", "5 gp"])
 
 elif Background == "Haunted One":
-    SkillProficiencies.extend(random.choice(["Arcana", "Investigation", "Religion", "Survival"]))
+    SkillProficiencies.extend(random.choice(
+        ["Arcana", "Investigation", "Religion", "Survival"]))
     Equipment.extend(["Monster Hunter's Pack", "Gothic Trinket"])
 
 elif Background == "Hermit":
@@ -1537,13 +1666,15 @@ elif Background == "House Agent":
     elif House == "Kundarak":
         ToolProficiencies.extend(["Tinker's Tools", "Thieves' Tools"])
     elif House == "Lyrandar":
-        ToolProficiencies.extend(["Sea Vehicles", "Air Vehicles", "Navigator's Tools"])
+        ToolProficiencies.extend(
+            ["Sea Vehicles", "Air Vehicles", "Navigator's Tools"])
     elif House == "Medani":
         ToolProficiencies.extend(["Thieves' Tools", "Disguise Kit"])
     elif House == "Orien":
         ToolProficiencies.extend(["Land Vehicles", random.choice(GamingSets)])
     elif House == "Phiarlan":
-        ToolProficiencies.extend(["Disguise Kit", random.choice(MusicalInstruments)])
+        ToolProficiencies.extend(
+            ["Disguise Kit", random.choice(MusicalInstruments)])
     elif House == "Sivis":
         ToolProficiencies.extend(["Calligrapher's Tools", "Forgery Kit"])
     elif House == "Tharashk":
@@ -1552,17 +1683,20 @@ elif Background == "House Agent":
         ToolProficiencies.extend(["Poisoner's Kit", random.choice(GamingSets)])
     elif House == "Vadalis":
         ToolProficiencies.extend(["Land Vehicles", "Herbalism Kit"])
-    Equipment.extend(["Set of Fine Clothes", House + " Signet Ring", "ID Papers", "20 gp"])
+    Equipment.extend(["Set of Fine Clothes", House +
+                     " Signet Ring", "ID Papers", "20 gp"])
 
 elif Background == "Inheritor":
-    SkillProficiencies.extend(["Survival", random.choice(["Arcana", "History", "Religion"])])
-    InheritorTool = random.choice([random.choice(GamingSets), random.choice(MusicalInstruments)])
+    SkillProficiencies.extend(
+        ["Survival", random.choice(["Arcana", "History", "Religion"])])
+    InheritorTool = random.choice(
+        [random.choice(GamingSets), random.choice(MusicalInstruments)])
     ToolProficiencies.extend([InheritorTool])
     Equipment.extend(["Your Inheritance: " + random.choice(
         [random.choice(["A Map", "A Letter", "A Journal"]), "A Trinket", "An Article of Clothing", "A Piece of Jewelry",
          "An Arcane " + random.choice(["Book", "Formulary"]),
          "A Written " + random.choice(["Story", "Song", "Poem", "Secret"]), "A Tattoo"]), "Set of Traveler's Clothes",
-                      InheritorTool, "15 gp"])
+        InheritorTool, "15 gp"])
 
 elif Background == "Initiate":
     SkillProficiencies.extend(["Athletics", "Intimidation"])
@@ -1580,10 +1714,12 @@ elif Background == "Inquisitor":
 elif Background == "Iron Route Bandit":
     SkillProficiencies.extend(["Animal Handling", "Stealth"])
     ToolProficiencies.extend([random.choice(GamingSets), "Land Vehicles"])
-    Equipment.extend(["Set of Dark Common Clothes", "Pack Saddle", "Burglar's Pack", "5 gp"])
+    Equipment.extend(["Set of Dark Common Clothes",
+                     "Pack Saddle", "Burglar's Pack", "5 gp"])
 
 elif Background == "Knight of the Order":
-    Order = random.choice(["the Unicorn", "Myth Drannor", "the Silver Chalice"])
+    Order = random.choice(
+        ["the Unicorn", "Myth Drannor", "the Silver Chalice"])
     Background = "Knight of the Order of " + Order
     SkillProficiencies.extend(["Persuasion"])
     if Order == "the Unicorn":
@@ -1592,9 +1728,11 @@ elif Background == "Knight of the Order":
         SkillProficiencies.extend([random.choice(["Nature", "History"])])
     elif Order == "the Silver Chalice":
         SkillProficiencies.extend([random.choice(["History", "Religion"])])
-    ToolProficiencies.extend([random.choice([random.choice(GamingSets), random.choice(MusicalInstruments)])])
+    ToolProficiencies.extend(
+        [random.choice([random.choice(GamingSets), random.choice(MusicalInstruments)])])
     Equipment.extend(["Set of Traveler's Clothes",
-                      random.choice(["Signet", "Banner", "Seal"]) + " Representing Your Rank in the Order of " + Order,
+                      random.choice(["Signet", "Banner", "Seal"]) +
+                      " Representing Your Rank in the Order of " + Order,
                       "10 gp"])
 
 elif Background == "Mercenary Veteran":
@@ -1610,7 +1748,8 @@ elif Background == "Mulmaster Aristocrat":
     SkillProficiencies.extend(["Deception", "Performance"])
     MulmasterAristocratArtisanTool = random.choice(ArtisanTools)
     MulmasterAristocratMusicalInstrument = random.choice(MusicalInstruments)
-    ToolProficiencies.extend([MulmasterAristocratArtisanTool, MulmasterAristocratMusicalInstrument])
+    ToolProficiencies.extend(
+        [MulmasterAristocratArtisanTool, MulmasterAristocratMusicalInstrument])
     Equipment.extend(
         [random.choice([MulmasterAristocratArtisanTool, MulmasterAristocratMusicalInstrument]), "Set of Fine Clothes",
          "10 gp"])
@@ -1618,7 +1757,8 @@ elif Background == "Mulmaster Aristocrat":
 elif Background == "Noble":
     SkillProficiencies.extend(["History", "Persuasion"])
     ToolProficiencies.extend([random.choice(GamingSets)])
-    Equipment.extend(["Set of Fine Clothes", "Signet Ring", "Scroll of Pedigree", "25 gp"])
+    Equipment.extend(["Set of Fine Clothes", "Signet Ring",
+                     "Scroll of Pedigree", "25 gp"])
 
 elif Background == "Outlander":
     Origin = random.choice(
@@ -1640,7 +1780,8 @@ elif Background == "Phlan Refugee":
     SkillProficiencies.extend(["Athletics", "Insight"])
     PhlanRefugeeTool = random.choice(ArtisanTools)
     ToolProficiencies.extend([PhlanRefugeeTool])
-    Equipment.extend([PhlanRefugeeTool, "Token from Home", "Set of Traveler's Clothes", "15 gp"])
+    Equipment.extend([PhlanRefugeeTool, "Token from Home",
+                     "Set of Traveler's Clothes", "15 gp"])
 
 elif Background == "Sage":
     Specialty = random.choice(
@@ -1661,7 +1802,8 @@ elif Background == "Sailor":
 elif Background == "Secret Identity":  # Has to be non human
     SkillProficiencies.extend(["Deception", "Stealth"])
     ToolProficiencies.extend(["Disguise Kit", "Forgery Kit"])
-    Equipment.extend(["Disguise Kit", "Forgery Kit", "Set of Common Clothes", "5 gp"])
+    Equipment.extend(["Disguise Kit", "Forgery Kit",
+                     "Set of Common Clothes", "5 gp"])
 
 elif Background == "Shade Fanatic":
     SkillProficiencies.extend(["Deception", "Intimidation"])
@@ -1683,7 +1825,8 @@ elif Background == "Soldier":
 elif Background == "Stojanow Prisoner":
     SkillProficiencies.extend(["Deception", "Perception"])
     ToolProficiencies.extend([random.choice(GamingSets), "Thieves' Tools"])
-    Equipment.extend(["Small Knife", "Set of Common Clothes", "Trinket from Home", "10 gp"])
+    Equipment.extend(["Small Knife", "Set of Common Clothes",
+                     "Trinket from Home", "10 gp"])
 
 elif Background == "Ticklebelly Nomad":
     SkillProficiencies.extend(["Animal Handling", "Nature"])
@@ -1695,10 +1838,12 @@ elif Background == "Ticklebelly Nomad":
 elif Background == "Trade Sheriff":
     SkillProficiencies.extend(["Investigation", "Persuasion"])
     ToolProficiencies.extend(["Thieves' Tools"])
-    Equipment.extend(["Thieves' Kit", "Gray Cloak", "Sherrif's Insignia", "Set of Fine Clothes", "17 gp"])
+    Equipment.extend(["Thieves' Kit", "Gray Cloak",
+                     "Sherrif's Insignia", "Set of Fine Clothes", "17 gp"])
 
 elif Background == "Urban Bounty Hunter":
-    SkillProficiencies.extend(random.sample(["Deception", "Insight", "Persuasion", "Stealth"], 2))
+    SkillProficiencies.extend(random.sample(
+        ["Deception", "Insight", "Persuasion", "Stealth"], 2))
     ToolProficiencies.extend(
         random.sample([random.choice(GamingSets), random.choice(MusicalInstruments), "Theives' Tools"], 2))
     Equipment.extend(
@@ -1713,7 +1858,8 @@ elif Background == "Urchin":
 
 elif Background == "Uthgardt Tribe Member":
     SkillProficiencies.extend(["Athletics", "Survival"])
-    ToolProficiencies.extend([random.choice([random.choice(ArtisanTools), random.choice(MusicalInstruments)])])
+    ToolProficiencies.extend([random.choice(
+        [random.choice(ArtisanTools), random.choice(MusicalInstruments)])])
     Equipment.extend(
         ["Hunting Trap", random.choice(["Totemic Token", "Set of Tattoos"]) + " Marking Your Loyalty to Uthgar",
          "Set of Traveler's Clothes", "10 gp"])
@@ -1728,7 +1874,8 @@ elif Background == "Vizier":
 
 elif Background == "Waterdhavian Noble":
     SkillProficiencies.extend(["History", "Persuasion"])
-    ToolProficiencies.extend([random.choice([random.choice(GamingSets), random.choice(MusicalInstruments)])])
+    ToolProficiencies.extend(
+        [random.choice([random.choice(GamingSets), random.choice(MusicalInstruments)])])
     Equipment.extend(["Set of Fine Clothes", random.choice(["Signet Ring", "Brooch"]), "Scroll of Pedigree",
                       "Skin of Fine " + random.choice(["Zzar", "Wine"]), "25 gp"])
 
@@ -1742,6 +1889,7 @@ ToolExpertises = [item for item, count in collections.Counter(ToolProficiencies)
                   count > 1]  # You can delete these two rows if you don't want innate expertises
 
 # ----------------------------------------------------PRINTING CHARATER--------------------------------------------------
+print()
 print("Race:", Race)
 if Subrace != "N/A":
     print("Subrace:", Subrace)
@@ -1765,29 +1913,38 @@ if Race == "Dwarf":
 else:
     print("Speed:", Speed, "Feet")
 if ArmourProficiencies != []:
-    print("Armour Proficiencies:", ", ".join(sorted(RemoveDuplicates(ArmourProficiencies))))
+    print("Armour Proficiencies:", ", ".join(
+        sorted(RemoveDuplicates(ArmourProficiencies))))
 if WeaponProficiencies != []:
-    print("Weapon Proficienceis:", ", ".join(sorted(RemoveDuplicates(WeaponProficiencies))))
+    print("Weapon Proficienceis:", ", ".join(
+        sorted(RemoveDuplicates(WeaponProficiencies))))
 if ToolProficiencies != []:
-    print("Tool Proficiencies:", ", ".join(sorted(RemoveDuplicates(ToolProficiencies))))
+    print("Tool Proficiencies:", ", ".join(
+        sorted(RemoveDuplicates(ToolProficiencies))))
 if ToolExpertises != []:
-    print("Tool Expertises: ", ", ".join(sorted(RemoveDuplicates(ToolExpertises))))
+    print("Tool Expertises: ", ", ".join(
+        sorted(RemoveDuplicates(ToolExpertises))))
 if SavingThrowProficiencies != []:
-    print("Saving Throw Proficiencies:", ", ".join(sorted(RemoveDuplicates(SavingThrowProficiencies))))
+    print("Saving Throw Proficiencies:", ", ".join(
+        sorted(RemoveDuplicates(SavingThrowProficiencies))))
 if SkillProficiencies != []:
-    print("Skill Proficiencies:", ", ".join(sorted(RemoveDuplicates(SkillProficiencies))))
+    print("Skill Proficiencies:", ", ".join(
+        sorted(RemoveDuplicates(SkillProficiencies))))
 if SkillExpertises != []:
-    print("Skill Expertises: ", ", ".join(sorted(RemoveDuplicates(SkillExpertises))))
+    print("Skill Expertises: ", ", ".join(
+        sorted(RemoveDuplicates(SkillExpertises))))
 if Resistances != []:
     print("Resistances:", ", ".join(sorted(RemoveDuplicates(Resistances))))
 if Immunities != []:
     print("Immunities:", ", ".join(sorted(RemoveDuplicates(Immunities))))
 if Vulnerabilities != []:
-    print("Vulnerabilities:", ", ".join(sorted(RemoveDuplicates(Vulnerabilities))))
+    print("Vulnerabilities:", ", ".join(
+        sorted(RemoveDuplicates(Vulnerabilities))))
 if Traits != []:
     print("Traits:", ", ".join(sorted(RemoveDuplicates(Traits))))
 if Equipment != []:
-    print("Equipment and Weapons:", ", ".join(sorted(RemoveDuplicates(Equipment))))
+    print("Equipment and Weapons:", ", ".join(
+        sorted(RemoveDuplicates(Equipment))))
 if Age != "N/A":
     print("Age:", Age, "Years")
 else:
