@@ -3,9 +3,10 @@
 initiative = []
 fighters = []
 
-def get_character(name, hp, ini, pc):
+def get_character(name, hp, ac, ini, pc):
     fighters.append({"Name": name,
                     "HP": int(hp),
+                    "AC": ac,
                     "Initiative": ini,
                      "PC": pc,
                     })
@@ -23,14 +24,15 @@ def get_started():
             pc = False
         nev = input("Name: ")
         hp = int(input("HP: "))
+        ac = int(input("AC: "))
         ini = int(input("Initiative: "))
-        get_character(nev, hp, ini, pc)
+        get_character(nev, hp, ac, ini, pc)
 
 
 def build_initiative():
     global fighters, initiative
     for fighter in fighters:
-        initiative.append([fighter["Initiative"], fighter["Name"], fighter["HP"], fighter["PC"]])
+        initiative.append([fighter["Initiative"], fighter["Name"], fighter["HP"], fighter["PC"], fighter["AC"]])
     initiative.sort(reverse=True)
     for char in initiative:
         char.pop(0)
@@ -41,10 +43,10 @@ def get_new_ini():
     initiative = []
     for fighter in fighters:
         if fighter["HP"] > 0:
-            initiative.append([fighter["Initiative"], fighter["Name"], fighter["HP"], fighter["PC"]])
+            initiative.append([fighter["Initiative"], fighter["Name"], fighter["HP"], fighter["PC"], fighter["AC"]])
         else:
             if fighter["PC"] == True:
-                initiative.append([fighter["Initiative"], fighter["Name"], fighter["HP"], fighter["PC"]])
+                initiative.append([fighter["Initiative"], fighter["Name"], fighter["HP"], fighter["PC"], fighter["AC"]])
     initiative.sort(reverse=True)
     for char in initiative:
         char.pop(0)
@@ -52,13 +54,16 @@ def get_new_ini():
 
 def fight():
     global initiative, fighters
-    print("Initiative: ", end=" ")
+    print("=============================" * len(fighters))
+    print("\nInitiative: ", end=" ")
     for i in initiative:
         if i[2] == True and i[1] <= 0:
             print(f"Name: {i[0]}, PLAYER DOWN!||", end=" ")
         else:
-            print(f"Name: {i[0]}, HP: {i[1]} ||", end=" ")
-    print()
+            print(f"Name: {i[0]}, HP: {i[1]}, AC: {i[3]} ||", end=" ")
+    print("\n")
+    print("=============================" * len(fighters))
+
     name = input("Who got dmg? ")
     dmg = int(input("How much dmg? (Type negative for heal) "))
     for fighter in fighters:
