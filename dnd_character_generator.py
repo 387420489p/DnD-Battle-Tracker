@@ -3,14 +3,14 @@ Created on Tuesday April 30 2019
 
 @author: terreratman
 """
-# TODO DONE optional user inputs for race, class
-# TODO DONE STR, WIS, ... stats distribution according to spell casting ability (max stat shoud be WIS for Cleric, STR for Barbarian....)
+# DONE optional user inputs for race, class
+# DONE STR, WIS, ... stats distribution according to spell casting ability (max stat shoud be WIS for Cleric, STR for Barbarian....)
 # TODO with dndAPI call description of backgrounds and stuff
 
 # =============================================================================
 # Known Gaps in the character creator:
 #
-# TODO Does not account for the level 4, 8, 12, and 16 stat increase or feat choice if making a higher level character
+# DONE Does not account for the level 4, 8, 12, and 16 stat increase or feat choice if making a higher level character
 # TODO Does not include languages yet because I'm still investigating a method to add a random item to a list only if the addition is not already in the list, and if it was already in the list, pick a new item and try to add
 # TODO Does not have a seperate category for currency because I'm not sure how to account for adding from multiple sources
 # TODO Does not account for Personality Traits, Ideals or Bonds because I don't want to write a random.choice for things that bulky, trying to find another way
@@ -29,7 +29,7 @@ else:
     Level = int(Level)
 
 # Abomination Currently Removed
-Race = input("What RACE do you want? Hit ENTER for random! ")
+Race = input("What RACE do you want? Hit ENTER for random! ").capitalize()
 if Race == "":
     Race = ["Aasimar", "Bugbear", "Dragonborn", "Dryad", "Dwarf", "Elf", "Firbolg", "Genasi", "Gith", "Gnome", "Goblin",
             "Goliath", "Hobgoblin", "Half-Elf", "Halfling", "Half-Orc", "Human", "Juiblexian", "Kender", "Kenku",
@@ -40,7 +40,7 @@ else:
     pass
 
 # Alchemist, Artificer, Blood Hunter, Cardcaster, Diabolist, Feywalker, Morph, Occultist temporarily removed
-Class = input("What CLASS do you want? Hit ENTER for random! ")
+Class = input("What CLASS do you want? Hit ENTER for random! ").capitalize()
 if Class == "":
     Class = ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer",
              "Warlock",
@@ -53,8 +53,7 @@ else:
 # -------------------------------------END OF USER INPUTS----------------------------------------------------------------
 
 # ------------------------------------------HP, STAT, GENERATING---------------------------------------------------------
-def Normal(Min,
-           Max):  # Not exactly sure how this one is working, but it gives a more realistic result for age, height and weight
+def Normal(Min, Max):  # Not exactly sure how this one is working, but it gives a more realistic result for age, height and weight
     r = round(random.triangular(low=Min, high=Max))  # Round gives us a whole number for a character's age
     return r
 
@@ -201,10 +200,26 @@ def StatRoll():
 
 StatRoll()
 
+#Level 4, 8, 12, 16 stat increase (it's random, just like everything!)
+
+stats_for_incr = [STR, DEX, CON, INT, WIS, CHA]
+
+if Level >= 16:
+    for i in range(8):
+        StatIncrease(random.choice(stats_for_incr), 1)
+elif Level >= 12:
+    for i in range(6):
+        StatIncrease(random.choice(stats_for_incr), 1)
+elif Level >= 8:    
+    for i in range(4):
+        StatIncrease(random.choice(stats_for_incr), 1)
+elif Level >= 4:
+    for i in range(2):
+        StatIncrease(random.choice(stats_for_incr), 1)
+
 # =============================================================================
 
-Stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"]  # This list will be used for the variant human later on
-
+Stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"] #this is for variant human
 # STR = random.randint(1, 20)
 # DEX = random.randint(1, 20)
 # CON = random.randint(1, 20)
@@ -222,6 +237,7 @@ Immunities = []
 Vulnerabilities = []
 Traits = []
 Equipment = []
+SpokenLanguage = []
 
 Subrace = "N/A"
 Subclass = "N/A"
@@ -254,6 +270,7 @@ SimpleWeapons = ["Club", "Dagger", "Greatclub", "Handaxe", "Javelin", "Light Ham
                  "Spear", "Light Crossbow", "Dart", "Shortbow", "Sling"]
 SimpleMelee = ["Club", "Dagger", "Greatclub", "Handaxe", "Javelin", "Light Hammer", "Mace", "Quarterstaff", "Sickle",
                "Spear"]
+Languages = ["Common", "Dwarvish", "Elvish", "Giant", "Gnomish", "Goblin", "Halfling", "Orc", "Abyssal", "Celestial", "Deep Speech", "Draconic", "Infernal", "Primordial", "Sylvan", "Undercommon"]
 
 # -----------------------------------------------RACE BUILDING-----------------------------------------------------------
 # Abomination Currently Removed
@@ -268,6 +285,7 @@ if Race == "Aasimar":
         WIS = StatIncrease(WIS, 1)
     elif Subrace == "Scourge":
         CON = StatIncrease(CON, 1)
+    SpokenLanguage.append(["Common", "Celestial"])
     Age = Normal(20, 140)
     SizeMod = Normal(2, 20)
     Height = 4 * 12 + 10 + SizeMod
@@ -390,26 +408,20 @@ elif Race == "Dwarf":
     Traits.extend(["Dwarven Resilience"])
     if Subrace == "Hill":
         WIS = StatIncrease(WIS, 1)
-    elif Subrace == "Mountain":
-        STR = StatIncrease(STR, 2)
-    elif Subrace == "Duergar":
-        STR = StatIncrease(STR, 1)
-    elif Subrace == "Hill":
         Height = 3 * 12 + 8 + SizeMod
         Weight = 115 + SizeMod * Normal(2, 12)
-    elif Subrace == "Mountain":
-        Height = 4 * 12 + SizeMod
-        Weight = 130 + SizeMod * Normal(2, 12)
-    elif Subrace == "Duergar":
-        Height = 3 * 12 + 8 + SizeMod
-        Weight = 115 + SizeMod * Normal(2, 12)
-    elif Subrace == "Hill":
         HP = HP + Level
         Traits.extend(["Darkvision (60ft)"])
     elif Subrace == "Mountain":
+        STR = StatIncrease(STR, 2)
+        Height = 4 * 12 + SizeMod
+        Weight = 130 + SizeMod * Normal(2, 12)
         ArmourProficiencies.extend(["Light Armour", "Medium Armour"])
         Traits.extend(["Darkvision (60ft)"])
     elif Subrace == "Duergar":
+        STR = StatIncrease(STR, 1)
+        Height = 3 * 12 + 8 + SizeMod
+        Weight = 115 + SizeMod * Normal(2, 12)
         Traits.extend(["Darkvision (120ft)", "Duergar Resilience", "Duergar Magic", "Sunlight Sensitivity"])
 
 elif Race == "Elf":
