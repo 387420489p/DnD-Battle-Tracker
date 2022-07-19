@@ -31,25 +31,27 @@ else:
     Level = int(Level)
 
 # Abomination Currently Removed
+Races = ["Aasimar", "Bugbear", "Dragonborn", "Dryad", "Dwarf", "Elf", "Firbolg", "Genasi", "Gith", "Gnome", "Goblin",
+        "Goliath", "Hobgoblin", "Half-Elf", "Halfling", "Half-Orc", "Human", "Juiblexian", "Kender", "Kenku",
+        "Kobold",
+        "Lizardfolk", "Mousefolk", "Orc", "Succubus", "Tabaxi", "Tiefling", "Tortle", "Triton", "Yuan-Ti Pureblood"]
 Race = input("What RACE do you want? Hit ENTER for random! ").capitalize()
 if Race == "":
-    Race = ["Aasimar", "Bugbear", "Dragonborn", "Dryad", "Dwarf", "Elf", "Firbolg", "Genasi", "Gith", "Gnome", "Goblin",
-            "Goliath", "Hobgoblin", "Half-Elf", "Halfling", "Half-Orc", "Human", "Juiblexian", "Kender", "Kenku",
-            "Kobold",
-            "Lizardfolk", "Mousefolk", "Orc", "Succubus", "Tabaxi", "Tiefling", "Tortle", "Triton", "Yuan-Ti Pureblood"]
-    Race = random.choice(Race)
+    Race = random.choice(Races)
 else:
-    pass
+    while Race not in Races:
+        print("Wrong race. Choose from:\n", ", ".join(Races))
+        Race = input()
 
 # Alchemist, Artificer, Blood Hunter, Cardcaster, Diabolist, Feywalker, Morph, Occultist temporarily removed
+Classes = ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"]
 Class = input("What CLASS do you want? Hit ENTER for random! ").capitalize()
 if Class == "":
-    Class = ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer",
-             "Warlock",
-             "Wizard"]
-    Class = random.choice(Class)
+    Class = random.choice(Classes)
 else:
-    pass
+    while Class not in Classes:
+        print("Wrong class. Choose from:\n", ", ".join(Classes))
+        Class = input()
 
 
 # -------------------------------------END OF USER INPUTS----------------------------------------------------------------
@@ -607,13 +609,17 @@ elif Race == "Gith":
             ["Shortswords", "Longswords", "Greatswords"])
         Traits.extend(["Decadent Mastery", "Githyanki Psionics"])
     elif Subrace == "Githzerai":
-        SpokenLanguage.append(["Githyanki", "Common"])
+        SpokenLanguage.append(["Githzerai", "Common"])
         WIS = StatIncrease(WIS, 2)
         Height = 4 * 12 + 11 + SizeMod
         Weight = 90 + SizeMod * Normal(2, 8)
+        ArmourProficiencies.extend(["Light Armour", "Medium Armour"])
+        WeaponProficiencies.extend(
+            ["Shortswords", "Longswords", "Greatswords"])
         Traits.extend(["Mental Discipline", "Githzerai Psionics"])
 
 elif Race == "Gnome":
+    SpokenLanguage.extend(["Common", "Gnomish"])
     Subrace = ["Deep", "Forest", "Rock"]
     Subrace = random.choice(Subrace)
     Age = Normal(20, 400)
@@ -646,6 +652,7 @@ elif Race == "Gnome":
         Traits.extend(["Artificer's Lore", "Tinker"])
 
 elif Race == "Goblin":
+    SpokenLanguage.extend(["Common", "Goblin"])
     DEX = StatIncrease(DEX, 2)
     CON = StatIncrease(CON, 1)
     Age = Normal(10, 35)
@@ -661,6 +668,7 @@ elif Race == "Goblin":
     Traits.extend(["Darkvision (60ft)", "Fury of the Small", "Nimble Escape"])
 
 elif Race == "Goliath":
+    SpokenLanguage.extend(["Common", "Giant"])
     STR = StatIncrease(STR, 2)
     CON = StatIncrease(CON, 1)
     Age = Normal(20, 80)
@@ -677,6 +685,7 @@ elif Race == "Goliath":
     Traits.extend(["Stone's Endurance", "Powerful Build", "Mountain Born"])
 
 elif Race == "Hobgoblin":
+    SpokenLanguage.extend(["Common", "Goblin"])
     CON = StatIncrease(CON, 2)
     INT = StatIncrease(INT, 1)
     Age = Normal(20, 80)
@@ -694,6 +703,11 @@ elif Race == "Hobgoblin":
 
 elif Race == "Half-Elf":
     # Keen Senses subrace removed because it is obsolete
+    SpokenLanguage.extend(["Common", "Elvish"])
+    # plus_language = random.choice(Languages)
+    # while plus_language in SpokenLanguage:
+    #     plus_language = random.choice(Languages)
+    # SpokenLanguage.append(plus_language)
     Subrace = ["N/A", "Drow", "Sun", "Moon", "Wood"]
     Subrace = random.choice(Subrace)
     CHA = StatIncrease(CHA, 2)
@@ -1957,6 +1971,7 @@ if Age != "N/A":
     print("Age:", Age, "Years")
 else:
     print("Age: N/A")
+print("Languages:", ", ".join(sorted(SpokenLanguage)))
 print("Height: ", (Height // 12), "' ", Height % 12, '"', sep='')
 print("Weight:", Weight, "Pounds")
 print("Eye Colour:", Eyes)
