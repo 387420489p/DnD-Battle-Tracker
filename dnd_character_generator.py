@@ -1,17 +1,16 @@
 """
-Created on Tuesday April 30 2019
-
 @author: terreratman
 @the_guy_who_took_the_code_and_"improved"_it: 387420489
 """
 # DONE optional user inputs for race, class
 # DONE STR, WIS, ... stats distribution according to spell casting ability (max stat shoud be WIS for Cleric, STR for Barbarian....)
-# TODO optimalize line 159 and under
+# TODO optimalize line 159 and under  !!!!!!!!!!
+# TODO character sheet print formatting
 # =============================================================================
 # Known Gaps in the character creator:
 #
-# DONE Does not account for the level 4, 8, 12, and 16 stat increase or feat choice if making a higher level character
-# TODO Does not include languages yet because I'm still investigating a method to add a random item to a list only if the addition is not already in the list, and if it was already in the list, pick a new item and try to add
+# DONE Does not account for the level 4, 8, 12, 16 and 19 stat increase or feat choice if making a higher level character
+# TODO !!!!!!! Does not include languages yet because I'm still investigating a method to add a random item to a list only if the addition is not already in the list, and if it was already in the list, pick a new item and try to add
 # TODO Does not have a seperate category for currency because I'm not sure how to account for adding from multiple sources
 # TODO Does not account for Personality Traits, Ideals or Bonds because I don't want to write a random.choice for things that bulky, trying to find another way
 # Not all Skin/Hair/Eye colours may be correct, I just put some in quickly
