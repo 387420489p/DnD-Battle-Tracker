@@ -6,8 +6,7 @@ Created on Tuesday April 30 2019
 """
 # DONE optional user inputs for race, class
 # DONE STR, WIS, ... stats distribution according to spell casting ability (max stat shoud be WIS for Cleric, STR for Barbarian....)
-# TODO with dndAPI call description of backgrounds and stuff
-
+# TODO optimalize line 159 and under
 # =============================================================================
 # Known Gaps in the character creator:
 #
@@ -20,7 +19,6 @@ Created on Tuesday April 30 2019
 # TODO missing classes:  Blood Hunter, Cardcaster, Diabolist, Feywalker, Morph, Occultist
 # =============================================================================
 
-from ast import Sub
 import random
 import collections
 from secrets import choice
@@ -156,6 +154,7 @@ def StatRoll():
         List.remove(MIN)
         Stat = sum(List)
         all_stats.append(Stat)
+    # TODO valahogy redundanciát csökkenteni
     # optimalizing STATS a little bit according to Class
     if Class == "Cleric" or Class == "Druid" or Class == "Ranger":
         WIS = max(all_stats)
@@ -210,7 +209,10 @@ StatRoll()
 
 stats_for_incr = [STR, DEX, CON, INT, WIS, CHA]
 
-if Level >= 16:
+if Level >= 19:
+    for i in range(10):
+        StatIncrease(random.choice(stats_for_incr), 1)
+elif Level >= 16:
     for i in range(8):
         StatIncrease(random.choice(stats_for_incr), 1)
 elif Level >= 12:
@@ -1167,8 +1169,10 @@ elif Class == "Blood hunter":
         Equipment.extend(random.choice(MartialWeapons))
     else:
         Equipment.extend(random.sample(SimpleWeapons, 2))
-    Equipment.append(random.choice(["Light Crossbow with 20 Bolts", "Hand Crossbow and 20 Bolts"]))
-    Equipment.extend([random.choice(["Studded Leather Armor", "Scale Mail Armor"]), "Explorer's Pack", "Alchemist's Supplies"])
+    Equipment.append(random.choice(
+        ["Light Crossbow with 20 Bolts", "Hand Crossbow and 20 Bolts"]))
+    Equipment.extend([random.choice(["Studded Leather Armor",
+                     "Scale Mail Armor"]), "Explorer's Pack", "Alchemist's Supplies"])
     if Level >= 2:
         FightingStyle = ["Arcery", "Dueling",
                          "Great Weapon Fighting", "Two-Weapon Fighting"]
