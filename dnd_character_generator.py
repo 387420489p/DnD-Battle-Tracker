@@ -2,20 +2,17 @@
 @author: terreratman
 @the_guy_who_took_the_code_and_"improved"_it: 387420489
 """
-# DONE optional user inputs for race, class
-# DONE STR, WIS, ... stats distribution according to spell casting ability (max stat shoud be WIS for Cleric, STR for Barbarian....)
 # TODO optimalize line 159 and under  !!!!!!!!!!
 # TODO character sheet print formatting
 # =============================================================================
-# Known Gaps in the character creator:
 #
-# DONE Does not account for the level 4, 8, 12, 16 and 19 stat increase or feat choice if making a higher level character
-# TODO !!!!!!! Does not include languages yet because I'm still investigating a method to add a random item to a list only if the addition is not already in the list, and if it was already in the list, pick a new item and try to add
+# TODO !!!!!!! Language: races done, next: other things that give the pc languages
+# def AddLanguage()
 # TODO Does not have a seperate category for currency because I'm not sure how to account for adding from multiple sources
 # TODO Does not account for Personality Traits, Ideals or Bonds because I don't want to write a random.choice for things that bulky, trying to find another way
 # Not all Skin/Hair/Eye colours may be correct, I just put some in quickly
 # TODO It does not print class traits
-# TODO missing classes:  Blood Hunter, Cardcaster, Diabolist, Feywalker, Morph, Occultist
+# TODO missing classes: Cardcaster, Diabolist, Feywalker, Morph, Occultist
 # =============================================================================
 
 import random
@@ -76,7 +73,7 @@ def HitPoints(MaxDice):
         while n < Level:
             ADDITION = random.randint(1, MaxDice)
             HITPOINTS = HITPOINTS + ADDITION
-            n = n + 1
+            n += 1
     if HITPOINTS <= MaxDice + (
             Level - 1):  # This makes it so the minimum HP increase is 1, I don't like to play with weakening characters
         HITPOINTS = MaxDice + (Level - 1)
@@ -130,6 +127,14 @@ def RemoveDuplicates(List):
         if num not in final_list:
             final_list.append(num)
     return final_list
+
+
+def AddLanguage(num):
+    for i in range(0, num):
+        plus_language = random.choice(Languages)
+        while plus_language in SpokenLanguage:
+            plus_language = random.choice(Languages)
+        SpokenLanguage.append(plus_language)
 
 
 # =============================================================================
@@ -193,7 +198,7 @@ def StatRoll():
         CON = all_stats[2]
         INT = all_stats[3]
         CHA = all_stats[4]
-    elif Class == "Wizard" or Class == "Artificer" or Class == "Blood hunter":
+    elif Class == "Wizard" or Class == "Artificer" or Class == "Blood Hunter":
         INT = max(all_stats)
         all_stats.remove(max(all_stats))
         random.shuffle(all_stats)
@@ -417,6 +422,8 @@ elif Race == "Dwarf":
     CON = StatIncrease(CON, 2)
     Age = Normal(20, 320)
     SpokenLanguage.extend(["Common", "Dwarvish"])
+    if Subrace == "Duergar":
+        SpokenLanguage.append("Undercommon")
     SizeMod = Normal(2, 8)
     Eyes = ["Brown", "Hazel", "Green"]
     Eyes = random.choice(Eyes)
@@ -452,6 +459,8 @@ elif Race == "Elf":
     SpokenLanguage.extend(["Common", "Elvish"])
     Subrace = ["Eladrin", "Drow", "High", "Sea", "Shadar-Kai", "Wood"]
     Subrace = random.choice(Subrace)
+    if Subrace == "High":
+        AddLanguage(1)
     Age = Normal(20, 700)
     DEX = StatIncrease(DEX, 2)
     Eyes = ["Blue", "Violet", "Green"]
@@ -704,10 +713,7 @@ elif Race == "Hobgoblin":
 elif Race == "Half-Elf":
     # Keen Senses subrace removed because it is obsolete
     SpokenLanguage.extend(["Common", "Elvish"])
-    plus_language = random.choice(Languages)
-    while plus_language in SpokenLanguage:
-        plus_language = random.choice(Languages)
-    SpokenLanguage.append(plus_language)
+    AddLanguage(1)
     Subrace = ["N/A", "Drow", "Sun", "Moon", "Wood"]
     Subrace = random.choice(Subrace)
     CHA = StatIncrease(CHA, 2)
@@ -784,10 +790,7 @@ elif Race == "Half-Orc":
 
 elif Race == "Human":  # I have not accounted for the different Human ethnicities
     SpokenLanguage.extend(["Common"])
-    plus_language = random.choice(Languages)
-    while plus_language in SpokenLanguage:
-        plus_language = random.choice(Languages)
-    SpokenLanguage.append(plus_language)
+    AddLanguage(1)
     # Two chances for variant, just to spice things up
     Subrace = ["Stat Increase", "Variant", "Variant"]
     Subrace = random.choice(Subrace)
@@ -939,10 +942,7 @@ elif Race == "Lizardfolk":
 
 elif Race == "Mousefolk":  # Extra Race I found https://www.dndbeyond.com/races/61879-mousefolk
     SpokenLanguage.extend(["Common"])
-    plus_language = random.choice(Languages)
-    while plus_language in SpokenLanguage:
-        plus_language = random.choice(Languages)
-    SpokenLanguage.append(plus_language)
+    AddLanguage(1)
     DEX = StatIncrease(DEX, 2)
     CHA = StatIncrease(CHA, 1)
     Age = Normal(10, 45)
@@ -998,10 +998,7 @@ elif Race == "Succubus":  # Extra class I found https://www.dndbeyond.com/races/
 
 elif Race == "Tabaxi":
     SpokenLanguage.extend(["Common"])
-    plus_language = random.choice(Languages)
-    while plus_language in SpokenLanguage:
-        plus_language = random.choice(Languages)
-    SpokenLanguage.append(plus_language)
+    AddLanguage(1)
     DEX = StatIncrease(DEX, 2)
     CHA = StatIncrease(CHA, 1)
     Age = Normal(20, 60)
@@ -1117,10 +1114,7 @@ elif Race == "Triton":
 
 elif Race == "Yuan-Ti Pureblood":
     SpokenLanguage.extend(["Common"])
-    plus_language = random.choice(Languages)
-    while plus_language in SpokenLanguage:
-        plus_language = random.choice(Languages)
-    SpokenLanguage.append(plus_language)
+    AddLanguage(1)
     CHA = StatIncrease(CHA, 2)
     INT = StatIncrease(INT, 1)
     Age = Normal(20, 60)
@@ -1204,7 +1198,7 @@ elif Class == "Bard":
                       random.choice(["Diplomat's Pack", "Entertainer's Pack"]),
                       random.choice(["Lute", random.choice(MusicalInstruments)]), "Leather Armour", "Dagger"])
 
-elif Class == "Blood hunter":
+elif Class == "Blood Hunter":
     if Level >= 3:
         Subclass = ["Ghostslayer", "Lycan", "Mutant", "Profane Soul"]
         Subclass = random.choice(Subclass)
@@ -1246,6 +1240,12 @@ elif Class == "Cleric":
                 "Solidarity Domain", "Strength Domain", "Tempest Domain", "Trickery Domain", "War Domain",
                 "Zeal Domain"]
     Subclass = random.choice(Subclass)
+    if Subclass == "Knowledge Domain":
+        for i in range(2):
+            extra_language = random.choice(Languages)
+            while extra_language in SpokenLanguage:
+                extra_language = random.choice(Languages)
+            SpokenLanguage.append(extra_language)
     HP = HP + HitPoints(8)
     ArmourProficiencies.extend(["Light Armour", "Medium Armour", "Shields"])
     WeaponProficiencies.extend(["Simple Weapons"])
@@ -1269,6 +1269,7 @@ elif Class == "Cleric":
 # =============================================================================
 
 elif Class == "Druid":
+    SpokenLanguage.append("Druidic")
     if Level >= 2:
         Subclass = ["Circle of Dreams", "Circle of the Land", "Circle of the Moon", "Circle of the Shepherd",
                     "Circle of Spores", "Circle of Twilight"]
