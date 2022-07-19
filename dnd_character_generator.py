@@ -20,7 +20,6 @@
 
 import random
 import collections
-from secrets import choice
 
 # --------------------------------------USER INPUTS----------------------------------------------------------------
 # This is where you change Character Level
@@ -32,10 +31,10 @@ else:
 
 # Abomination Currently Removed
 Races = ["Aasimar", "Bugbear", "Dragonborn", "Dryad", "Dwarf", "Elf", "Firbolg", "Genasi", "Gith", "Gnome", "Goblin",
-        "Goliath", "Hobgoblin", "Half-Elf", "Halfling", "Half-Orc", "Human", "Juiblexian", "Kender", "Kenku",
-        "Kobold",
-        "Lizardfolk", "Mousefolk", "Orc", "Succubus", "Tabaxi", "Tiefling", "Tortle", "Triton", "Yuan-Ti Pureblood"]
-Race = input("What RACE do you want? Hit ENTER for random! ").capitalize()
+         "Goliath", "Hobgoblin", "Half-Elf", "Halfling", "Half-Orc", "Human", "Juiblexian", "Kender", "Kenku",
+         "Kobold",
+         "Lizardfolk", "Mousefolk", "Orc", "Succubus", "Tabaxi", "Tiefling", "Tortle", "Triton", "Yuan-Ti Pureblood"]
+Race = input("What RACE do you want? Hit ENTER for random! ")
 if Race == "":
     Race = random.choice(Races)
 else:
@@ -44,8 +43,9 @@ else:
         Race = input()
 
 # Alchemist, Artificer, Blood Hunter, Cardcaster, Diabolist, Feywalker, Morph, Occultist temporarily removed
-Classes = ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"]
-Class = input("What CLASS do you want? Hit ENTER for random! ").capitalize()
+Classes = ["Barbarian", "Artificer", "Bard", "Blood Hunter", "Cleric", "Druid", "Fighter", "Monk",
+           "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"]
+Class = input("What CLASS do you want? Hit ENTER for random! ")
 if Class == "":
     Class = random.choice(Classes)
 else:
@@ -704,10 +704,10 @@ elif Race == "Hobgoblin":
 elif Race == "Half-Elf":
     # Keen Senses subrace removed because it is obsolete
     SpokenLanguage.extend(["Common", "Elvish"])
-    # plus_language = random.choice(Languages)
-    # while plus_language in SpokenLanguage:
-    #     plus_language = random.choice(Languages)
-    # SpokenLanguage.append(plus_language)
+    plus_language = random.choice(Languages)
+    while plus_language in SpokenLanguage:
+        plus_language = random.choice(Languages)
+    SpokenLanguage.append(plus_language)
     Subrace = ["N/A", "Drow", "Sun", "Moon", "Wood"]
     Subrace = random.choice(Subrace)
     CHA = StatIncrease(CHA, 2)
@@ -737,6 +737,7 @@ elif Race == "Half-Elf":
         Traits.extend([Choice])
 
 elif Race == "Halfling":
+    SpokenLanguage.extend(["Common", "Halfling"])
     Subrace = ["Ghostwise", "Lightfoot", "Stout"]
     Subrace = random.choice(Subrace)
     Age = Normal(20, 200)
@@ -754,19 +755,17 @@ elif Race == "Halfling":
     DEX = StatIncrease(DEX, 2)
     if Subrace == "Ghostwise":
         WIS = StatIncrease(WIS, 1)
-    elif Subrace == "Lightfoot":
-        CHA = StatIncrease(CHA, 1)
-    elif Subrace == "Stout":
-        CON = StatIncrease(CON, 1)
-    if Subrace == "Ghostwise":
         Traits.extend(["Silent Speech"])
     elif Subrace == "Lightfoot":
+        CHA = StatIncrease(CHA, 1)
         Traits.extend(["Naturally Stealthy"])
     elif Subrace == "Stout":
+        CON = StatIncrease(CON, 1)
         Resistances.extend(["Poison"])
         Traits.extend(["Stout Resilience"])
 
 elif Race == "Half-Orc":
+    SpokenLanguage.extend(["Common", "Orc"])
     STR = StatIncrease(STR, 2)
     CON = StatIncrease(CON, 1)
     Age = Normal(14, 60)
@@ -784,6 +783,11 @@ elif Race == "Half-Orc":
         ["Darkvision (60ft)", "Relentless Endurance", "Savage Attacks"])
 
 elif Race == "Human":  # I have not accounted for the different Human ethnicities
+    SpokenLanguage.extend(["Common"])
+    plus_language = random.choice(Languages)
+    while plus_language in SpokenLanguage:
+        plus_language = random.choice(Languages)
+    SpokenLanguage.append(plus_language)
     # Two chances for variant, just to spice things up
     Subrace = ["Stat Increase", "Variant", "Variant"]
     Subrace = random.choice(Subrace)
@@ -826,6 +830,7 @@ elif Race == "Human":  # I have not accounted for the different Human ethnicitie
         SkillProficiencies.extend([random.choice(Skills)])
 
 elif Race == "Juiblexian":
+    SpokenLanguage.extend(["all, telepathy 120 ft."])
     Subrace = ["Corrosive", "Blasphemy", "Mnemonic"]
     Subrace = random.choice(Subrace)
     Age = Normal(100, 200)
@@ -856,6 +861,8 @@ elif Race == "Juiblexian":
         Traits.extend(["False Appearance", "Mnemonic Echoes"])
 
 elif Race == "Kender":  # Extra Race I found https://www.dndbeyond.com/races/670-kender
+    SpokenLanguage.extend(["Common"])
+    SpokenLanguage.append(random.choice(["Gnomish", "Dwarvish", "Halfling"]))
     DEX = StatIncrease(DEX, 2)
     CHA = StatIncrease(CHA, 1)
     Age = Normal(15, 80)
@@ -875,6 +882,8 @@ elif Race == "Kender":  # Extra Race I found https://www.dndbeyond.com/races/670
     Traits.extend(["Kender Pockets", "Nimbleness", "Taunt"])
 
 elif Race == "Kenku":
+    SpokenLanguage.extend(
+        ["Common", "Auran", "you can speak only by using your Mimicry trait"])
     DEX = StatIncrease(DEX, 2)
     WIS = StatIncrease(WIS, 1)
     Age = Normal(12, 45)
@@ -890,6 +899,7 @@ elif Race == "Kenku":
     SkillProficiencies.extend(random.sample(KenkuSkills, 2))
 
 elif Race == "Kobold":
+    SpokenLanguage.extend(["Common", "Draconic"])
     DEX = StatIncrease(DEX, 2)
     STR = StatDecrease(STR, 2)
     Age = Normal(8, 80)
@@ -906,6 +916,7 @@ elif Race == "Kobold":
                   "Pack Tactics", "Sunlight Sensitivity"])
 
 elif Race == "Lizardfolk":
+    SpokenLanguage.extend(["Common", "Draconic"])
     CON = StatIncrease(CON, 2)
     WIS = StatIncrease(WIS, 1)
     Age = Normal(14, 45)
@@ -927,6 +938,11 @@ elif Race == "Lizardfolk":
     SkillProficiencies.extend(random.sample(LizardfolkSkills, 2))
 
 elif Race == "Mousefolk":  # Extra Race I found https://www.dndbeyond.com/races/61879-mousefolk
+    SpokenLanguage.extend(["Common"])
+    plus_language = random.choice(Languages)
+    while plus_language in SpokenLanguage:
+        plus_language = random.choice(Languages)
+    SpokenLanguage.append(plus_language)
     DEX = StatIncrease(DEX, 2)
     CHA = StatIncrease(CHA, 1)
     Age = Normal(10, 45)
@@ -944,6 +960,7 @@ elif Race == "Mousefolk":  # Extra Race I found https://www.dndbeyond.com/races/
                    "Mouse's Survival"])  # I will be ediditing some of these for my campaign as they aren't well balanced
 
 elif Race == "Orc":
+    SpokenLanguage.extend(["Common", "Orc"])
     STR = StatIncrease(STR, 2)
     CON = StatIncrease(CON, 1)
     INT = StatDecrease(INT, 2)
@@ -960,6 +977,8 @@ elif Race == "Orc":
     SkillProficiencies.extend(["Intimidation"])
 
 elif Race == "Succubus":  # Extra class I found https://www.dndbeyond.com/races/1524-succubus
+    SpokenLanguage.extend(["Common", "Draconic"])
+    SpokenLanguage.append(random.choice(["Abyssal", "Infernal"]))
     CHA = StatIncrease(CHA, 1)
     Age = Normal(20, 1000)
     SizeMod = Normal(2, 20)
@@ -978,6 +997,11 @@ elif Race == "Succubus":  # Extra class I found https://www.dndbeyond.com/races/
     Vulnerabilities.extend(["Radiant"])
 
 elif Race == "Tabaxi":
+    SpokenLanguage.extend(["Common"])
+    plus_language = random.choice(Languages)
+    while plus_language in SpokenLanguage:
+        plus_language = random.choice(Languages)
+    SpokenLanguage.append(plus_language)
     DEX = StatIncrease(DEX, 2)
     CHA = StatIncrease(CHA, 1)
     Age = Normal(20, 60)
@@ -995,6 +1019,7 @@ elif Race == "Tabaxi":
     SkillProficiencies.extend(["Perception", "Stealth"])
 
 elif Race == "Tiefling":
+    SpokenLanguage.extend(["Common", "Infernal"])
     Subrace = ["Asmodeus", "Baalzebul", "Devil's Tongue", "Dispater", "Feral", "Fierna", "Glasya", "Hellfire",
                "Levistus", "Mammon", "Mephistopheles", "Zariel"]
     Subrace = random.choice(Subrace)
@@ -1055,6 +1080,7 @@ elif Race == "Tiefling":
         Traits.extend(["Legacy of Avernus"])
 
 elif Race == "Tortle":
+    SpokenLanguage.extend(["Common", "Aquan"])
     STR = StatIncrease(STR, 2)
     WIS = StatIncrease(WIS, 1)
     Age = Normal(30, 320)
@@ -1071,6 +1097,7 @@ elif Race == "Tortle":
     Traits.extend(["Claws", "Hold Breath", "Natural Armour", "Shell Defense"])
 
 elif Race == "Triton":
+    SpokenLanguage.extend(["Common", "Primordial"])
     STR = StatIncrease(STR, 1)
     CON = StatIncrease(CON, 1)
     CHA = StatIncrease(CHA, 1)
@@ -1089,6 +1116,11 @@ elif Race == "Triton":
                   "Emissary of the Sea", "Guardians of the Depths"])
 
 elif Race == "Yuan-Ti Pureblood":
+    SpokenLanguage.extend(["Common"])
+    plus_language = random.choice(Languages)
+    while plus_language in SpokenLanguage:
+        plus_language = random.choice(Languages)
+    SpokenLanguage.append(plus_language)
     CHA = StatIncrease(CHA, 2)
     INT = StatIncrease(INT, 1)
     Age = Normal(20, 60)
