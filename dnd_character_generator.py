@@ -330,6 +330,7 @@ elif Race == "Bugbear":
     SizeMod = Normal(2, 16)
     Height = 6 * 12 + 4 + SizeMod
     Weight = 230 + SizeMod * Normal(2, 12)
+    SpokenLanguage.extend(["Common", "Goblin"])
     Eyes = ["Yellow", "Orange", "Red", "Brown", "Greenish White"]
     Eyes = random.choice(Eyes)
     Skin = ["Yellow", "Muddy Yellow", "Reddish Orange", "Reddish Brown"]
@@ -355,6 +356,7 @@ elif Race == "Dragonborn":
     Eyes = random.choice(Eyes)
     Skin = Subrace + " Scales"
     Speed = 30
+    SpokenLanguage.extend(["Common", "Draconic"])
     if Subrace == "Black":
         Resistances.extend(["Acid"])
         Traits.extend(["Acid Breath"])
@@ -397,6 +399,7 @@ elif Race == "Dryad":
     SizeMod = Normal(2, 6)
     Height = 5 * 12 + 5 + SizeMod
     Weight = 40 + SizeMod * Normal(2, 6)
+    SpokenLanguage.extend(["Common", "Sylvan", "Elvish"])
     Eyes = "Changes with the Seasons"
     Skin = ["Orange", "Green", "Yellowish Green"]
     Skin = random.choice(Skin)
@@ -411,6 +414,7 @@ elif Race == "Dwarf":
     Subrace = random.choice(Subrace)
     CON = StatIncrease(CON, 2)
     Age = Normal(20, 320)
+    SpokenLanguage.extend(["Common", "Dwarvish"])
     SizeMod = Normal(2, 8)
     Eyes = ["Brown", "Hazel", "Green"]
     Eyes = random.choice(Eyes)
@@ -443,6 +447,7 @@ elif Race == "Dwarf":
                       "Duergar Magic", "Sunlight Sensitivity"])
 
 elif Race == "Elf":
+    SpokenLanguage.extend(["Common", "Elvish"])
     Subrace = ["Eladrin", "Drow", "High", "Sea", "Shadar-Kai", "Wood"]
     Subrace = random.choice(Subrace)
     Age = Normal(20, 700)
@@ -517,6 +522,7 @@ elif Race == "Elf":
         Traits.extend(["Mask of the Wild"])
 
 elif Race == "Firbolg":
+    SpokenLanguage.extend(["Common", "Giant", "Elvish"])
     WIS = StatIncrease(WIS, 2)
     STR = StatIncrease(STR, 1)
     Age = Normal(30, 450)
@@ -534,6 +540,7 @@ elif Race == "Firbolg":
                   "Powerful Build", "Speech of Beast and Leaf"])
 
 elif Race == "Genasi":
+    SpokenLanguage.extend(["Common", "Preordial"])
     Subrace = ["Air", "Earth", "Fire", "Water"]
     Subrace = random.choice(Subrace)
     Age = Normal(20, 100)
@@ -591,21 +598,19 @@ elif Race == "Gith":
     Speed = 30
     INT = StatIncrease(INT, 1)
     if Subrace == "Githyanki":
+        SpokenLanguage.append(["Githyanki", "Common"])
         STR = StatIncrease(STR, 2)
-    elif Subrace == "Githzerai":
-        WIS = StatIncrease(WIS, 2)
-    if Subrace == "Githyanki":
         Height = 5 * 12 + SizeMod
         Weight = 100 + SizeMod * Normal(2, 8)
-    elif Subrace == "Githzerai":
-        Height = 4 * 12 + 11 + SizeMod
-        Weight = 90 + SizeMod * Normal(2, 8)
-    if Subrace == "Githyanki":
         ArmourProficiencies.extend(["Light Armour", "Medium Armour"])
         WeaponProficiencies.extend(
             ["Shortswords", "Longswords", "Greatswords"])
         Traits.extend(["Decadent Mastery", "Githyanki Psionics"])
     elif Subrace == "Githzerai":
+        SpokenLanguage.append(["Githyanki", "Common"])
+        WIS = StatIncrease(WIS, 2)
+        Height = 4 * 12 + 11 + SizeMod
+        Weight = 90 + SizeMod * Normal(2, 8)
         Traits.extend(["Mental Discipline", "Githzerai Psionics"])
 
 elif Race == "Gnome":
