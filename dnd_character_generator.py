@@ -3,6 +3,7 @@
 @the_guy_who_took_the_code_and_"improved"_it: 387420489
 """
 # TODO optimalize line 159 and under  !!!!!!!!!!
+# TODO CHARACTER NAMES!!!!!  https://www.reddit.com/r/DnDBehindTheScreen/comments/50pcg1/a_post_about_names_names_for_speakers_of_the/
 # TODO character sheet print formatting
 # =============================================================================
 #
@@ -47,8 +48,20 @@ else:
 
 
 # -------------------------------------END OF USER INPUTS----------------------------------------------------------------
+# -----------------------------------------NAME GENERATOR-----------------------------------------------------------------
+
+name_lst = []
+with open("names.txt", "r") as n:
+    names = n.readlines()
+    for i in range(2):
+        name1 = random.choice(names).strip()
+        name2 = random.choice(names).strip()
+        Name = name1 + " " + name2
+
 
 # ------------------------------------------HP, STAT, GENERATING---------------------------------------------------------
+
+
 def Normal(Min, Max):  # Not exactly sure how this one is working, but it gives a more realistic result for age, height and weight
     # Round gives us a whole number for a character's age
     r = round(random.triangular(low=Min, high=Max))
@@ -1693,8 +1706,8 @@ elif Background == "Harborfolk":
                      "Set of Common Clothes", "Rowboat", "5 gp"])
 
 elif Background == "Haunted One":
-    SpokenLanguage.append(random.choice["Abyssal", "Celestial", "Deep Speech",
-                          "Draconic", "Infernal", "Primordial", "Sylvan", "Undercommon"])
+    SpokenLanguage.append(random.choice(["Abyssal", "Celestial", "Deep Speech",
+                          "Draconic", "Infernal", "Primordial", "Sylvan", "Undercommon"]))
     SkillProficiencies.extend(random.choice(
         ["Arcana", "Investigation", "Religion", "Survival"]))
     Equipment.extend(["Monster Hunter's Pack", "Gothic Trinket"])
@@ -1972,6 +1985,7 @@ ToolExpertises = [item for item, count in collections.Counter(ToolProficiencies)
 
 # ----------------------------------------------------PRINTING CHARATER--------------------------------------------------
 print()
+print("Name:", Name)
 print("Race:", Race)
 if Subrace != "N/A":
     print("Subrace:", Subrace)
