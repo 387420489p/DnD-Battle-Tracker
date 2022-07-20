@@ -297,7 +297,7 @@ if Race == "Aasimar":
         WIS = StatIncrease(WIS, 1)
     elif Subrace == "Scourge":
         CON = StatIncrease(CON, 1)
-    SpokenLanguage.append(["Common", "Celestial"])
+    SpokenLanguage.extend(["Common", "Celestial"])
     Age = Normal(20, 140)
     SizeMod = Normal(2, 20)
     Height = 4 * 12 + 10 + SizeMod
