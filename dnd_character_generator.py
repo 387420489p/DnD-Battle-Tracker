@@ -1474,16 +1474,19 @@ Background = ["Acolyte", "Anthropologist", "Archaeologist", "Black Fist Double A
 Background = random.choice(Background)
 
 if Background == "Acolyte":
+    AddLanguage(2)
     SkillProficiencies.extend(["Insight", "Religion"])
     Equipment.extend(["Holy Symbol", random.choice(["Prayer Book", "Prayer Wheel"]), "5 Sticks of Incense", "Vestments",
                       "Common Clothes", "15 gp"])
 
 elif Background == "Anthropologist":
+    AddLanguage(2)
     SkillProficiencies.extend(["Insight", "Religion"])
     Equipment.extend(["Leather-Bound Diary", "Bottle of Ink", "Ink Pen", "Set of Traveler's Clothes",
                       "One Trinket of Special Significance", "10 gp"])
 
 elif Background == "Archaeologist":
+    AddLanguage(1)
     SkillProficiencies.extend(["History", "Survival"])
     ToolProficiencies.extend(
         [random.choice(["Cartographer's Tools", "Navigator's Tools"])])
@@ -1502,6 +1505,7 @@ elif Background == "Black Fist Double Agent":
          BlackFistDoubleAgentTool, "15 gp"])
 
 elif Background == "Caravan Specialist":
+    AddLanguage(1)
     SkillProficiencies.extend(["Animal Handling", "Survival"])
     ToolProficiencies.extend(["Land Vehicles"])
     Equipment.extend(["Whip", "Tent", "Regional Map",
@@ -1515,6 +1519,7 @@ elif Background == "Charlatan":
          "Signet Ring of an Imaginary Duke"]), "15 gp"])
 
 elif Background == "City Watch":
+    AddLanguage(2)
     Background = random.choice(
         ["City Watch Patrol", "City Watch Investigator"])
     SkillProficiencies.extend(["Insight"])
@@ -1526,6 +1531,7 @@ elif Background == "City Watch":
                       "Set of Manacles", "10 gp"])
 
 elif Background == "Clan Crafter":
+    AddLanguage(1)
     SkillProficiencies.extend(["History", "Insight"])
     ClanCrafterArtisanTools = random.choice(ArtisanTools)
     ToolProficiencies.extend([ClanCrafterArtisanTools])
@@ -1533,6 +1539,7 @@ elif Background == "Clan Crafter":
                      "Traveler's Clothes", "Gem Worth 10 gp", "5 gp"])
 
 elif Background == "Cloistered Scholar":
+    AddLanguage(2)
     SkillProficiencies.extend(
         ["History", random.choice(["Arcana", "Nature", "Religion"])])
     Equipment.extend(
@@ -1540,6 +1547,8 @@ elif Background == "Cloistered Scholar":
          "10 gp"])
 
 elif Background == "Cormanthor Refugee":
+    if "Elvish" not in SpokenLanguage:
+        SpokenLanguage.append("Elvish")
     SkillProficiencies.extend(["Nature", "Survival"])
     CormanthorRefugeeArtisanTools = random.choice(
         ArtisanTools)  # Introducing a temporary variable so the same artisan's tools will be included in the equipment and proficiencies
@@ -1548,6 +1557,7 @@ elif Background == "Cormanthor Refugee":
                      "Holy Symbol", "Traveler's Clothes", "5 gp"])
 
 elif Background == "Courtier":
+    AddLanguage(2)
     SkillProficiencies.extend(["Insight", "Persuasion"])
     Equipment.extend(["Set of Fine Clothes", "5 gp"])
 
@@ -1564,6 +1574,8 @@ elif Background == "Criminal":
 # =============================================================================
 
 elif Background == "Dragon Casualty":  # Tool proficiency is based on origin
+    if "Draconic" not in SpokenLanguage:
+        SpokenLanguage.append("Draconic")
     Origin = random.choice(
         ["Dockworker/Fisherman", "Tradesperson/Merchant", "Black Fist Soldier", "Adventurer", "Entertainer",
          "Scholar/Healer", "Criminal", "Unskilled Labourer"])
@@ -1592,6 +1604,7 @@ elif Background == "Dragon Casualty":  # Tool proficiency is based on origin
                       "Small Cast-Off Scale Belonging to Vorgansharax - The Maimed Virulence", "5 gp"])
 
 elif Background == "Earthspur Miner":
+    SpokenLanguage.extend(["Dwarvish", "Undercommon"])
     SkillProficiencies.extend(["Athletics", "Survival"])
     Equipment.extend(
         [random.choice(["Shovel", "Miner's Pick"]), "Block and Tackle", "Climber's Kit", "Set of Common Clothes",
@@ -1616,6 +1629,7 @@ elif Background == "Entertainer":
         Equipment.extend([GladiatorWeapon])
 
 elif Background == "Faction Agent":
+    AddLanguage(2)
     Faction = random.choice(
         ["The Emerald Enclave", "The Harpers", "The Lord's Alliance", "The Order of the Gauntlet", "The Zhentarim"])
     Background = "Faction Agent of " + Faction
@@ -1638,6 +1652,7 @@ elif Background == "Faction Agent":
                      "Emblem of " + Faction]), "Set of Common Clothes", "15 gp"])
 
 elif Background == "Far Traveler":
+    AddLanguage(1)
     Reason = random.choice(
         ["Emissary", "Exile", "Fugitive", "Pilgrim", "Sightseer", "Wanderer"])
     Origin = random.choice(["Evermeet", "Halruaa", "Kara-Tur",
@@ -1668,6 +1683,7 @@ elif Background == "Gate Urchin":
                       "Set of Common Clothes", "10 gp"])
 
 elif Background == "Guild Artisan":
+    AddLanguage(1)
     SkillProficiencies.extend(["Insight", "Persuasion"])
     GuildArtisanTools = random.choice(ArtisanTools)
     ToolProficiencies.extend([GuildArtisanTools])
@@ -1682,11 +1698,14 @@ elif Background == "Harborfolk":
                      "Set of Common Clothes", "Rowboat", "5 gp"])
 
 elif Background == "Haunted One":
+    SpokenLanguage.append(random.choice["Abyssal", "Celestial", "Deep Speech",
+                          "Draconic", "Infernal", "Primordial", "Sylvan", "Undercommon"])
     SkillProficiencies.extend(random.choice(
         ["Arcana", "Investigation", "Religion", "Survival"]))
     Equipment.extend(["Monster Hunter's Pack", "Gothic Trinket"])
 
 elif Background == "Hermit":
+    AddLanguage(1)
     SkillProficiencies.extend(["Medicine", "Religion"])
     ToolProficiencies.extend(["Herbalism Kit"])
     Equipment.extend(
@@ -1700,6 +1719,7 @@ elif Background == "Hillsfar Merchant":
         ["Set of Clothes", "Signet Ring", "Letter of Introduction from Your Family's Trading House", "25 gp"])
 
 elif Background == "Hillsfar Smuggler":
+    AddLanguage(1)
     SkillProficiencies.extend(["Perception", "Stealth"])
     ToolProficiencies.extend(["Forgery Kit"])
     Equipment.extend(["Forgery Kit", "Set of Common Clothes", "5 gp"])
@@ -1773,6 +1793,7 @@ elif Background == "Iron Route Bandit":
                      "Pack Saddle", "Burglar's Pack", "5 gp"])
 
 elif Background == "Knight of the Order":
+    AddLanguage(1)
     Order = random.choice(
         ["the Unicorn", "Myth Drannor", "the Silver Chalice"])
     Background = "Knight of the Order of " + Order
@@ -1810,12 +1831,14 @@ elif Background == "Mulmaster Aristocrat":
          "10 gp"])
 
 elif Background == "Noble":
+    AddLanguage(1)
     SkillProficiencies.extend(["History", "Persuasion"])
     ToolProficiencies.extend([random.choice(GamingSets)])
     Equipment.extend(["Set of Fine Clothes", "Signet Ring",
                      "Scroll of Pedigree", "25 gp"])
 
 elif Background == "Outlander":
+    AddLanguage(1)
     Origin = random.choice(
         ["Forester", "Trapper", "Homesteader", "Guide", "Exile", "Outcast", "Bounty Hunter", "Pilgrim", "Tribal Nomad",
          "Hunter-Gatherer", "Tribal Marauder"])
@@ -1832,6 +1855,7 @@ elif Background == "Phlan Insurgent":
         ["Bag of 20 Caltrops", "Small Trinket from Your Home", "Healer's Kit", "Set of Dark Common Clothes", "5 gp"])
 
 elif Background == "Phlan Refugee":
+    AddLanguage(1)
     SkillProficiencies.extend(["Athletics", "Insight"])
     PhlanRefugeeTool = random.choice(ArtisanTools)
     ToolProficiencies.extend([PhlanRefugeeTool])
@@ -1839,6 +1863,7 @@ elif Background == "Phlan Refugee":
                      "Set of Traveler's Clothes", "15 gp"])
 
 elif Background == "Sage":
+    AddLanguage(2)
     Specialty = random.choice(
         ["Alchemist", "Astronomer", "Discredited Academic", "Librarian", "Professor", "Researcher",
          "Wizard's Apprentice", "Scribe"])
@@ -1861,6 +1886,7 @@ elif Background == "Secret Identity":  # Has to be non human
                      "Set of Common Clothes", "5 gp"])
 
 elif Background == "Shade Fanatic":
+    SpokenLanguage.append("Netherese")
     SkillProficiencies.extend(["Deception", "Intimidation"])
     ToolProficiencies.extend(["Forgery Kit"])
     Equipment.extend(
@@ -1884,6 +1910,8 @@ elif Background == "Stojanow Prisoner":
                      "Trinket from Home", "10 gp"])
 
 elif Background == "Ticklebelly Nomad":
+    if "Giant" not in SpokenLanguage:
+        SpokenLanguage.append("Giant")
     SkillProficiencies.extend(["Animal Handling", "Nature"])
     ToolProficiencies.extend(["Herbalism Kit"])
     Equipment.extend(
@@ -1891,6 +1919,8 @@ elif Background == "Ticklebelly Nomad":
          "5 gp"])
 
 elif Background == "Trade Sheriff":
+    if "Elvish" not in SpokenLanguage:
+        SpokenLanguage.append("Elvish")
     SkillProficiencies.extend(["Investigation", "Persuasion"])
     ToolProficiencies.extend(["Thieves' Tools"])
     Equipment.extend(["Thieves' Kit", "Gray Cloak",
@@ -1912,6 +1942,7 @@ elif Background == "Urchin":
          "10 gp"])
 
 elif Background == "Uthgardt Tribe Member":
+    AddLanguage(1)
     SkillProficiencies.extend(["Athletics", "Survival"])
     ToolProficiencies.extend([random.choice(
         [random.choice(ArtisanTools), random.choice(MusicalInstruments)])])
@@ -1928,6 +1959,7 @@ elif Background == "Vizier":
                       "Vizier's Cartouche", "Set of Fine Clothes", "25 gp"])
 
 elif Background == "Waterdhavian Noble":
+    AddLanguage(1)
     SkillProficiencies.extend(["History", "Persuasion"])
     ToolProficiencies.extend(
         [random.choice([random.choice(GamingSets), random.choice(MusicalInstruments)])])
