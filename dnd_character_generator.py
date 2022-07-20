@@ -6,12 +6,7 @@
 # TODO character sheet print formatting
 # =============================================================================
 #
-# TODO !!!!!!! Language: races done, next: other things that give the pc languages
-# def AddLanguage()
 # TODO Does not have a seperate category for currency because I'm not sure how to account for adding from multiple sources
-# TODO Does not account for Personality Traits, Ideals or Bonds because I don't want to write a random.choice for things that bulky, trying to find another way
-# Not all Skin/Hair/Eye colours may be correct, I just put some in quickly
-# TODO It does not print class traits
 # TODO missing classes: Cardcaster, Diabolist, Feywalker, Morph, Occultist
 # =============================================================================
 
@@ -148,7 +143,7 @@ CHA = 0
 
 
 def StatRoll():
-    global STR, DEX, CON, INT, WIS, CHA
+    global STR, DEX, CON, INT, WIS, CHA, all_stats
     all_stats = []
     for i in range(0, 6):
         List = []
@@ -609,7 +604,7 @@ elif Race == "Gith":
     Speed = 30
     INT = StatIncrease(INT, 1)
     if Subrace == "Githyanki":
-        SpokenLanguage.append(["Githyanki", "Common"])
+        SpokenLanguage.extend(["Githyanki", "Common"])
         STR = StatIncrease(STR, 2)
         Height = 5 * 12 + SizeMod
         Weight = 100 + SizeMod * Normal(2, 8)
@@ -618,7 +613,7 @@ elif Race == "Gith":
             ["Shortswords", "Longswords", "Greatswords"])
         Traits.extend(["Decadent Mastery", "Githyanki Psionics"])
     elif Subrace == "Githzerai":
-        SpokenLanguage.append(["Githzerai", "Common"])
+        SpokenLanguage.extend(["Githzerai", "Common"])
         WIS = StatIncrease(WIS, 2)
         Height = 4 * 12 + 11 + SizeMod
         Weight = 90 + SizeMod * Normal(2, 8)
