@@ -1984,6 +1984,25 @@ ToolExpertises = [item for item, count in collections.Counter(ToolProficiencies)
                   count > 1]  # You can delete these two rows if you don't want innate expertises
 
 # ----------------------------------------------------PRINTING CHARATER--------------------------------------------------
+
+
+def print_msg_box(msg, indent=1, width=None, title=None):
+    """Print message-box with optional title."""
+    lines = msg.split('\n')
+    space = " " * indent
+    if not width:
+        width = max(map(len, lines))
+    box = f'╔{"═" * (width + indent * 2)}╗\n'  # upper_border
+    box += ''.join([f'║{space}{line:<{width}}{space}║\n' for line in lines])
+    if title:
+        box += f'║{space}{"-" * len(msg):<{width}}{space}║\n'  # underscore
+        box += f'║{space}{title:<{width}}{space}║\n'  # title
+    box += f'╚{"═" * (width + indent * 2)}╝'  # lower_border
+    print(box, flush=False)
+
+
+print_msg_box(Name, title="Name")
+print_msg_box(Race)
 print()
 print("Name:", Name)
 print("Race:", Race)
