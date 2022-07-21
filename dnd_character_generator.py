@@ -1998,11 +1998,11 @@ def print_msg_box(msg, indent=1, width=None, title=None):
         box += f'║{space}{"-" * len(msg):<{width}}{space}║\n'  # underscore
         box += f'║{space}{title:<{width}}{space}║\n'  # title
     box += f'╚{"═" * (width + indent * 2)}╝'  # lower_border
-    print(box, flush=False)
+    print(box, flush=True)
 
 
 print_msg_box(Name, title="Name")
-print_msg_box(Race)
+print_msg_box(Race, title="Race")
 print()
 print("Name:", Name)
 print("Race:", Race)
