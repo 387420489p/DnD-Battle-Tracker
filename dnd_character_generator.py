@@ -2000,13 +2000,17 @@ def print_msg_box(msg, indent=1, width=None, title=None):
     box += f'╚{"═" * (width + indent * 2)}╝'  # lower_border
     print(box, flush=True)
 
-
+# TODO AC MISSING !!!!!!!
+# TODO MAKE MONEY
+# TODO calculate saving throws and skills
 space = " "
 print("╔════════════════════╦═════════════════════════════════════════════════════════════════════════════╗")
 print(f'║{Name}{space*(20-len(Name))}║{Class} {Level}{space*(38-len(Class)-len(str(Level)))}{Background}{space*(38-len(Background))}║')
 print(f'║{"-"*len(Name)}{space*(20-len(Name))}║Subclass: {Subclass}{space*(67-len(Subclass))}║')
 print(f'║Name {space*15}║{Subrace} {Race}{space*(38-len(Subrace)-len(Race))}{Alignment}{space*(38-len(Alignment))}║')
-
+print('╠════════════════════╬═════════════════════════╦════════════════╦══════════════════╦═══════════════╣')
+print(f'║{space*6}STRENGHT{space*6}║     SAVING THROWS{space*(21-len(" saving throws"))}║ AC 10 {space*(16-7)}║ Initiative {DEXMOD}{space*(6-len(str(DEXMOD)))}║ Speed {Speed}{space*(8-len(str(Speed)))}║')
+print(f'║{space*9}{DEX}{space*(11-len(str(DEX)))}║')
 print()
 print("Name:", Name)
 print("Race:", Race)
