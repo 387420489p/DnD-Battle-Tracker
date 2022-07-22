@@ -7,7 +7,7 @@
 ╠════════════════════╬═════════════════════════╦════════════════╦══════════════════╦═══════════════╣
 ║     STRENGHT       ║      SAVING THROWS      ║       AC 20    ║   Initiative 3   ║  Speed 25     ║
 ║       19           ║ Strenght +3             ╠════════════════╩══════════════════╩═══════════════╣
-║       +3           ║ Dextreity +3            ║                 CURRENT HITPOINTS                 ║
+║       +3           ║ Dextreity +3            ║                     HITPOINTS                     ║
 ╠════════════════════╣ Constitution +3         ║                        35                         ║
 ║    DEXTERITY       ║ Itelligence +3          ╠═══════════════════════════════════════════════════╣
 ║        19          ║ Wisdom +3               ║                 TEMOPRARY HITPOINTS               ║
@@ -15,15 +15,15 @@
 ╠════════════════════╬═════════════════════════╬═════════════════╦═════════════════════════════════╣
 ║    CONSTITUTION    ║       SKILLS            ║HIT DICE   1D10  ║  DEATH SAVES   O-O-O   O-O-O    ║
 ║       19           ║o +3 Acrobatics          ╠═════════════════╩═════════════════════════════════╣
-║       +3           ║o +3 Animal Handling     ║              ATTACK & SPELLCASTING                ║
+║       +3           ║o +3 Animal Handling     ║                   EQUIPMENT                       ║
 ╠════════════════════╣o +3 Arcana              ║                                                   ║
-║  INTELLIGENCE      ║o +3 Athletics           ║                                                   ║
+║    INTELLIGENCE    ║o +3 Athletics           ║                                                   ║
 ║       19           ║o +3 Deception           ║                                                   ║
 ║       +3           ║o +3 History             ║                                                   ║
 ╠════════════════════╣o +3 Insight             ║                                                   ║
 ║      WISDOM        ║o +3 Intimidation        ║                                                   ║
-║       19           ║o +3 Investigation       ╠═══════════════════════════════════════════════════╣
-║       +3           ║o +3 Medicine            ║                   EQUIPMENT                       ║
+║       19           ║o +3 Investigation       ║                                                   ║
+║       +3           ║o +3 Medicine            ║                                                   ║
 ╠════════════════════╣o +3 Nature              ║                                                   ║
 ║     CHARISMA       ║o +3 Perception          ║                                                   ║
 ║       19           ║o +3 Performance         ║                                                   ║

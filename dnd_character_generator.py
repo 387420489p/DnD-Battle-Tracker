@@ -16,35 +16,37 @@ import collections
 
 # --------------------------------------USER INPUTS----------------------------------------------------------------
 # This is where you change Character Level
-Level = input("What LEVEL do you want? Hit ENTER for random. ")
-if Level == "":
-    Level = random.randint(1, 20)
-else:
-    Level = int(Level)
-
-# Abomination Currently Removed
+# Level = input("What LEVEL do you want? Hit ENTER for random. ")
+# if Level == "":
+#     Level = random.randint(1, 20)
+# else:
+#     Level = int(Level)
+Level = random.randint(1, 20)
+# # Abomination Currently Removed
 Races = ["Aasimar", "Bugbear", "Dragonborn", "Dryad", "Dwarf", "Elf", "Firbolg", "Genasi", "Gith", "Gnome", "Goblin",
          "Goliath", "Hobgoblin", "Half-Elf", "Halfling", "Half-Orc", "Human", "Juiblexian", "Kender", "Kenku",
          "Kobold",
          "Lizardfolk", "Mousefolk", "Orc", "Succubus", "Tabaxi", "Tiefling", "Tortle", "Triton", "Yuan-Ti Pureblood"]
-Race = input("What RACE do you want? Hit ENTER for random! ")
-if Race == "":
-    Race = random.choice(Races)
-else:
-    while Race not in Races:
-        print("Wrong race. Choose from:\n", ", ".join(Races))
-        Race = input()
+Race = random.choice(Races)
+# Race = input("What RACE do you want? Hit ENTER for random! ")
+# if Race == "":
+#     Race = random.choice(Races)
+# else:
+#     while Race not in Races:
+#         print("Wrong race. Choose from:\n", ", ".join(Races))
+#         Race = input()
 
-# Alchemist, Artificer, Blood Hunter, Cardcaster, Diabolist, Feywalker, Morph, Occultist temporarily removed
+# # Alchemist, Artificer, Blood Hunter, Cardcaster, Diabolist, Feywalker, Morph, Occultist temporarily removed
 Classes = ["Barbarian", "Artificer", "Bard", "Blood Hunter", "Cleric", "Druid", "Fighter", "Monk",
            "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"]
-Class = input("What CLASS do you want? Hit ENTER for random! ")
-if Class == "":
-    Class = random.choice(Classes)
-else:
-    while Class not in Classes:
-        print("Wrong class. Choose from:\n", ", ".join(Classes))
-        Class = input()
+Class = random.choice(Classes)
+# Class = input("What CLASS do you want? Hit ENTER for random! ")
+# if Class == "":
+#     Class = random.choice(Classes)
+# else:
+#     while Class not in Classes:
+#         print("Wrong class. Choose from:\n", ", ".join(Classes))
+#         Class = input()
 
 
 # -------------------------------------END OF USER INPUTS----------------------------------------------------------------
@@ -1154,6 +1156,7 @@ CHAMOD = STATMOD(CHA)
 if Class == "Artificer":
     SpellCastingAbility = "INT"
     HP = HP + HitPoints(8)
+    HitDie = 8
     ArmourProficiencies.extend(["Light Armor", "Medium Armor", "Shields"])
     WeaponProficiencies.extend(["Simple Weapons"])
     SavingThrowProficiencies.extend(["CON", "INT"])
@@ -1180,6 +1183,7 @@ elif Class == "Barbarian":
                     "Path of the Storm Herald", "Path of the Totem Warrior", "Path of the Zealot"]
         Subclass = random.choice(Subclass)
     HP = HP + HitPoints(12)
+    HitDie = 12
     ArmourProficiencies.extend(["Light Armour", "Medium Armour", "Shields"])
     WeaponProficiencies.extend(["Simple Weapons", "Martial Weapons"])
     SavingThrowProficiencies.extend(["STR", "CON"])
@@ -1196,6 +1200,7 @@ elif Class == "Bard":
                     "College of Valor", "College of Whispers"]
         Subclass = random.choice(Subclass)
     HP = HP + HitPoints(8)
+    HitDie = 8
     ArmourProficiencies.extend(["Light Armour"])
     WeaponProficiencies.extend(
         ["Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords"])
@@ -1211,6 +1216,7 @@ elif Class == "Blood Hunter":
         Subclass = ["Ghostslayer", "Lycan", "Mutant", "Profane Soul"]
         Subclass = random.choice(Subclass)
     HP = HP + HitPoints(8)
+    HitDie = 8
     ArmourProficiencies.extend(["Light Armour", "Medium Armour", "Shields"])
     WeaponProficiencies.extend(["Simple Weapons", "Martial Weapons"])
     SavingThrowProficiencies.extend(["DEX", "INT"])
@@ -1218,7 +1224,7 @@ elif Class == "Blood Hunter":
                               "Athletics", "History", "Insight", "Investigation", "Religion", "Survival"], 3))
     coinflip = random.randint(1, 2)
     if coinflip == 1:
-        Equipment.extend(random.choice(MartialWeapons))
+        Equipment.append(random.choice(MartialWeapons))
     else:
         Equipment.extend(random.sample(SimpleWeapons, 2))
     Equipment.append(random.choice(
@@ -1255,6 +1261,7 @@ elif Class == "Cleric":
                 extra_language = random.choice(Languages)
             SpokenLanguage.append(extra_language)
     HP = HP + HitPoints(8)
+    HitDie = 8
     ArmourProficiencies.extend(["Light Armour", "Medium Armour", "Shields"])
     WeaponProficiencies.extend(["Simple Weapons"])
     SavingThrowProficiencies.extend(["WIS", "CHA"])
@@ -1287,6 +1294,7 @@ elif Class == "Druid":
                 ["(Arctic)", "(Coast)", "(Desert)", "(Forest)", "(Grassland)", "(Mountain)", "(Swamp)", "(Underdark)"])
             Subclass = "Circle of the Land " + Land
     HP = HP + HitPoints(8)
+    HitDie = 8
     ArmourProficiencies.extend(["Light Armour", "Medium Armour", "Shields"])
     WeaponProficiencies.extend(
         ["Clubs", "Daggers", "Darts", "Javelins", "Maces", "Quarterstaffs", "Scimitars", "Sickles", "Slings", "Spears"])
@@ -1312,6 +1320,7 @@ elif Class == "Fighter":
                     "Purple Dragon Knight", "Samurai", "Scout", "Sharpshooter"]
         Subclass = random.choice(Subclass)
     HP = HP + HitPoints(10)
+    HitDie = 10
     ArmourProficiencies.extend(
         ["Light Armour, Medium Armour, Heavy Armour", "Shields"])
     WeaponProficiencies.extend(["Simple Weapons", "Martial Weapons"])
@@ -1338,6 +1347,7 @@ elif Class == "Monk":
                     "Way of Tranquility"]
         Subclass = random.choice(Subclass)
     HP = HP + HitPoints(8)
+    HitDie = 8
     WeaponProficiencies.extend(["Simple Weapons", "Shortswords"])
     ToolProficiencies.extend([random.choice(
         [random.choice(MusicalInstruments), random.choice(ArtisanTools)])])
@@ -1365,6 +1375,7 @@ elif Class == "Paladin":
                     "Oath of Redemption", "Oath of Vengeance", "Oathbreaker", "Oath of Treachery"]
         Subclass = random.choice(Subclass)
     HP = HP + HitPoints(10)
+    HitDie = 10
     ArmourProficiencies.extend(
         ["Light Armour", "Medium Armour", "Heavy Armour", "Shields"])
     WeaponProficiencies.extend(["Simple Weapons", "Martial Weapons"])
@@ -1388,6 +1399,7 @@ elif Class == "Ranger":
                     "Hunter", "Monster Slayer", "Primeval Guardian"]
         Subclass = random.choice(Subclass)
     HP = HP + HitPoints(10)
+    HitDie = 10
     ArmourProficiencies.extend(["Light Armour", "Medium Armour", "Shields"])
     WeaponProficiencies.extend(["Simple Weapons", "Martial Weapons"])
     SavingThrowProficiencies.extend(["STR", "DEX"])
@@ -1406,6 +1418,7 @@ elif Class == "Rogue":
                     "Mastermind", "Scout", "Swashbuckler", "Thief"]
         Subclass = random.choice(Subclass)
     HP = HP + HitPoints(8)
+    HitDie = 8
     ArmourProficiencies.extend(["Light Armour"])
     WeaponProficiencies.extend(
         ["Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords"])
@@ -1424,6 +1437,7 @@ elif Class == "Sorcerer":
                 "Shadow Magic", "Stone Soercery", "Storm Sorcery", "Wild Magic"]
     Subclass = random.choice(Subclass)
     HP = HP + HitPoints(6)
+    HitDie = 6
     WeaponProficiencies.extend(
         ["Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows"])
     SavingThrowProficiencies.extend(["CON", "CHA"])
@@ -1442,6 +1456,7 @@ elif Class == "Warlock":
                          "Pact of the Blade", "Pact of the Tome"]
         FightingStyle = random.choice(FightingStyle)
     HP = HP + HitPoints(8)
+    HitDie = 8
     ArmourProficiencies.extend(["Light Armour"])
     WeaponProficiencies.extend(["Simple Weapons"])
     SavingThrowProficiencies.extend(["WIS", "CHA"])
@@ -1461,6 +1476,7 @@ elif Class == "Wizard":
                     "War Magic"]
         Subclass = random.choice(Subclass)
     HP = HP + HitPoints(6)
+    HitDie = 6
     WeaponProficiencies.extend(
         ["Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows"])
     SavingThrowProficiencies.extend(["INT", "WIS"])
@@ -2000,17 +2016,63 @@ def print_msg_box(msg, indent=1, width=None, title=None):
     box += f'╚{"═" * (width + indent * 2)}╝'  # lower_border
     print(box, flush=True)
 
+
 # TODO AC MISSING !!!!!!!
 # TODO MAKE MONEY
 # TODO calculate saving throws and skills
+# TODO reduce too long background texts
+# TODO szétszedni a fegyvereket az equipmentektől
 space = " "
+print(len(Equipment))
 print("╔════════════════════╦═════════════════════════════════════════════════════════════════════════════╗")
 print(f'║{Name}{space*(20-len(Name))}║{Class} {Level}{space*(38-len(Class)-len(str(Level)))}{Background}{space*(38-len(Background))}║')
 print(f'║{"-"*len(Name)}{space*(20-len(Name))}║Subclass: {Subclass}{space*(67-len(Subclass))}║')
 print(f'║Name {space*15}║{Subrace} {Race}{space*(38-len(Subrace)-len(Race))}{Alignment}{space*(38-len(Alignment))}║')
 print('╠════════════════════╬═════════════════════════╦════════════════╦══════════════════╦═══════════════╣')
-print(f'║{space*6}STRENGHT{space*6}║     SAVING THROWS{space*(21-len(" saving throws"))}║ AC 10 {space*(16-7)}║ Initiative {DEXMOD}{space*(6-len(str(DEXMOD)))}║ Speed {Speed}{space*(8-len(str(Speed)))}║')
-print(f'║{space*9}{DEX}{space*(11-len(str(DEX)))}║')
+print(
+    f'║      STRENGHT      ║     SAVING THROWS{space*(21-len(" saving throws"))}║ AC 10 {space*(16-7)}║ Initiative {DEXMOD}{space*(6-len(str(DEXMOD)))}║ Speed {Speed}{space*(8-len(str(Speed)))}║')
+print(f'║{space*9}{STR}{space*(11-len(str(STR)))}║ 3 Strenght{space*(25-len(" 3 Strenght"))}╠════════════════╩══════════════════╩═══════════════╣')
+print(f'║{space*9}{STRMOD}{space*(11-len(str(STRMOD)))}║ 3 Dexterity{space*(25-len(" 3 Dexterity"))}║                     HITPOINTS                     ║')
+print(
+    f'╠════════════════════╣ 3 Constitution{space*(25-len(" 3 Constitution"))}║{space*25}{HP}{space*(26-len(str(HP)))}║')
+print(
+    f'║     DEXTERITY      ║ 3 Intelligence{space*(25-len(" 3 Intelligence"))}╠═══════════════════════════════════════════════════╣')
+print(f'║{space*9}{DEX}{space*(11-len(str(DEX)))}║ 3 Wisdom{space*(25-len(" 3 Wisdom"))}║                 TEMOPRARY HITPOINTS               ║')
+print(f'║{space*9}{DEXMOD}{space*(11-len(str(DEXMOD)))}║ 3 Charisma{space*(25-len(" 3 Charisma"))}║                                                   ║')
+print(f'╠════════════════════╬═════════════════════════╬════════════════╦══════════════════════════════════╣')
+print(
+    f'║    CONSTITUTION    ║          SKILLS{space*(15-len("skills"))}║ HIT DICE {HitDie}{space*(6-len(str(HitDie)))}║   DEATH SAVES   O-O-O   O-O-O    ║')
+print(f'║{space*9}{CON}{space*(11-len(str(CON)))}║ 3 Acrobatics{space*(25-len(" 3 Acrobatics"))}╠════════════════╩══════════════════════════════════╣')
+print(f'║{space*9}{CONMOD}{space*(11-len(str(CONMOD)))}║ 3 Animal Handling{space*(25-len(" 3 Animal Handling"))}║                EQUIPMENT & WEAPONS                ║')
+print(
+    f'╠════════════════════╣ 3 Arcana{space*(25-len(" 3 Arcana"))}║ {Equipment[0]}{space*(50-len(Equipment[0]))}║')
+print(
+    f'║    INTELLIGENCE    ║ 3 Athletics{space*(25-len(" 3 Athletics"))}║ {Equipment[1]}{space*(50-len(Equipment[1]))}║')
+print(
+    f'║{space*9}{INT}{space*(11-len(str(INT)))}║ 3 Deception{space*(25-len(" 3 Deception"))}║ {Equipment[2]}{space*(50-len(Equipment[2]))}║')
+print(
+    f'║{space*9}{INTMOD}{space*(11-len(str(INTMOD)))}║ 3 History{space*(25-len(" 3 History"))}║ {Equipment[3]}{space*(50-len(Equipment[3]))}║')
+print(
+    f'╠════════════════════╣ 3 Insight{space*(25-len(" 3 Insight"))}║ {Equipment[4]}{space*(50-len(Equipment[4]))}║')
+print(
+    f'║       WISDOM       ║ 3 Intimidation{space*(25-len(" 3 Intimidation"))}║ {Equipment[5]}{space*(50-len(Equipment[5]))}║')
+if len(Equipment) >= 7:
+    print(
+        f'║{space*9}{WIS}{space*(11-len(str(WIS)))}║ 3 Investigation{space*(25-len(" 3 Investigation"))}║ {Equipment[6]}{space*(50-len(Equipment[6]))}║')
+else:
+    print(f'║{space*9}{WIS}{space*(11-len(str(WIS)))}║ 3 Investigation{space*(25-len(" 3 Investigation"))}║                                                   ║')
+if len(Equipment) >= 8:
+    print(
+        f'║{space*9}{WISMOD}{space*(11-len(str(WISMOD)))}║ 3 Medicine{space*(25-len(" 3 Medicine"))}║ {Equipment[7]}{space*(50-len(Equipment[7]))}║')
+else:
+    print(f'║{space*9}{WISMOD}{space*(11-len(str(WISMOD)))}║ 3 Medicine{space*(25-len(" 3 Medicine"))}║                                                   ║')
+if len(Equipment) >= 9:
+    print(
+        f'╠════════════════════╣ 3 Nature{space*(25-len(" 3 Nature"))}║ {Equipment[8]}{space*(50-len(Equipment[8]))}║')
+else:
+    print(
+        f'╠════════════════════╣ 3 Nature{space*(25-len(" 3 Nature"))}║                                                   ║')
+
 print()
 print("Name:", Name)
 print("Race:", Race)
@@ -2078,3 +2140,5 @@ print("Weight:", Weight, "Pounds")
 print("Eye Colour:", Eyes)
 print("Skin Colour:", Skin)
 print("Hair Colour:", Hair)
+
+print(len(Equipment))
