@@ -2016,6 +2016,23 @@ def print_msg_box(msg, indent=1, width=None, title=None):
     box += f'╚{"═" * (width + indent * 2)}╝'  # lower_border
     print(box, flush=True)
 
+#Proficiencie bonus & Passive Perception
+if Level < 5:
+    ProfBonus = 2
+elif Level < 9:
+    ProfBonus = 3
+elif Level < 13:
+    ProfBonus = 4
+elif Level < 17:
+    ProfBonus = 5
+else:
+    ProfBonus = 6
+
+if "Perception" in SkillProficiencies:
+    PassivePerception = 10 + WISMOD + ProfBonus
+else:
+    PassivePerception = 10 + ProfBonus
+
 
 # TODO AC MISSING !!!!!!!
 # TODO MAKE MONEY
@@ -2023,10 +2040,9 @@ def print_msg_box(msg, indent=1, width=None, title=None):
 # TODO reduce too long background texts
 # TODO szétszedni a fegyvereket az equipmentektől
 space = " "
-print(len(Equipment))
 print("╔════════════════════╦═════════════════════════════════════════════════════════════════════════════╗")
 print(f'║{Name}{space*(20-len(Name))}║{Class} {Level}{space*(38-len(Class)-len(str(Level)))}{Background}{space*(38-len(Background))}║')
-print(f'║{"-"*len(Name)}{space*(20-len(Name))}║Subclass: {Subclass}{space*(67-len(Subclass))}║')
+print(f'║{"-"*len(Name)}{space*(20-len(Name))}║Subclass: {Subclass}{space*(29-len(Subclass))}Proficiency Bonus {ProfBonus}{space*(20-len(str(ProfBonus)))}║')
 print(f'║Name {space*15}║{Subrace} {Race}{space*(38-len(Subrace)-len(Race))}{Alignment}{space*(38-len(Alignment))}║')
 print('╠════════════════════╬═════════════════════════╦════════════════╦══════════════════╦═══════════════╣')
 print(
@@ -2050,12 +2066,24 @@ print(
     f'║    INTELLIGENCE    ║ 3 Athletics{space*(25-len(" 3 Athletics"))}║ {Equipment[1]}{space*(50-len(Equipment[1]))}║')
 print(
     f'║{space*9}{INT}{space*(11-len(str(INT)))}║ 3 Deception{space*(25-len(" 3 Deception"))}║ {Equipment[2]}{space*(50-len(Equipment[2]))}║')
-print(
-    f'║{space*9}{INTMOD}{space*(11-len(str(INTMOD)))}║ 3 History{space*(25-len(" 3 History"))}║ {Equipment[3]}{space*(50-len(Equipment[3]))}║')
-print(
-    f'╠════════════════════╣ 3 Insight{space*(25-len(" 3 Insight"))}║ {Equipment[4]}{space*(50-len(Equipment[4]))}║')
-print(
-    f'║       WISDOM       ║ 3 Intimidation{space*(25-len(" 3 Intimidation"))}║ {Equipment[5]}{space*(50-len(Equipment[5]))}║')
+if len(Equipment) >=4:
+    print(
+        f'║{space*9}{INTMOD}{space*(11-len(str(INTMOD)))}║ 3 History{space*(25-len(" 3 History"))}║ {Equipment[3]}{space*(50-len(Equipment[3]))}║')
+else:
+    print(
+        f'║{space*9}{INTMOD}{space*(11-len(str(INTMOD)))}║ 3 History{space*(25-len(" 3 History"))}║                                                   ║')
+if len(Equipment) >= 5:    
+    print(
+        f'╠════════════════════╣ 3 Insight{space*(25-len(" 3 Insight"))}║ {Equipment[4]}{space*(50-len(Equipment[4]))}║')
+else:
+    print(
+        f'╠════════════════════╣ 3 Insight{space*(25-len(" 3 Insight"))}║                                                   ║')
+if len(Equipment) >= 6:
+    print(
+        f'║       WISDOM       ║ 3 Intimidation{space*(25-len(" 3 Intimidation"))}║ {Equipment[5]}{space*(50-len(Equipment[5]))}║')
+else:        
+    print(
+        f'║       WISDOM       ║ 3 Intimidation{space*(25-len(" 3 Intimidation"))}║                                                   ║')
 if len(Equipment) >= 7:
     print(
         f'║{space*9}{WIS}{space*(11-len(str(WIS)))}║ 3 Investigation{space*(25-len(" 3 Investigation"))}║ {Equipment[6]}{space*(50-len(Equipment[6]))}║')
@@ -2072,7 +2100,57 @@ if len(Equipment) >= 9:
 else:
     print(
         f'╠════════════════════╣ 3 Nature{space*(25-len(" 3 Nature"))}║                                                   ║')
-
+if len(Equipment) >= 10:
+    print(
+        f'║      CHARISMA      ║ 3 Perception{space*(25-len(" 3 Perception"))}║ {Equipment[9]}{space*(50-len(Equipment[9]))}║')
+else:
+    print(
+        f'║      CHARISMA      ║ 3 Perception{space*(25-len(" 3 Perception"))}║                                                   ║')
+if len(Equipment) >= 11:
+    print(
+        f'║{space*9}{CHA}{space*(11-len(str(CHA)))}║ 3 Pwrformance{space*(25-len(" 3 Performance"))}║ {Equipment[10]}{space*(50-len(Equipment[10]))}║')
+else:
+    print(f'║{space*9}{CHA}{space*(11-len(str(CHA)))}║ 3 Performance{space*(25-len(" 3 Performance"))}║                                                   ║')
+if len(Equipment) >= 12:
+    print(
+        f'║{space*9}{CHAMOD}{space*(11-len(str(CHAMOD)))}║ 3 Persuation{space*(25-len(" 3 Persuation"))}║ {Equipment[11]}{space*(50-len(Equipment[11]))}║')
+else:
+    print(f'║{space*9}{CHAMOD}{space*(11-len(str(CHAMOD)))}║ 3 Persuation{space*(25-len(" 3 Persuation"))}║                                                   ║')
+if len(Equipment) >= 13:
+    print(
+        f'╠════════════════════╣ 3 Religion{space*(25-len(" 3 Religion"))}║ {Equipment[12]}{space*(50-len(Equipment[12]))}║')
+else:
+    print(
+        f'╠════════════════════╣ 3 Religion{space*(25-len(" 3 Religion"))}║                                                   ║')
+if len(Equipment) >= 14:
+    print(
+        f'║                    ║ 3 Sleight of Hand{space*(25-len(" 3 Sleight of Hand"))}║ {Equipment[12]}{space*(50-len(Equipment[12]))}║')
+else:
+    print(
+        f'║                    ║ 3 Sleight of Hand{space*(25-len(" 3 Sleight of Hand"))}║                                                   ║')
+if len(Equipment) >= 15:
+    print(
+        f'║ Passive Perception ║ 3 Stealth{space*(25-len(" 3 Stealth"))}║ {Equipment[13]}{space*(50-len(Equipment[13]))}║')
+else:
+    print(
+        f'║ Passive Perception ║ 3 Stealth{space*(25-len(" 3 Stealth"))}║                                                   ║')
+if len(Equipment) >= 16:
+    print(
+        f'║         {PassivePerception}{space*(11-len(str(PassivePerception)))}║ 3 Survival{space*(25-len(" 3 Survival"))}║ {Equipment[13]}{space*(50-len(Equipment[13]))}║')
+else:
+    print(
+        f'║         {PassivePerception}{space*(11-len(str(PassivePerception)))}║ 3 Survival{space*(25-len(" 3 Survival"))}║                                                   ║')
+print("╠════════════════════╩═════════════════════════╩═══════════════════════════════════════════════════╣")
+print(f"║Languages, Armor, Weapon, Toolproficiencies:{space*(98-44)}║")
+print(f'║{", ".join(sorted(SpokenLanguage))}{space*(98-len(", ".join(sorted(SpokenLanguage))))}║')
+print(f'║{", ".join(sorted(ArmourProficiencies))}{space*(98-len(", ".join(sorted(ArmourProficiencies))))}║')
+print(f'║{", ".join(sorted(WeaponProficiencies))}{space*(98-len(", ".join(sorted(WeaponProficiencies))))}║')
+print(f'║{", ".join(sorted(ToolProficiencies))}{space*(98-len(", ".join(sorted(ToolProficiencies))))}║')
+print("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣")
+print(f'║Height: {"%.2f" % (Height/12)} Feet, Weight: {Weight} Pounds, Eye Color: {Eyes}, Skin Color: {Skin}{space*(98-len(f"Height: xxxx Feet, Weight: {Weight} Pounds, Eye Color: {Eyes}, Skin Color: {Skin}"))}║')
+print(f'║Hair Color: {Hair}, Fighting Style: {FightingStyle}{space*(98-len(f"Hair Color: {Hair}, Fighting Style: {FightingStyle}"))}║')
+print(f'║Traits: {", ".join(sorted(RemoveDuplicates(Traits)))}{space*(90-len(", ".join(RemoveDuplicates(Traits))))}║')
+print("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝")
 print()
 print("Name:", Name)
 print("Race:", Race)
@@ -2140,5 +2218,3 @@ print("Weight:", Weight, "Pounds")
 print("Eye Colour:", Eyes)
 print("Skin Colour:", Skin)
 print("Hair Colour:", Hair)
-
-print(len(Equipment))

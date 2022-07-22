@@ -2,7 +2,7 @@
 
 ╔════════════════════╦═════════════════════════════════════════════════════════════════════════════╗
 ║  Kovács Béla       ║   Class                                Background                           ║
-║  -----------       ║    Subclass                                                                 ║
+║  -----------       ║    Subclass                            proficiency Bonus                    ║
 ║  Name              ║   Race/Subrace                         Alignment                            ║
 ╠════════════════════╬═════════════════════════╦════════════════╦══════════════════╦═══════════════╣
 ║     STRENGHT       ║      SAVING THROWS      ║       AC 20    ║   Initiative 3   ║  Speed 25     ║
@@ -25,13 +25,13 @@
 ║       19           ║o +3 Investigation       ║                                                   ║
 ║       +3           ║o +3 Medicine            ║                                                   ║
 ╠════════════════════╣o +3 Nature              ║                                                   ║
-║     CHARISMA       ║o +3 Perception          ║                                                   ║
+║      CHARISMA      ║o +3 Perception          ║                                                   ║
 ║       19           ║o +3 Performance         ║                                                   ║
 ║       +3           ║o +3 Persuation          ║                                                   ║
 ╠════════════════════╣o +3 Religion            ║                                                   ║
 ║                    ║o +3 Sleight of Hand     ║                                                   ║
 ║ Passive Perception ║o +3 Stealth             ║                                                   ║
-║        11          ║o +3 Survival            ║                                                   ║
+║         11         ║o +3 Survival            ║                                                   ║
 ╠════════════════════╩═════════════════════════╩═══════════════════════════════════════════════════╣
 ║Other proficiencies & Languages:                                                                  ║
 ║LANG                                                                                              ║
