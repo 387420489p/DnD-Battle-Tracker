@@ -16,37 +16,34 @@ import collections
 
 # --------------------------------------USER INPUTS----------------------------------------------------------------
 # This is where you change Character Level
-# Level = input("What LEVEL do you want? Hit ENTER for random. ")
-# if Level == "":
-#     Level = random.randint(1, 20)
-# else:
-#     Level = int(Level)
-Level = random.randint(1, 20)
-# # Abomination Currently Removed
+Level = input("What LEVEL do you want? Hit ENTER for random. ")
+if Level == "":
+    Level = random.randint(1, 20)
+else:
+    Level = int(Level)
+# Abomination Currently Removed
 Races = ["Aasimar", "Bugbear", "Dragonborn", "Dryad", "Dwarf", "Elf", "Firbolg", "Genasi", "Gith", "Gnome", "Goblin",
          "Goliath", "Hobgoblin", "Half-Elf", "Halfling", "Half-Orc", "Human", "Juiblexian", "Kender", "Kenku",
          "Kobold",
          "Lizardfolk", "Mousefolk", "Orc", "Succubus", "Tabaxi", "Tiefling", "Tortle", "Triton", "Yuan-Ti Pureblood"]
-Race = random.choice(Races)
-# Race = input("What RACE do you want? Hit ENTER for random! ")
-# if Race == "":
-#     Race = random.choice(Races)
-# else:
-#     while Race not in Races:
-#         print("Wrong race. Choose from:\n", ", ".join(Races))
-#         Race = input()
+Race = input("What RACE do you want? Hit ENTER for random! ")
+if Race == "":
+    Race = random.choice(Races)
+else:
+    while Race not in Races:
+        print("Wrong race. Choose from:\n", ", ".join(Races))
+        Race = input()
 
-# # Alchemist, Artificer, Blood Hunter, Cardcaster, Diabolist, Feywalker, Morph, Occultist temporarily removed
+# Alchemist, , Blood , Cardcaster, Diabolist, Feywalker, Morph, Occultist temporarily removed
 Classes = ["Barbarian", "Artificer", "Bard", "Blood Hunter", "Cleric", "Druid", "Fighter", "Monk",
            "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"]
-Class = random.choice(Classes)
-# Class = input("What CLASS do you want? Hit ENTER for random! ")
-# if Class == "":
-#     Class = random.choice(Classes)
-# else:
-#     while Class not in Classes:
-#         print("Wrong class. Choose from:\n", ", ".join(Classes))
-#         Class = input()
+Class = input("What CLASS do you want? Hit ENTER for random! ")
+if Class == "":
+    Class = random.choice(Classes)
+else:
+    while Class not in Classes:
+        print("Wrong class. Choose from:\n", ", ".join(Classes))
+        Class = input()
 
 
 # -------------------------------------END OF USER INPUTS----------------------------------------------------------------
