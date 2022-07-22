@@ -1,0 +1,47 @@
+["═", "║", "╔", "╗", "╚", "╝", "╠", "╣", "╦", "╩", "╬"]
+
+╔════════════════════╦═════════════════════════════════════════════════════════════════════════════╗
+║  Kovács Béla       ║   Class                                Background                           ║
+║  -----------       ║    Subclass                            proficiency Bonus                    ║
+║  Name              ║   Race/Subrace                         Alignment                            ║
+╠════════════════════╬═════════════════════════╦════════════════╦══════════════════╦═══════════════╣
+║     STRENGHT       ║      SAVING THROWS      ║       AC 20    ║   Initiative 3   ║  Speed 25     ║
+║       19           ║ Strenght +3             ╠════════════════╩══════════════════╩═══════════════╣
+║       +3           ║ Dextreity +3            ║                     HITPOINTS                     ║
+╠════════════════════╣ Constitution +3         ║                        35                         ║
+║    DEXTERITY       ║ Itelligence +3          ╠═══════════════════════════════════════════════════╣
+║        19          ║ Wisdom +3               ║                 TEMOPRARY HITPOINTS               ║
+║        +3          ║ Charisma +3             ║                        8                          ║
+╠════════════════════╬═════════════════════════╬═════════════════╦═════════════════════════════════╣
+║    CONSTITUTION    ║       SKILLS            ║HIT DICE   1D10  ║  DEATH SAVES   O-O-O   O-O-O    ║
+║       19           ║o +3 Acrobatics          ╠═════════════════╩═════════════════════════════════╣
+║       +3           ║o +3 Animal Handling     ║                   EQUIPMENT                       ║
+╠════════════════════╣o +3 Arcana              ║                                                   ║
+║    INTELLIGENCE    ║o +3 Athletics           ║                                                   ║
+║       19           ║o +3 Deception           ║                                                   ║
+║       +3           ║o +3 History             ║                                                   ║
+╠════════════════════╣o +3 Insight             ║                                                   ║
+║      WISDOM        ║o +3 Intimidation        ║                                                   ║
+║       19           ║o +3 Investigation       ║                                                   ║
+║       +3           ║o +3 Medicine            ║                                                   ║
+╠════════════════════╣o +3 Nature              ║                                                   ║
+║      CHARISMA      ║o +3 Perception          ║                                                   ║
+║       19           ║o +3 Performance         ║                                                   ║
+║       +3           ║o +3 Persuation          ║                                                   ║
+╠════════════════════╣o +3 Religion            ║                                                   ║
+║                    ║o +3 Sleight of Hand     ║                                                   ║
+║ Passive Perception ║o +3 Stealth             ║                                                   ║
+║         11         ║o +3 Survival            ║                                                   ║
+╠════════════════════╩═════════════════════════╩═══════════════════════════════════════════════════╣
+║Other proficiencies & Languages:                                                                  ║
+║LANG                                                                                              ║
+║weapon                                                                                            ║
+║armor                                                                                             ║
+║tool                                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════════╣
+║OTHERS:  Height: 6' 7"   Weight: 318 Pounds    Eye Colour: Gold     Skin Colour: White Scales     ║
+║ Hair Colour: N/A                                                                                 ║
+║                                                                                                  ║
+║Traits:                                                                                           ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════════╝
+fighting style/subclass, immunities,  
