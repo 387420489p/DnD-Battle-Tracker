@@ -2043,102 +2043,102 @@ print(f'║{"-"*len(Name)}{space*(20-len(Name))}║Subclass: {Subclass}{space*(2
 print(f'║Name {space*15}║{Subrace} {Race}{space*(38-len(Subrace)-len(Race))}{Alignment}{space*(38-len(Alignment))}║')
 print('╠════════════════════╬═════════════════════════╦════════════════╦══════════════════╦═══════════════╣')
 print(
-    f'║      STRENGHT      ║     SAVING THROWS{space*(21-len(" saving throws"))}║ AC 10 {space*(16-7)}║ Initiative {DEXMOD}{space*(6-len(str(DEXMOD)))}║ Speed {Speed}{space*(8-len(str(Speed)))}║')
-print(f'║{space*9}{STR}{space*(11-len(str(STR)))}║ 3 Strenght{space*(25-len(" 3 Strenght"))}╠════════════════╩══════════════════╩═══════════════╣')
-print(f'║{space*9}{STRMOD}{space*(11-len(str(STRMOD)))}║ 3 Dexterity{space*(25-len(" 3 Dexterity"))}║                     HITPOINTS                     ║')
+    f'║      STRENGHT      ║     SAVING THROWS{space*(21-len(" saving throws"))}║ AC xx {space*(16-7)}║ Initiative {DEXMOD}{space*(6-len(str(DEXMOD)))}║ Speed {Speed}{space*(8-len(str(Speed)))}║')
+print(f'║{space*9}{STR}{space*(11-len(str(STR)))}║ x Strenght{space*(25-len(" 3 Strenght"))}╠════════════════╩══════════════════╩═══════════════╣')
+print(f'║{space*9}{STRMOD}{space*(11-len(str(STRMOD)))}║ x Dexterity{space*(25-len(" 3 Dexterity"))}║                     HITPOINTS                     ║')
 print(
-    f'╠════════════════════╣ 3 Constitution{space*(25-len(" 3 Constitution"))}║{space*25}{HP}{space*(26-len(str(HP)))}║')
+    f'╠════════════════════╣ x Constitution{space*(25-len(" x Constitution"))}║{space*25}{HP}{space*(26-len(str(HP)))}║')
 print(
-    f'║     DEXTERITY      ║ 3 Intelligence{space*(25-len(" 3 Intelligence"))}╠═══════════════════════════════════════════════════╣')
-print(f'║{space*9}{DEX}{space*(11-len(str(DEX)))}║ 3 Wisdom{space*(25-len(" 3 Wisdom"))}║                 TEMOPRARY HITPOINTS               ║')
-print(f'║{space*9}{DEXMOD}{space*(11-len(str(DEXMOD)))}║ 3 Charisma{space*(25-len(" 3 Charisma"))}║                                                   ║')
+    f'║     DEXTERITY      ║ x Intelligence{space*(25-len(" x Intelligence"))}╠═══════════════════════════════════════════════════╣')
+print(f'║{space*9}{DEX}{space*(11-len(str(DEX)))}║ x Wisdom{space*(25-len(" 3 Wisdom"))}║                 TEMOPRARY HITPOINTS               ║')
+print(f'║{space*9}{DEXMOD}{space*(11-len(str(DEXMOD)))}║ x Charisma{space*(25-len(" 3 Charisma"))}║                                                   ║')
 print(f'╠════════════════════╬═════════════════════════╬════════════════╦══════════════════════════════════╣')
 print(
     f'║    CONSTITUTION    ║          SKILLS{space*(15-len("skills"))}║ HIT DICE {HitDie}{space*(6-len(str(HitDie)))}║   DEATH SAVES   O-O-O   O-O-O    ║')
-print(f'║{space*9}{CON}{space*(11-len(str(CON)))}║ 3 Acrobatics{space*(25-len(" 3 Acrobatics"))}╠════════════════╩══════════════════════════════════╣')
-print(f'║{space*9}{CONMOD}{space*(11-len(str(CONMOD)))}║ 3 Animal Handling{space*(25-len(" 3 Animal Handling"))}║                EQUIPMENT & WEAPONS                ║')
+print(f'║{space*9}{CON}{space*(11-len(str(CON)))}║ x Acrobatics{space*(25-len(" 3 Acrobatics"))}╠════════════════╩══════════════════════════════════╣')
+print(f'║{space*9}{CONMOD}{space*(11-len(str(CONMOD)))}║ x Animal Handling{space*(25-len(" 3 Animal Handling"))}║                EQUIPMENT & WEAPONS                ║')
 print(
-    f'╠════════════════════╣ 3 Arcana{space*(25-len(" 3 Arcana"))}║ {Equipment[0]}{space*(50-len(Equipment[0]))}║')
+    f'╠════════════════════╣ x Arcana{space*(25-len(" 3 Arcana"))}║ {Equipment[0]}{space*(50-len(Equipment[0]))}║')
 print(
-    f'║    INTELLIGENCE    ║ 3 Athletics{space*(25-len(" 3 Athletics"))}║ {Equipment[1]}{space*(50-len(Equipment[1]))}║')
+    f'║    INTELLIGENCE    ║ x Athletics{space*(25-len(" 3 Athletics"))}║ {Equipment[1]}{space*(50-len(Equipment[1]))}║')
 print(
-    f'║{space*9}{INT}{space*(11-len(str(INT)))}║ 3 Deception{space*(25-len(" 3 Deception"))}║ {Equipment[2]}{space*(50-len(Equipment[2]))}║')
+    f'║{space*9}{INT}{space*(11-len(str(INT)))}║ x Deception{space*(25-len(" 3 Deception"))}║ {Equipment[2]}{space*(50-len(Equipment[2]))}║')
 if len(Equipment) >=4:
     print(
-        f'║{space*9}{INTMOD}{space*(11-len(str(INTMOD)))}║ 3 History{space*(25-len(" 3 History"))}║ {Equipment[3]}{space*(50-len(Equipment[3]))}║')
+        f'║{space*9}{INTMOD}{space*(11-len(str(INTMOD)))}║ x History{space*(25-len(" 3 History"))}║ {Equipment[3]}{space*(50-len(Equipment[3]))}║')
 else:
     print(
-        f'║{space*9}{INTMOD}{space*(11-len(str(INTMOD)))}║ 3 History{space*(25-len(" 3 History"))}║                                                   ║')
+        f'║{space*9}{INTMOD}{space*(11-len(str(INTMOD)))}║ x History{space*(25-len(" 3 History"))}║                                                   ║')
 if len(Equipment) >= 5:    
     print(
-        f'╠════════════════════╣ 3 Insight{space*(25-len(" 3 Insight"))}║ {Equipment[4]}{space*(50-len(Equipment[4]))}║')
+        f'╠════════════════════╣ x Insight{space*(25-len(" x Insight"))}║ {Equipment[4]}{space*(50-len(Equipment[4]))}║')
 else:
     print(
-        f'╠════════════════════╣ 3 Insight{space*(25-len(" 3 Insight"))}║                                                   ║')
+        f'╠════════════════════╣ x Insight{space*(25-len(" x Insight"))}║                                                   ║')
 if len(Equipment) >= 6:
     print(
-        f'║       WISDOM       ║ 3 Intimidation{space*(25-len(" 3 Intimidation"))}║ {Equipment[5]}{space*(50-len(Equipment[5]))}║')
+        f'║       WISDOM       ║ x Intimidation{space*(25-len(" 3 Intimidation"))}║ {Equipment[5]}{space*(50-len(Equipment[5]))}║')
 else:        
     print(
-        f'║       WISDOM       ║ 3 Intimidation{space*(25-len(" 3 Intimidation"))}║                                                   ║')
+        f'║       WISDOM       ║ x Intimidation{space*(25-len(" 3 Intimidation"))}║                                                   ║')
 if len(Equipment) >= 7:
     print(
-        f'║{space*9}{WIS}{space*(11-len(str(WIS)))}║ 3 Investigation{space*(25-len(" 3 Investigation"))}║ {Equipment[6]}{space*(50-len(Equipment[6]))}║')
+        f'║{space*9}{WIS}{space*(11-len(str(WIS)))}║ x Investigation{space*(25-len(" 3 Investigation"))}║ {Equipment[6]}{space*(50-len(Equipment[6]))}║')
 else:
-    print(f'║{space*9}{WIS}{space*(11-len(str(WIS)))}║ 3 Investigation{space*(25-len(" 3 Investigation"))}║                                                   ║')
+    print(f'║{space*9}{WIS}{space*(11-len(str(WIS)))}║ x Investigation{space*(25-len(" 3 Investigation"))}║                                                   ║')
 if len(Equipment) >= 8:
     print(
-        f'║{space*9}{WISMOD}{space*(11-len(str(WISMOD)))}║ 3 Medicine{space*(25-len(" 3 Medicine"))}║ {Equipment[7]}{space*(50-len(Equipment[7]))}║')
+        f'║{space*9}{WISMOD}{space*(11-len(str(WISMOD)))}║ x Medicine{space*(25-len(" 3 Medicine"))}║ {Equipment[7]}{space*(50-len(Equipment[7]))}║')
 else:
-    print(f'║{space*9}{WISMOD}{space*(11-len(str(WISMOD)))}║ 3 Medicine{space*(25-len(" 3 Medicine"))}║                                                   ║')
+    print(f'║{space*9}{WISMOD}{space*(11-len(str(WISMOD)))}║ x Medicine{space*(25-len(" 3 Medicine"))}║                                                   ║')
 if len(Equipment) >= 9:
     print(
-        f'╠════════════════════╣ 3 Nature{space*(25-len(" 3 Nature"))}║ {Equipment[8]}{space*(50-len(Equipment[8]))}║')
+        f'╠════════════════════╣ x Nature{space*(25-len(" 3 Nature"))}║ {Equipment[8]}{space*(50-len(Equipment[8]))}║')
 else:
     print(
-        f'╠════════════════════╣ 3 Nature{space*(25-len(" 3 Nature"))}║                                                   ║')
+        f'╠════════════════════╣ x Nature{space*(25-len(" 3 Nature"))}║                                                   ║')
 if len(Equipment) >= 10:
     print(
-        f'║      CHARISMA      ║ 3 Perception{space*(25-len(" 3 Perception"))}║ {Equipment[9]}{space*(50-len(Equipment[9]))}║')
+        f'║      CHARISMA      ║ x Perception{space*(25-len(" 3 Perception"))}║ {Equipment[9]}{space*(50-len(Equipment[9]))}║')
 else:
     print(
-        f'║      CHARISMA      ║ 3 Perception{space*(25-len(" 3 Perception"))}║                                                   ║')
+        f'║      CHARISMA      ║ x Perception{space*(25-len(" 3 Perception"))}║                                                   ║')
 if len(Equipment) >= 11:
     print(
-        f'║{space*9}{CHA}{space*(11-len(str(CHA)))}║ 3 Pwrformance{space*(25-len(" 3 Performance"))}║ {Equipment[10]}{space*(50-len(Equipment[10]))}║')
+        f'║{space*9}{CHA}{space*(11-len(str(CHA)))}║ x Performance{space*(25-len(" 3 Performance"))}║ {Equipment[10]}{space*(50-len(Equipment[10]))}║')
 else:
-    print(f'║{space*9}{CHA}{space*(11-len(str(CHA)))}║ 3 Performance{space*(25-len(" 3 Performance"))}║                                                   ║')
+    print(f'║{space*9}{CHA}{space*(11-len(str(CHA)))}║ x Performance{space*(25-len(" 3 Performance"))}║                                                   ║')
 if len(Equipment) >= 12:
     print(
-        f'║{space*9}{CHAMOD}{space*(11-len(str(CHAMOD)))}║ 3 Persuation{space*(25-len(" 3 Persuation"))}║ {Equipment[11]}{space*(50-len(Equipment[11]))}║')
+        f'║{space*9}{CHAMOD}{space*(11-len(str(CHAMOD)))}║ x Persuation{space*(25-len(" 3 Persuation"))}║ {Equipment[11]}{space*(50-len(Equipment[11]))}║')
 else:
-    print(f'║{space*9}{CHAMOD}{space*(11-len(str(CHAMOD)))}║ 3 Persuation{space*(25-len(" 3 Persuation"))}║                                                   ║')
+    print(f'║{space*9}{CHAMOD}{space*(11-len(str(CHAMOD)))}║ x Persuation{space*(25-len(" 3 Persuation"))}║                                                   ║')
 if len(Equipment) >= 13:
     print(
-        f'╠════════════════════╣ 3 Religion{space*(25-len(" 3 Religion"))}║ {Equipment[12]}{space*(50-len(Equipment[12]))}║')
+        f'╠════════════════════╣ x Religion{space*(25-len(" 3 Religion"))}║ {Equipment[12]}{space*(50-len(Equipment[12]))}║')
 else:
     print(
-        f'╠════════════════════╣ 3 Religion{space*(25-len(" 3 Religion"))}║                                                   ║')
+        f'╠════════════════════╣ x Religion{space*(25-len(" 3 Religion"))}║                                                   ║')
 if len(Equipment) >= 14:
     print(
-        f'║                    ║ 3 Sleight of Hand{space*(25-len(" 3 Sleight of Hand"))}║ {Equipment[12]}{space*(50-len(Equipment[12]))}║')
+        f'║                    ║ x Sleight of Hand{space*(25-len(" 3 Sleight of Hand"))}║ {Equipment[12]}{space*(50-len(Equipment[12]))}║')
 else:
     print(
-        f'║                    ║ 3 Sleight of Hand{space*(25-len(" 3 Sleight of Hand"))}║                                                   ║')
+        f'║                    ║ x Sleight of Hand{space*(25-len(" 3 Sleight of Hand"))}║                                                   ║')
 if len(Equipment) >= 15:
     print(
-        f'║ Passive Perception ║ 3 Stealth{space*(25-len(" 3 Stealth"))}║ {Equipment[13]}{space*(50-len(Equipment[13]))}║')
+        f'║ Passive Perception ║ x Stealth{space*(25-len(" 3 Stealth"))}║ {Equipment[13]}{space*(50-len(Equipment[13]))}║')
 else:
     print(
-        f'║ Passive Perception ║ 3 Stealth{space*(25-len(" 3 Stealth"))}║                                                   ║')
+        f'║ Passive Perception ║ x Stealth{space*(25-len(" 3 Stealth"))}║                                                   ║')
 if len(Equipment) >= 16:
     print(
-        f'║         {PassivePerception}{space*(11-len(str(PassivePerception)))}║ 3 Survival{space*(25-len(" 3 Survival"))}║ {Equipment[13]}{space*(50-len(Equipment[13]))}║')
+        f'║         {PassivePerception}{space*(11-len(str(PassivePerception)))}║ x Survival{space*(25-len(" 3 Survival"))}║ {Equipment[13]}{space*(50-len(Equipment[13]))}║')
 else:
     print(
-        f'║         {PassivePerception}{space*(11-len(str(PassivePerception)))}║ 3 Survival{space*(25-len(" 3 Survival"))}║                                                   ║')
+        f'║         {PassivePerception}{space*(11-len(str(PassivePerception)))}║ x Survival{space*(25-len(" 3 Survival"))}║                                                   ║')
 print("╠════════════════════╩═════════════════════════╩═══════════════════════════════════════════════════╣")
-print(f"║Languages, Armor, Weapon, Toolproficiencies:{space*(98-44)}║")
+print(f"║Languages, Armor Proficiencies, Weapon Proficiencies, Tool Proficiencies:{space*(98-73)}║")
 print(f'║{", ".join(sorted(SpokenLanguage))}{space*(98-len(", ".join(sorted(SpokenLanguage))))}║')
 print(f'║{", ".join(sorted(ArmourProficiencies))}{space*(98-len(", ".join(sorted(ArmourProficiencies))))}║')
 print(f'║{", ".join(sorted(WeaponProficiencies))}{space*(98-len(", ".join(sorted(WeaponProficiencies))))}║')
