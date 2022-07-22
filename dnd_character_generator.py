@@ -2001,8 +2001,12 @@ def print_msg_box(msg, indent=1, width=None, title=None):
     print(box, flush=True)
 
 
-print_msg_box(Name, title="Name")
-print_msg_box(Race, title="Race")
+space = " "
+print("╔════════════════════╦═════════════════════════════════════════════════════════════════════════════╗")
+print(f'║{Name}{space*(20-len(Name))}║{Class} {Level}{space*(38-len(Class)-len(str(Level)))}{Background}{space*(38-len(Background))}║')
+print(f'║{"-"*len(Name)}{space*(20-len(Name))}║Subclass: {Subclass}{space*(67-len(Subclass))}║')
+print(f'║Name {space*15}║{Subrace} {Race}{space*(38-len(Subrace)-len(Race))}{Alignment}{space*(38-len(Alignment))}║')
+
 print()
 print("Name:", Name)
 print("Race:", Race)
