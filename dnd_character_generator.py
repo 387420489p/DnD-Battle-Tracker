@@ -2033,15 +2033,18 @@ else:
 
 
 # TODO AC MISSING !!!!!!!
-# TODO MAKE MONEY
 # TODO calculate saving throws and skills
 # TODO reduce too long background texts
-# TODO szétszedni a fegyvereket az equipmentektől
+# TODO initiative
+# TODO Spell Attack Bonus, Spell save DC
+# TODO check ELIFs !
 space = " "
 print("╔════════════════════╦═════════════════════════════════════════════════════════════════════════════╗")
 print(f'║{Name}{space*(20-len(Name))}║{Class} {Level}{space*(38-len(Class)-len(str(Level)))}{Background}{space*(38-len(Background))}║')
 print(f'║{"-"*len(Name)}{space*(20-len(Name))}║Subclass: {Subclass}{space*(29-len(Subclass))}Proficiency Bonus {ProfBonus}{space*(20-len(str(ProfBonus)))}║')
 print(f'║Name {space*15}║{Subrace} {Race}{space*(38-len(Subrace)-len(Race))}{Alignment}{space*(38-len(Alignment))}║')
+print('╠════════════════════╬═════════════════════════╦════════════════╦══════════════════╦═══════════════╣')
+print(f'║Initiative xx       ║ Proficiency Bonus xx    ║Fighting style  ║                  ║               ║')
 print('╠════════════════════╬═════════════════════════╦════════════════╦══════════════════╦═══════════════╣')
 print(
     f'║      STRENGHT      ║     SAVING THROWS{space*(21-len(" saving throws"))}║ AC xx {space*(16-7)}║ Initiative {DEXMOD}{space*(6-len(str(DEXMOD)))}║ Speed {Speed}{space*(8-len(str(Speed)))}║')
