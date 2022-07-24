@@ -1391,10 +1391,11 @@ elif Class == "Ranger":
         FightingStyle = ["Archery", "Defense",
                          "Dueling", "Two-Weapon Fighting"]
         FightingStyle = random.choice(FightingStyle)
-    elif Level >= 3:
+    if Level >= 3:
         Subclass = ["Beast Master", "Gloom Stalker", "Horizon Walker",
                     "Hunter", "Monster Slayer", "Primeval Guardian"]
         Subclass = random.choice(Subclass)
+        print(Subclass)
     HP = HP + HitPoints(10)
     HitDie = 10
     ArmourProficiencies.extend(["Light Armour", "Medium Armour", "Shields"])
@@ -2149,41 +2150,41 @@ print(f'║Hair Color: {Hair}, Fighting Style: {FightingStyle}{space*(98-len(f"H
 print(f'║Traits: {", ".join(sorted(RemoveDuplicates(Traits)))}{space*(90-len(", ".join(RemoveDuplicates(Traits))))}║')
 print("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝")
 print()
-print("Name:", Name)
-print("Race:", Race)
-if Subrace != "N/A":
-    print("Subrace:", Subrace)
-print("Class:", Class)
-if Subclass != "N/A":
-    print("Sub-Class:", Subclass)
-if FightingStyle != "N/A":
-    print("Fighting Style:", FightingStyle)
-print("Level:", Level)
-print("Alignment:", Alignment)
-print("Background:", Background)
-print("STR ", STR, " STRMOD: ", STRMOD)
-print("DEX ", DEX, " DEXMOD: ", DEXMOD)
-print("CON ", CON, " CONMOD: ", CONMOD)
-print("INT ", INT, " INTMOD: ", INTMOD)
-print("WIS ", WIS, " WISMOD: ", WISMOD)
-print("CHA ", CHA, " CHAMOD: ", CHAMOD)
-print("Hit Points: ", HP)
-if Race == "Dwarf":
-    print("Speed:", Speed, "Feet (Your Speed is not Reduced by Wearing Heavy Armour)")
-else:
-    print("Speed:", Speed, "Feet")
-if ArmourProficiencies != []:
-    print("Armour Proficiencies:", ", ".join(
-        sorted(RemoveDuplicates(ArmourProficiencies))))
-if WeaponProficiencies != []:
-    print("Weapon Proficienceis:", ", ".join(
-        sorted(RemoveDuplicates(WeaponProficiencies))))
-if ToolProficiencies != []:
-    print("Tool Proficiencies:", ", ".join(
-        sorted(RemoveDuplicates(ToolProficiencies))))
-if ToolExpertises != []:
-    print("Tool Expertises: ", ", ".join(
-        sorted(RemoveDuplicates(ToolExpertises))))
+# print("Name:", Name)
+# print("Race:", Race)
+# if Subrace != "N/A":
+#     print("Subrace:", Subrace)
+# print("Class:", Class)
+# if Subclass != "N/A":
+#     print("Sub-Class:", Subclass)
+# if FightingStyle != "N/A":
+#     print("Fighting Style:", FightingStyle)
+# print("Level:", Level)
+# print("Alignment:", Alignment)
+# print("Background:", Background)
+# print("STR ", STR, " STRMOD: ", STRMOD)
+# print("DEX ", DEX, " DEXMOD: ", DEXMOD)
+# print("CON ", CON, " CONMOD: ", CONMOD)
+# print("INT ", INT, " INTMOD: ", INTMOD)
+# print("WIS ", WIS, " WISMOD: ", WISMOD)
+# print("CHA ", CHA, " CHAMOD: ", CHAMOD)
+# print("Hit Points: ", HP)
+# if Race == "Dwarf":
+#     print("Speed:", Speed, "Feet (Your Speed is not Reduced by Wearing Heavy Armour)")
+# else:
+#     print("Speed:", Speed, "Feet")
+# if ArmourProficiencies != []:
+#     print("Armour Proficiencies:", ", ".join(
+#         sorted(RemoveDuplicates(ArmourProficiencies))))
+# if WeaponProficiencies != []:
+#     print("Weapon Proficienceis:", ", ".join(
+#         sorted(RemoveDuplicates(WeaponProficiencies))))
+# if ToolProficiencies != []:
+#     print("Tool Proficiencies:", ", ".join(
+#         sorted(RemoveDuplicates(ToolProficiencies))))
+# if ToolExpertises != []:
+#     print("Tool Expertises: ", ", ".join(
+#         sorted(RemoveDuplicates(ToolExpertises))))
 if SavingThrowProficiencies != []:
     print("Saving Throw Proficiencies:", ", ".join(
         sorted(RemoveDuplicates(SavingThrowProficiencies))))
@@ -2193,25 +2194,25 @@ if SkillProficiencies != []:
 if SkillExpertises != []:
     print("Skill Expertises: ", ", ".join(
         sorted(RemoveDuplicates(SkillExpertises))))
-if Resistances != []:
-    print("Resistances:", ", ".join(sorted(RemoveDuplicates(Resistances))))
-if Immunities != []:
-    print("Immunities:", ", ".join(sorted(RemoveDuplicates(Immunities))))
-if Vulnerabilities != []:
-    print("Vulnerabilities:", ", ".join(
-        sorted(RemoveDuplicates(Vulnerabilities))))
-if Traits != []:
-    print("Traits:", ", ".join(sorted(RemoveDuplicates(Traits))))
-if Equipment != []:
-    print("Equipment and Weapons:", ", ".join(
-        sorted(RemoveDuplicates(Equipment))))
-if Age != "N/A":
-    print("Age:", Age, "Years")
-else:
-    print("Age: N/A")
-print("Languages:", ", ".join(sorted(SpokenLanguage)))
-print("Height: ", (Height // 12), "' ", Height % 12, '"', sep='')
-print("Weight:", Weight, "Pounds")
-print("Eye Colour:", Eyes)
-print("Skin Colour:", Skin)
-print("Hair Colour:", Hair)
+# if Resistances != []:
+#     print("Resistances:", ", ".join(sorted(RemoveDuplicates(Resistances))))
+# if Immunities != []:
+#     print("Immunities:", ", ".join(sorted(RemoveDuplicates(Immunities))))
+# if Vulnerabilities != []:
+#     print("Vulnerabilities:", ", ".join(
+#         sorted(RemoveDuplicates(Vulnerabilities))))
+# if Traits != []:
+#     print("Traits:", ", ".join(sorted(RemoveDuplicates(Traits))))
+# if Equipment != []:
+#     print("Equipment and Weapons:", ", ".join(
+#         sorted(RemoveDuplicates(Equipment))))
+# if Age != "N/A":
+#     print("Age:", Age, "Years")
+# else:
+#     print("Age: N/A")
+# print("Languages:", ", ".join(sorted(SpokenLanguage)))
+# print("Height: ", (Height // 12), "' ", Height % 12, '"', sep='')
+# print("Weight:", Weight, "Pounds")
+# print("Eye Colour:", Eyes)
+# print("Skin Colour:", Skin)
+# print("Hair Colour:", Hair)
