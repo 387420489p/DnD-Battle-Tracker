@@ -2014,7 +2014,8 @@ def print_msg_box(msg, indent=1, width=None, title=None):
     box += f'╚{"═" * (width + indent * 2)}╝'  # lower_border
     print(box, flush=True)
 
-#Proficiencie bonus & Passive Perception
+
+# Proficiencie bonus & Passive Perception
 if Level < 5:
     ProfBonus = 2
 elif Level < 9:
@@ -2034,9 +2035,75 @@ else:
 
 # TODO AC MISSING !!!!!!!
 # TODO calculate saving throws and skills
-# TODO reduce too long background texts
+# TODO reduce too long background texts/cut them in 2 lines if too long
 # TODO initiative
-# TODO Spell Attack Bonus, Spell save DC
+# TODO Spell Attack Bonus, Spell save DC DC:8+profbon+SpellCastingAbilityMod   AttackBonus: ProfBonus+SCA
+
+# Spell Save DC and Spell Attack Bonus calculation
+if Class == "Cleric" or Class == "Druid" or Class == "Ranger":
+    SpellSaveDC = 8 + ProfBonus + WISMOD
+    SpellAttackBonus = ProfBonus + WISMOD
+elif Class == "Fighter" or Class == "Monk" or Class == "Rogue":
+    SpellAttackBonus = ProfBonus + DEXMOD
+    SpellSaveDC = 8 + ProfBonus + DEXMOD
+elif Class == "Bard" or Class == "Warlock" or Class == "Paladin" or Class == "Sorcerer":
+    SpellAttackBonus = ProfBonus + CHAMOD
+    SpellSaveDC = 8 + ProfBonus + CHAMOD
+elif Class == "Barbarian":
+    SpellAttackBonus = ProfBonus + STRMOD
+    SpellSaveDC = 8 + ProfBonus + STRMOD
+elif Class == "Wizard" or Class == "Artificer" or Class == "Blood Hunter":
+    SpellAttackBonus = ProfBonus + INTMOD
+    SpellSaveDC = 8 + ProfBonus + INTMOD
+
+#Skill & Skill save calculation
+SkillWIS = WISMOD
+SkillDEX = DEXMOD
+SkillSTR = STRMOD
+SkillCHA = CHAMOD
+SkillINT = INTMOD
+SkillCON = CONMOD
+
+if "WIS" in SkillProficiencies:
+    SkillWIS = WISMOD + ProfBonus
+if "DEX" in SkillProficiencies:
+    SkillDEX = DEXMOD + ProfBonus
+if "STR" in SkillProficiencies:
+    SkillSTR = STRMOD + ProfBonus
+if "CHA" in SkillProficiencies:
+    SkillCHA = CHAMOD + ProfBonus
+if "INT" in SkillProficiencies:
+    SkillINT = INTMOD + ProfBonus
+if "CON" in SkillProficiencies:
+    SkillCON = CONMOD + ProfBonus
+
+if "WIS" in SkillExpertises:
+    SkillWIS = WISMOD + ProfBonus * 2
+if "DEX" in SkillExpertises:
+    SkillDEX = DEXMOD + ProfBonus * 2
+if "STR" in SkillExpertises:
+    SkillSTR = STRMOD + ProfBonus * 2
+if "CHA" in SkillExpertises:
+    SkillCHA = CHAMOD + ProfBonus * 2
+if "INT" in SkillExpertises:
+    SkillINT = INTMOD + ProfBonus * 2
+if "CON" in SkillExpertises:
+    SkillCON = CONMOD + ProfBonus * 2
+
+if "WIS" in SavingThrowProficiencies:
+    WISsave = WISMOD + ProfBonus
+if "DEX" in SavingThrowProficiencies:
+    DEXsave = DEXMOD + ProfBonus
+if "STR" in SavingThrowProficiencies:
+    STRsave = STRMOD + ProfBonus
+if "CHA" in SavingThrowProficiencies:
+    CHAsave = CHAMOD + ProfBonus
+if "INT" in SavingThrowProficiencies:
+    INTsave = INTMOD + ProfBonus
+if "CON" in SavingThrowProficiencies:
+    CONsave = CONMOD + ProfBonus
+
+
 # TODO check ELIFs !
 space = " "
 print("╔════════════════════╦═════════════════════════════════════════════════════════════════════════════╗")
@@ -2044,7 +2111,7 @@ print(f'║{Name}{space*(20-len(Name))}║{Class} {Level}{space*(38-len(Class)-l
 print(f'║{"-"*len(Name)}{space*(20-len(Name))}║Subclass: {Subclass}{space*(29-len(Subclass))}Proficiency Bonus {ProfBonus}{space*(20-len(str(ProfBonus)))}║')
 print(f'║Name {space*15}║{Subrace} {Race}{space*(38-len(Subrace)-len(Race))}{Alignment}{space*(38-len(Alignment))}║')
 print('╠════════════════════╬═════════════════════════╦════════════════╦══════════════════╦═══════════════╣')
-print(f'║Initiative xx       ║ Proficiency Bonus xx    ║Fighting style  ║                  ║               ║')
+print(f'║Initiative DEXMOD   ║ Proficiency Bonus xx    ║Fighting style  ║                  ║               ║')
 print('╠════════════════════╬═════════════════════════╦════════════════╦══════════════════╦═══════════════╣')
 print(
     f'║      STRENGHT      ║     SAVING THROWS{space*(21-len(" saving throws"))}║ AC xx {space*(16-7)}║ Initiative {DEXMOD}{space*(6-len(str(DEXMOD)))}║ Speed {Speed}{space*(8-len(str(Speed)))}║')
@@ -2067,13 +2134,13 @@ print(
     f'║    INTELLIGENCE    ║ x Athletics{space*(25-len(" 3 Athletics"))}║ {Equipment[1]}{space*(50-len(Equipment[1]))}║')
 print(
     f'║{space*9}{INT}{space*(11-len(str(INT)))}║ x Deception{space*(25-len(" 3 Deception"))}║ {Equipment[2]}{space*(50-len(Equipment[2]))}║')
-if len(Equipment) >=4:
+if len(Equipment) >= 4:
     print(
         f'║{space*9}{INTMOD}{space*(11-len(str(INTMOD)))}║ x History{space*(25-len(" 3 History"))}║ {Equipment[3]}{space*(50-len(Equipment[3]))}║')
 else:
     print(
         f'║{space*9}{INTMOD}{space*(11-len(str(INTMOD)))}║ x History{space*(25-len(" 3 History"))}║                                                   ║')
-if len(Equipment) >= 5:    
+if len(Equipment) >= 5:
     print(
         f'╠════════════════════╣ x Insight{space*(25-len(" x Insight"))}║ {Equipment[4]}{space*(50-len(Equipment[4]))}║')
 else:
@@ -2082,7 +2149,7 @@ else:
 if len(Equipment) >= 6:
     print(
         f'║       WISDOM       ║ x Intimidation{space*(25-len(" 3 Intimidation"))}║ {Equipment[5]}{space*(50-len(Equipment[5]))}║')
-else:        
+else:
     print(
         f'║       WISDOM       ║ x Intimidation{space*(25-len(" 3 Intimidation"))}║                                                   ║')
 if len(Equipment) >= 7:
@@ -2142,7 +2209,8 @@ else:
     print(
         f'║         {PassivePerception}{space*(11-len(str(PassivePerception)))}║ x Survival{space*(25-len(" 3 Survival"))}║                                                   ║')
 print("╠════════════════════╩═════════════════════════╩═══════════════════════════════════════════════════╣")
-print(f"║Languages, Armor Proficiencies, Weapon Proficiencies, Tool Proficiencies:{space*(98-73)}║")
+print(
+    f"║Languages, Armor Proficiencies, Weapon Proficiencies, Tool Proficiencies:{space*(98-73)}║")
 print(f'║{", ".join(sorted(SpokenLanguage))}{space*(98-len(", ".join(sorted(SpokenLanguage))))}║')
 print(f'║{", ".join(sorted(ArmourProficiencies))}{space*(98-len(", ".join(sorted(ArmourProficiencies))))}║')
 print(f'║{", ".join(sorted(WeaponProficiencies))}{space*(98-len(", ".join(sorted(WeaponProficiencies))))}║')
