@@ -2057,8 +2057,52 @@ elif Class == "Wizard" or Class == "Artificer" or Class == "Blood Hunter":
     SpellSaveDC = 8 + ProfBonus + INTMOD
 
 #Skill & Skill save calculation
+SkillWIS = WISMOD
+SkillDEX = DEXMOD
+SkillSTR = STRMOD
+SkillCHA = CHAMOD
+SkillINT = INTMOD
+SkillCON = CONMOD
+
 if "WIS" in SkillProficiencies:
-    
+    SkillWIS = WISMOD + ProfBonus
+if "DEX" in SkillProficiencies:
+    SkillDEX = DEXMOD + ProfBonus
+if "STR" in SkillProficiencies:
+    SkillSTR = STRMOD + ProfBonus
+if "CHA" in SkillProficiencies:
+    SkillCHA = CHAMOD + ProfBonus
+if "INT" in SkillProficiencies:
+    SkillINT = INTMOD + ProfBonus
+if "CON" in SkillProficiencies:
+    SkillCON = CONMOD + ProfBonus
+
+if "WIS" in SkillExpertises:
+    SkillWIS = WISMOD + ProfBonus * 2
+if "DEX" in SkillExpertises:
+    SkillDEX = DEXMOD + ProfBonus * 2
+if "STR" in SkillExpertises:
+    SkillSTR = STRMOD + ProfBonus * 2
+if "CHA" in SkillExpertises:
+    SkillCHA = CHAMOD + ProfBonus * 2
+if "INT" in SkillExpertises:
+    SkillINT = INTMOD + ProfBonus * 2
+if "CON" in SkillExpertises:
+    SkillCON = CONMOD + ProfBonus * 2
+
+if "WIS" in SavingThrowProficiencies:
+    WISsave = WISMOD + ProfBonus
+if "DEX" in SavingThrowProficiencies:
+    DEXsave = DEXMOD + ProfBonus
+if "STR" in SavingThrowProficiencies:
+    STRsave = STRMOD + ProfBonus
+if "CHA" in SavingThrowProficiencies:
+    CHAsave = CHAMOD + ProfBonus
+if "INT" in SavingThrowProficiencies:
+    INTsave = INTMOD + ProfBonus
+if "CON" in SavingThrowProficiencies:
+    CONsave = CONMOD + ProfBonus
+
 
 # TODO check ELIFs !
 space = " "
