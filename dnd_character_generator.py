@@ -2014,7 +2014,8 @@ def print_msg_box(msg, indent=1, width=None, title=None):
     box += f'╚{"═" * (width + indent * 2)}╝'  # lower_border
     print(box, flush=True)
 
-#Proficiencie bonus & Passive Perception
+
+# Proficiencie bonus & Passive Perception
 if Level < 5:
     ProfBonus = 2
 elif Level < 9:
@@ -2034,9 +2035,9 @@ else:
 
 # TODO AC MISSING !!!!!!!
 # TODO calculate saving throws and skills
-# TODO reduce too long background texts
+# TODO reduce too long background texts/cut them in 2 lines if too long
 # TODO initiative
-# TODO Spell Attack Bonus, Spell save DC
+# TODO Spell Attack Bonus, Spell save DC DC:8+profbon+SpellCastingAbilityMod   AttackBonus: ProfBonus+SCA
 # TODO check ELIFs !
 space = " "
 print("╔════════════════════╦═════════════════════════════════════════════════════════════════════════════╗")
@@ -2067,13 +2068,13 @@ print(
     f'║    INTELLIGENCE    ║ x Athletics{space*(25-len(" 3 Athletics"))}║ {Equipment[1]}{space*(50-len(Equipment[1]))}║')
 print(
     f'║{space*9}{INT}{space*(11-len(str(INT)))}║ x Deception{space*(25-len(" 3 Deception"))}║ {Equipment[2]}{space*(50-len(Equipment[2]))}║')
-if len(Equipment) >=4:
+if len(Equipment) >= 4:
     print(
         f'║{space*9}{INTMOD}{space*(11-len(str(INTMOD)))}║ x History{space*(25-len(" 3 History"))}║ {Equipment[3]}{space*(50-len(Equipment[3]))}║')
 else:
     print(
         f'║{space*9}{INTMOD}{space*(11-len(str(INTMOD)))}║ x History{space*(25-len(" 3 History"))}║                                                   ║')
-if len(Equipment) >= 5:    
+if len(Equipment) >= 5:
     print(
         f'╠════════════════════╣ x Insight{space*(25-len(" x Insight"))}║ {Equipment[4]}{space*(50-len(Equipment[4]))}║')
 else:
@@ -2082,7 +2083,7 @@ else:
 if len(Equipment) >= 6:
     print(
         f'║       WISDOM       ║ x Intimidation{space*(25-len(" 3 Intimidation"))}║ {Equipment[5]}{space*(50-len(Equipment[5]))}║')
-else:        
+else:
     print(
         f'║       WISDOM       ║ x Intimidation{space*(25-len(" 3 Intimidation"))}║                                                   ║')
 if len(Equipment) >= 7:
@@ -2142,7 +2143,8 @@ else:
     print(
         f'║         {PassivePerception}{space*(11-len(str(PassivePerception)))}║ x Survival{space*(25-len(" 3 Survival"))}║                                                   ║')
 print("╠════════════════════╩═════════════════════════╩═══════════════════════════════════════════════════╣")
-print(f"║Languages, Armor Proficiencies, Weapon Proficiencies, Tool Proficiencies:{space*(98-73)}║")
+print(
+    f"║Languages, Armor Proficiencies, Weapon Proficiencies, Tool Proficiencies:{space*(98-73)}║")
 print(f'║{", ".join(sorted(SpokenLanguage))}{space*(98-len(", ".join(sorted(SpokenLanguage))))}║')
 print(f'║{", ".join(sorted(ArmourProficiencies))}{space*(98-len(", ".join(sorted(ArmourProficiencies))))}║')
 print(f'║{", ".join(sorted(WeaponProficiencies))}{space*(98-len(", ".join(sorted(WeaponProficiencies))))}║')
