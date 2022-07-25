@@ -11,6 +11,7 @@
 # TODO missing classes: Cardcaster, Diabolist, Feywalker, Morph, Occultist
 # =============================================================================
 
+from pprint import pprint
 import random
 import collections
 
@@ -220,24 +221,35 @@ StatRoll()
 
 # Level 4, 8, 12, 16 stat increase (it's random, just like everything!)
 
-stats_for_incr = [STR, DEX, CON, INT, WIS, CHA]
+stats_for_incr = ["STR", "DEX", "CON", "INT", "WIS", "CHA"]
+def AbilityScoreImprovement(num):
+    global STR, DEX, CON, INT, WIS, CHA, stats_for_incr
+    for i in range(num):
+        stat_to_incr = random.choice(stats_for_incr)
+        if stat_to_incr == "STR":
+            STR = StatIncrease(STR, 1)
+        if stat_to_incr == "DEX":
+            DEX = StatIncrease(DEX, 1)
+        if stat_to_incr == "CON":
+            CON = StatIncrease(CON, 1)
+        if stat_to_incr == "INT":
+            INT = StatIncrease(INT, 1)
+        if stat_to_incr == "WIS":
+            WIS = StatIncrease(WIS, 1)
+        if stat_to_incr == "CHA":
+            CHA = StatIncrease(CHA, 1)
+
 
 if Level >= 19:
-    for i in range(10):
-        StatIncrease(random.choice(stats_for_incr), 1)
+    AbilityScoreImprovement(10)
 elif Level >= 16:
-    for i in range(8):
-        StatIncrease(random.choice(stats_for_incr), 1)
+    AbilityScoreImprovement(8)
 elif Level >= 12:
-    for i in range(6):
-        StatIncrease(random.choice(stats_for_incr), 1)
+    AbilityScoreImprovement(6)
 elif Level >= 8:
-    for i in range(4):
-        StatIncrease(random.choice(stats_for_incr), 1)
+    AbilityScoreImprovement(4)
 elif Level >= 4:
-    for i in range(2):
-        StatIncrease(random.choice(stats_for_incr), 1)
-
+    AbilityScoreImprovement(2)
 # =============================================================================
 
 Stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"]  # this is for variant human
@@ -2056,40 +2068,57 @@ elif Class == "Wizard" or Class == "Artificer" or Class == "Blood Hunter":
     SpellAttackBonus = ProfBonus + INTMOD
     SpellSaveDC = 8 + ProfBonus + INTMOD
 
-#Skill & Skill save calculation
-SkillWIS = WISMOD
-SkillDEX = DEXMOD
-SkillSTR = STRMOD
-SkillCHA = CHAMOD
-SkillINT = INTMOD
-SkillCON = CONMOD
+# Skill & Skill save calculation
+SkillMOD = {
+    "Acrobatics": DEXMOD,
+    "Animal Handling": WISMOD,
+    "Arcana": INTMOD,
+    "Athletics": STRMOD,
+    "Deception": CHAMOD,
+    "History": INTMOD,
+    "Insight": WISMOD,
+    "Intimidation": CHAMOD,
+    "Investigation": INTMOD,
+    "Medicine": WISMOD,
+    "Nature": INTMOD,
+    "Perception": WISMOD,
+    "Performance": CHAMOD,
+    "Persuasion": CHAMOD,
+    "Religion": INTMOD,
+    "Sleight of Hand": DEXMOD,
+    "Stealth": DEXMOD,
+    "Survival": WISMOD
+}
 
-if "WIS" in SkillProficiencies:
-    SkillWIS = WISMOD + ProfBonus
-if "DEX" in SkillProficiencies:
-    SkillDEX = DEXMOD + ProfBonus
-if "STR" in SkillProficiencies:
-    SkillSTR = STRMOD + ProfBonus
-if "CHA" in SkillProficiencies:
-    SkillCHA = CHAMOD + ProfBonus
-if "INT" in SkillProficiencies:
-    SkillINT = INTMOD + ProfBonus
-if "CON" in SkillProficiencies:
-    SkillCON = CONMOD + ProfBonus
+for stat in SkillProficiencies:
+    if stat == "Acrobatics" or stat == "Sleight of Hand" or stat == "Stealth":
+        SkillMOD["{0}".format(stat)] = DEXMOD + ProfBonus
+    if stat == "Animal Handling" or stat == "Insight" or stat == "Medicine" or stat == "Perception" or stat == "Survival":
+        SkillMOD["{0}".format(stat)] = WISMOD + ProfBonus
+    if stat == "Arcana" or stat == "History" or stat == "Investigation" or stat == "Nature" or stat == "Religion":
+        SkillMOD["{0}".format(stat)] = INTMOD + ProfBonus
+    if stat == "Deception" or stat == "Intimidation" or stat == "Performance" or stat == "Persuasion":
+        SkillMOD["{0}".format(stat)] = CHAMOD + ProfBonus
+    if stat == "Athletics":
+        SkillMOD["{0}".format(stat)] = STRMOD + ProfBonus
 
-if "WIS" in SkillExpertises:
-    SkillWIS = WISMOD + ProfBonus * 2
-if "DEX" in SkillExpertises:
-    SkillDEX = DEXMOD + ProfBonus * 2
-if "STR" in SkillExpertises:
-    SkillSTR = STRMOD + ProfBonus * 2
-if "CHA" in SkillExpertises:
-    SkillCHA = CHAMOD + ProfBonus * 2
-if "INT" in SkillExpertises:
-    SkillINT = INTMOD + ProfBonus * 2
-if "CON" in SkillExpertises:
-    SkillCON = CONMOD + ProfBonus * 2
-
+for stat in SkillExpertises:
+    if stat == "Acrobatics" or stat == "Sleight of Hand" or stat == "Stealth":
+        SkillMOD["{0}".format(stat)] = DEXMOD + (ProfBonus * 2)
+    if stat == "Animal Handling" or stat == "Insight" or stat == "Medicine" or stat == "Perception" or stat == "Survival":
+        SkillMOD["{0}".format(stat)] = WISMOD + (ProfBonus * 2)
+    if stat == "Arcana" or stat == "History" or stat == "Investigation" or stat == "Nature" or stat == "Religion":
+        SkillMOD["{0}".format(stat)] = INTMOD + (ProfBonus * 2)
+    if stat == "Deception" or stat == "Intimidation" or stat == "Performance" or stat == "Persuasion":
+        SkillMOD["{0}".format(stat)] = CHAMOD + (ProfBonus * 2)
+    if stat == "Athletics":
+        SkillMOD["{0}".format(stat)] = STRMOD + (ProfBonus * 2)
+WISsave = WISMOD
+DEXsave = DEXMOD
+STRsave = STRMOD
+CHAsave = CHAMOD
+INTsave = INTMOD
+CONsave = CONMOD
 if "WIS" in SavingThrowProficiencies:
     WISsave = WISMOD + ProfBonus
 if "DEX" in SavingThrowProficiencies:
@@ -2108,106 +2137,112 @@ if "CON" in SavingThrowProficiencies:
 space = " "
 print("╔════════════════════╦═════════════════════════════════════════════════════════════════════════════╗")
 print(f'║{Name}{space*(20-len(Name))}║{Class} {Level}{space*(38-len(Class)-len(str(Level)))}{Background}{space*(38-len(Background))}║')
-print(f'║{"-"*len(Name)}{space*(20-len(Name))}║Subclass: {Subclass}{space*(29-len(Subclass))}Proficiency Bonus {ProfBonus}{space*(20-len(str(ProfBonus)))}║')
+print(f'║{"-"*len(Name)}{space*(20-len(Name))}║Subclass: {Subclass}{space*(67-len(Subclass))}║')
 print(f'║Name {space*15}║{Subrace} {Race}{space*(38-len(Subrace)-len(Race))}{Alignment}{space*(38-len(Alignment))}║')
-print('╠════════════════════╬═════════════════════════╦════════════════╦══════════════════╦═══════════════╣')
-print(f'║Initiative DEXMOD   ║ Proficiency Bonus xx    ║Fighting style  ║                  ║               ║')
-print('╠════════════════════╬═════════════════════════╦════════════════╦══════════════════╦═══════════════╣')
+print('╠════════════════════╬═════════════════════════╦═══════════════════════════════════════════════════╣')
+print(f'║Initiative {DEXMOD}{space*(9-len(str(DEXMOD)))}║ Proficiency Bonus {ProfBonus}{space*(6-len(str(ProfBonus)))}║Fighting style {FightingStyle}{space*(51-len(f"Fighting style {FightingStyle}"))}║')
+print('╠════════════════════╬═════════════════════════╬════════════════╦══════════════════╦═══════════════╣')
 print(
     f'║      STRENGHT      ║     SAVING THROWS{space*(21-len(" saving throws"))}║ AC xx {space*(16-7)}║ Initiative {DEXMOD}{space*(6-len(str(DEXMOD)))}║ Speed {Speed}{space*(8-len(str(Speed)))}║')
-print(f'║{space*9}{STR}{space*(11-len(str(STR)))}║ x Strenght{space*(25-len(" 3 Strenght"))}╠════════════════╩══════════════════╩═══════════════╣')
-print(f'║{space*9}{STRMOD}{space*(11-len(str(STRMOD)))}║ x Dexterity{space*(25-len(" 3 Dexterity"))}║                     HITPOINTS                     ║')
+print(f'║{space*9}{STR}{space*(11-len(str(STR)))}║ {STRsave} Strenght{space*(15-len(str(STRsave)))}╠════════════════╩══════════════════╩═══════════════╣')
+print(f'║{space*9}{STRMOD}{space*(11-len(str(STRMOD)))}║ {DEXsave} Dexterity{space*(14-len(str(DEXsave)))}║                     HITPOINTS                     ║')
 print(
-    f'╠════════════════════╣ x Constitution{space*(25-len(" x Constitution"))}║{space*25}{HP}{space*(26-len(str(HP)))}║')
+    f'╠════════════════════╣ {CONsave} Constitution{space*(11-len(str(CONsave)))}║{space*25}{HP}{space*(26-len(str(HP)))}║')
 print(
-    f'║     DEXTERITY      ║ x Intelligence{space*(25-len(" x Intelligence"))}╠═══════════════════════════════════════════════════╣')
-print(f'║{space*9}{DEX}{space*(11-len(str(DEX)))}║ x Wisdom{space*(25-len(" 3 Wisdom"))}║                 TEMOPRARY HITPOINTS               ║')
-print(f'║{space*9}{DEXMOD}{space*(11-len(str(DEXMOD)))}║ x Charisma{space*(25-len(" 3 Charisma"))}║                                                   ║')
+    f'║     DEXTERITY      ║ {INTsave} Intelligence{space*(11-len(str(INTsave)))}╠═══════════════════════════════════════════════════╣')
+print(f'║{space*9}{DEX}{space*(11-len(str(DEX)))}║ {WISsave} Wisdom{space*(17-len(str(WISsave)))}║                 TEMOPRARY HITPOINTS               ║')
+print(f'║{space*9}{DEXMOD}{space*(11-len(str(DEXMOD)))}║ {CHAsave} Charisma{space*(15-len(str(CHAsave)))}║                                                   ║')
 print(f'╠════════════════════╬═════════════════════════╬════════════════╦══════════════════════════════════╣')
 print(
     f'║    CONSTITUTION    ║          SKILLS{space*(15-len("skills"))}║ HIT DICE {HitDie}{space*(6-len(str(HitDie)))}║   DEATH SAVES   O-O-O   O-O-O    ║')
-print(f'║{space*9}{CON}{space*(11-len(str(CON)))}║ x Acrobatics{space*(25-len(" 3 Acrobatics"))}╠════════════════╩══════════════════════════════════╣')
-print(f'║{space*9}{CONMOD}{space*(11-len(str(CONMOD)))}║ x Animal Handling{space*(25-len(" 3 Animal Handling"))}║                EQUIPMENT & WEAPONS                ║')
 print(
-    f'╠════════════════════╣ x Arcana{space*(25-len(" 3 Arcana"))}║ {Equipment[0]}{space*(50-len(Equipment[0]))}║')
+    f'║{space*9}{CON}{space*(11-len(str(CON)))}║ {SkillMOD["Acrobatics"]} Acrobatics{space*(15-len(str({SkillMOD["Acrobatics"]})))}╠════════════════╩══════════════════════════════════╣')
 print(
-    f'║    INTELLIGENCE    ║ x Athletics{space*(25-len(" 3 Athletics"))}║ {Equipment[1]}{space*(50-len(Equipment[1]))}║')
+    f'║{space*9}{CONMOD}{space*(11-len(str(CONMOD)))}║ {SkillMOD["Animal Handling"]} Animal Handling{space*(10-len(str({SkillMOD["Animal Handling"]})))}║                EQUIPMENT & WEAPONS                ║')
 print(
-    f'║{space*9}{INT}{space*(11-len(str(INT)))}║ x Deception{space*(25-len(" 3 Deception"))}║ {Equipment[2]}{space*(50-len(Equipment[2]))}║')
+    f'╠════════════════════╣ {SkillMOD["Arcana"]} Arcana{space*(17-len(str(SkillMOD["Arcana"])))}║ {Equipment[0]}{space*(50-len(Equipment[0]))}║')
+print(
+    f'║    INTELLIGENCE    ║ {SkillMOD["Athletics"]} Athletics{space*(16-len(str({SkillMOD["Athletics"]})))}║ {Equipment[1]}{space*(50-len(Equipment[1]))}║')
+print(
+    f'║{space*9}{INT}{space*(11-len(str(INT)))}║ {SkillMOD["Deception"]} Deception{space*(16-len(str({SkillMOD["Deception"]})))}║ {Equipment[2]}{space*(50-len(Equipment[2]))}║')
 if len(Equipment) >= 4:
     print(
-        f'║{space*9}{INTMOD}{space*(11-len(str(INTMOD)))}║ x History{space*(25-len(" 3 History"))}║ {Equipment[3]}{space*(50-len(Equipment[3]))}║')
+        f'║{space*9}{INTMOD}{space*(11-len(str(INTMOD)))}║ {SkillMOD["History"]} History{space*(18-len(str({SkillMOD["History"]})))}║ {Equipment[3]}{space*(50-len(Equipment[3]))}║')
 else:
     print(
-        f'║{space*9}{INTMOD}{space*(11-len(str(INTMOD)))}║ x History{space*(25-len(" 3 History"))}║                                                   ║')
+        f'║{space*9}{INTMOD}{space*(11-len(str(INTMOD)))}║ {SkillMOD["History"]} History{space*(18-len(str({SkillMOD["History"]})))}║                                                   ║')
 if len(Equipment) >= 5:
     print(
-        f'╠════════════════════╣ x Insight{space*(25-len(" x Insight"))}║ {Equipment[4]}{space*(50-len(Equipment[4]))}║')
+        f'╠════════════════════╣ {SkillMOD["Insight"]} Insight{space*(18-len(str({SkillMOD["Insight"]})))}║ {Equipment[4]}{space*(50-len(Equipment[4]))}║')
 else:
     print(
-        f'╠════════════════════╣ x Insight{space*(25-len(" x Insight"))}║                                                   ║')
+        f'╠════════════════════╣ {SkillMOD["Insight"]} Insight{space*(18-len(str({SkillMOD["Insight"]})))}║                                                   ║')
 if len(Equipment) >= 6:
     print(
-        f'║       WISDOM       ║ x Intimidation{space*(25-len(" 3 Intimidation"))}║ {Equipment[5]}{space*(50-len(Equipment[5]))}║')
+        f'║       WISDOM       ║ {SkillMOD["Intimidation"]} Intimidation{space*(13-len(str({SkillMOD["Intimidation"]})))}║ {Equipment[5]}{space*(50-len(Equipment[5]))}║')
 else:
     print(
-        f'║       WISDOM       ║ x Intimidation{space*(25-len(" 3 Intimidation"))}║                                                   ║')
+        f'║       WISDOM       ║ {SkillMOD["Intimidation"]} Intimidation{space*(13-len(str({SkillMOD["Intimidation"]})))}║                                                   ║')
 if len(Equipment) >= 7:
     print(
-        f'║{space*9}{WIS}{space*(11-len(str(WIS)))}║ x Investigation{space*(25-len(" 3 Investigation"))}║ {Equipment[6]}{space*(50-len(Equipment[6]))}║')
+        f'║{space*9}{WIS}{space*(11-len(str(WIS)))}║ {SkillMOD["Investigation"]} Investigation{space*(12-len(str({SkillMOD["Investigation"]})))}║ {Equipment[6]}{space*(50-len(Equipment[6]))}║')
 else:
-    print(f'║{space*9}{WIS}{space*(11-len(str(WIS)))}║ x Investigation{space*(25-len(" 3 Investigation"))}║                                                   ║')
+    print(
+        f'║{space*9}{WIS}{space*(11-len(str(WIS)))}║ {SkillMOD["Investigation"]} Investigation{space*(12-len(str({SkillMOD["Investigation"]})))}║                                                   ║')
 if len(Equipment) >= 8:
     print(
-        f'║{space*9}{WISMOD}{space*(11-len(str(WISMOD)))}║ x Medicine{space*(25-len(" 3 Medicine"))}║ {Equipment[7]}{space*(50-len(Equipment[7]))}║')
+        f'║{space*9}{WISMOD}{space*(11-len(str(WISMOD)))}║ {SkillMOD["Medicine"]} Medicine{space*(17-len(str({SkillMOD["Medicine"]})))}║ {Equipment[7]}{space*(50-len(Equipment[7]))}║')
 else:
-    print(f'║{space*9}{WISMOD}{space*(11-len(str(WISMOD)))}║ x Medicine{space*(25-len(" 3 Medicine"))}║                                                   ║')
+    print(
+        f'║{space*9}{WISMOD}{space*(11-len(str(WISMOD)))}║ {SkillMOD["Medicine"]} Medicine{space*(17-len(str({SkillMOD["Medicine"]})))}║                                                   ║')
 if len(Equipment) >= 9:
     print(
-        f'╠════════════════════╣ x Nature{space*(25-len(" 3 Nature"))}║ {Equipment[8]}{space*(50-len(Equipment[8]))}║')
+        f'╠════════════════════╣ {SkillMOD["Nature"]} Nature{space*(17-len(str(SkillMOD["Nature"])))}║ {Equipment[8]}{space*(50-len(Equipment[8]))}║')
 else:
     print(
-        f'╠════════════════════╣ x Nature{space*(25-len(" 3 Nature"))}║                                                   ║')
+        f'╠════════════════════╣ {SkillMOD["Nature"]} Nature{space*(17-len(str(SkillMOD["Nature"])))}║                                                   ║')
 if len(Equipment) >= 10:
     print(
-        f'║      CHARISMA      ║ x Perception{space*(25-len(" 3 Perception"))}║ {Equipment[9]}{space*(50-len(Equipment[9]))}║')
+        f'║      CHARISMA      ║ {SkillMOD["Perception"]} Perception{space*(13-len(str(SkillMOD["Perception"])))}║ {Equipment[9]}{space*(50-len(Equipment[9]))}║')
 else:
     print(
-        f'║      CHARISMA      ║ x Perception{space*(25-len(" 3 Perception"))}║                                                   ║')
+        f'║      CHARISMA      ║ {SkillMOD["Perception"]} Perception{space*(13-len(str(SkillMOD["Perception"])))}║                                                   ║')
 if len(Equipment) >= 11:
     print(
-        f'║{space*9}{CHA}{space*(11-len(str(CHA)))}║ x Performance{space*(25-len(" 3 Performance"))}║ {Equipment[10]}{space*(50-len(Equipment[10]))}║')
+        f'║{space*9}{CHA}{space*(11-len(str(CHA)))}║ {SkillMOD["Performance"]} Performance{space*(12-len(str(SkillMOD["Performance"])))}║ {Equipment[10]}{space*(50-len(Equipment[10]))}║')
 else:
-    print(f'║{space*9}{CHA}{space*(11-len(str(CHA)))}║ x Performance{space*(25-len(" 3 Performance"))}║                                                   ║')
+    print(
+        f'║{space*9}{CHA}{space*(11-len(str(CHA)))}║ {SkillMOD["Performance"]} Performance{space*(12-len(str(SkillMOD["Performance"])))}║                                                   ║')
 if len(Equipment) >= 12:
     print(
-        f'║{space*9}{CHAMOD}{space*(11-len(str(CHAMOD)))}║ x Persuation{space*(25-len(" 3 Persuation"))}║ {Equipment[11]}{space*(50-len(Equipment[11]))}║')
+        f'║{space*9}{CHAMOD}{space*(11-len(str(CHAMOD)))}║ {SkillMOD["Persuasion"]} Persuation{space*(13-len(str(SkillMOD["Persuasion"])))}║ {Equipment[11]}{space*(50-len(Equipment[11]))}║')
 else:
-    print(f'║{space*9}{CHAMOD}{space*(11-len(str(CHAMOD)))}║ x Persuation{space*(25-len(" 3 Persuation"))}║                                                   ║')
+    print(
+        f'║{space*9}{CHAMOD}{space*(11-len(str(CHAMOD)))}║ {SkillMOD["Persuasion"]} Persuation{space*(13-len(str(SkillMOD["Persuasion"])))}║                                                   ║')
 if len(Equipment) >= 13:
     print(
-        f'╠════════════════════╣ x Religion{space*(25-len(" 3 Religion"))}║ {Equipment[12]}{space*(50-len(Equipment[12]))}║')
+        f'╠════════════════════╣ {SkillMOD["Religion"]} Religion{space*(15-len(str(SkillMOD["Religion"])))}║ {Equipment[12]}{space*(50-len(Equipment[12]))}║')
 else:
     print(
-        f'╠════════════════════╣ x Religion{space*(25-len(" 3 Religion"))}║                                                   ║')
+        f'╠════════════════════╣ {SkillMOD["Religion"]} Religion{space*(15-len(str(SkillMOD["Religion"])))}║                                                   ║')
 if len(Equipment) >= 14:
     print(
-        f'║                    ║ x Sleight of Hand{space*(25-len(" 3 Sleight of Hand"))}║ {Equipment[12]}{space*(50-len(Equipment[12]))}║')
+        f'║                    ║ {SkillMOD["Sleight of Hand"]} Sleight of Hand{space*(8-len(str(SkillMOD["Sleight of Hand"])))}║ {Equipment[12]}{space*(50-len(Equipment[12]))}║')
 else:
     print(
-        f'║                    ║ x Sleight of Hand{space*(25-len(" 3 Sleight of Hand"))}║                                                   ║')
+        f'║                    ║ {SkillMOD["Sleight of Hand"]} Sleight of Hand{space*(8-len(str(SkillMOD["Sleight of Hand"])))}║                                                   ║')
 if len(Equipment) >= 15:
     print(
-        f'║ Passive Perception ║ x Stealth{space*(25-len(" 3 Stealth"))}║ {Equipment[13]}{space*(50-len(Equipment[13]))}║')
+        f'║ Passive Perception ║ {SkillMOD["Stealth"]} Stealth{space*(16-len(str(SkillMOD["Stealth"])))}║ {Equipment[13]}{space*(50-len(Equipment[13]))}║')
 else:
     print(
-        f'║ Passive Perception ║ x Stealth{space*(25-len(" 3 Stealth"))}║                                                   ║')
+        f'║ Passive Perception ║ {SkillMOD["Stealth"]} Stealth{space*(16-len(str(SkillMOD["Stealth"])))}║                                                   ║')
 if len(Equipment) >= 16:
     print(
-        f'║         {PassivePerception}{space*(11-len(str(PassivePerception)))}║ x Survival{space*(25-len(" 3 Survival"))}║ {Equipment[13]}{space*(50-len(Equipment[13]))}║')
+        f'║         {PassivePerception}{space*(11-len(str(PassivePerception)))}║ {SkillMOD["Survival"]} Survival{space*(15-len(str(SkillMOD["Survival"])))}║ {Equipment[13]}{space*(50-len(Equipment[13]))}║')
 else:
     print(
-        f'║         {PassivePerception}{space*(11-len(str(PassivePerception)))}║ x Survival{space*(25-len(" 3 Survival"))}║                                                   ║')
+        f'║         {PassivePerception}{space*(11-len(str(PassivePerception)))}║ {SkillMOD["Survival"]} Survival{space*(15-len(str(SkillMOD["Survival"])))}║                                                   ║')
 print("╠════════════════════╩═════════════════════════╩═══════════════════════════════════════════════════╣")
 print(
     f"║Languages, Armor Proficiencies, Weapon Proficiencies, Tool Proficiencies:{space*(98-73)}║")
@@ -2217,7 +2252,7 @@ print(f'║{", ".join(sorted(WeaponProficiencies))}{space*(98-len(", ".join(sort
 print(f'║{", ".join(sorted(ToolProficiencies))}{space*(98-len(", ".join(sorted(ToolProficiencies))))}║')
 print("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣")
 print(f'║Height: {"%.2f" % (Height/12)} Feet, Weight: {Weight} Pounds, Eye Color: {Eyes}, Skin Color: {Skin}{space*(98-len(f"Height: xxxx Feet, Weight: {Weight} Pounds, Eye Color: {Eyes}, Skin Color: {Skin}"))}║')
-print(f'║Hair Color: {Hair}, Fighting Style: {FightingStyle}{space*(98-len(f"Hair Color: {Hair}, Fighting Style: {FightingStyle}"))}║')
+print(f'║Hair Color: {Hair}{space*(98-len(f"Hair Color: {Hair}"))}║')
 print(f'║Traits: {", ".join(sorted(RemoveDuplicates(Traits)))}{space*(90-len(", ".join(RemoveDuplicates(Traits))))}║')
 print("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝")
 print()
@@ -2256,15 +2291,15 @@ print()
 # if ToolExpertises != []:
 #     print("Tool Expertises: ", ", ".join(
 #         sorted(RemoveDuplicates(ToolExpertises))))
-if SavingThrowProficiencies != []:
-    print("Saving Throw Proficiencies:", ", ".join(
-        sorted(RemoveDuplicates(SavingThrowProficiencies))))
-if SkillProficiencies != []:
-    print("Skill Proficiencies:", ", ".join(
-        sorted(RemoveDuplicates(SkillProficiencies))))
-if SkillExpertises != []:
-    print("Skill Expertises: ", ", ".join(
-        sorted(RemoveDuplicates(SkillExpertises))))
+# if SavingThrowProficiencies != []:
+#     print("Saving Throw Proficiencies:", ", ".join(
+#         sorted(RemoveDuplicates(SavingThrowProficiencies))))
+# if SkillProficiencies != []:
+#     print("Skill Proficiencies:", ", ".join(
+#         sorted(RemoveDuplicates(SkillProficiencies))))
+# if SkillExpertises != []:
+#     print("Skill Expertises: ", ", ".join(
+#         sorted(RemoveDuplicates(SkillExpertises))))
 # if Resistances != []:
 #     print("Resistances:", ", ".join(sorted(RemoveDuplicates(Resistances))))
 # if Immunities != []:
