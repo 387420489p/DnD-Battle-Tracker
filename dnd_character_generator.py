@@ -2038,6 +2038,28 @@ else:
 # TODO reduce too long background texts/cut them in 2 lines if too long
 # TODO initiative
 # TODO Spell Attack Bonus, Spell save DC DC:8+profbon+SpellCastingAbilityMod   AttackBonus: ProfBonus+SCA
+
+# Spell Save DC and Spell Attack Bonus calculation
+if Class == "Cleric" or Class == "Druid" or Class == "Ranger":
+    SpellSaveDC = 8 + ProfBonus + WISMOD
+    SpellAttackBonus = ProfBonus + WISMOD
+elif Class == "Fighter" or Class == "Monk" or Class == "Rogue":
+    SpellAttackBonus = ProfBonus + DEXMOD
+    SpellSaveDC = 8 + ProfBonus + DEXMOD
+elif Class == "Bard" or Class == "Warlock" or Class == "Paladin" or Class == "Sorcerer":
+    SpellAttackBonus = ProfBonus + CHAMOD
+    SpellSaveDC = 8 + ProfBonus + CHAMOD
+elif Class == "Barbarian":
+    SpellAttackBonus = ProfBonus + STRMOD
+    SpellSaveDC = 8 + ProfBonus + STRMOD
+elif Class == "Wizard" or Class == "Artificer" or Class == "Blood Hunter":
+    SpellAttackBonus = ProfBonus + INTMOD
+    SpellSaveDC = 8 + ProfBonus + INTMOD
+
+#Skill & Skill save calculation
+if "WIS" in SkillProficiencies:
+    
+
 # TODO check ELIFs !
 space = " "
 print("╔════════════════════╦═════════════════════════════════════════════════════════════════════════════╗")
@@ -2045,7 +2067,7 @@ print(f'║{Name}{space*(20-len(Name))}║{Class} {Level}{space*(38-len(Class)-l
 print(f'║{"-"*len(Name)}{space*(20-len(Name))}║Subclass: {Subclass}{space*(29-len(Subclass))}Proficiency Bonus {ProfBonus}{space*(20-len(str(ProfBonus)))}║')
 print(f'║Name {space*15}║{Subrace} {Race}{space*(38-len(Subrace)-len(Race))}{Alignment}{space*(38-len(Alignment))}║')
 print('╠════════════════════╬═════════════════════════╦════════════════╦══════════════════╦═══════════════╣')
-print(f'║Initiative xx       ║ Proficiency Bonus xx    ║Fighting style  ║                  ║               ║')
+print(f'║Initiative DEXMOD   ║ Proficiency Bonus xx    ║Fighting style  ║                  ║               ║')
 print('╠════════════════════╬═════════════════════════╦════════════════╦══════════════════╦═══════════════╣')
 print(
     f'║      STRENGHT      ║     SAVING THROWS{space*(21-len(" saving throws"))}║ AC xx {space*(16-7)}║ Initiative {DEXMOD}{space*(6-len(str(DEXMOD)))}║ Speed {Speed}{space*(8-len(str(Speed)))}║')
