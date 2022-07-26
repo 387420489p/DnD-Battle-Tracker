@@ -222,6 +222,8 @@ StatRoll()
 # Level 4, 8, 12, 16 stat increase (it's random, just like everything!)
 
 stats_for_incr = ["STR", "DEX", "CON", "INT", "WIS", "CHA"]
+
+
 def AbilityScoreImprovement(num):
     global STR, DEX, CON, INT, WIS, CHA, stats_for_incr
     for i in range(num):
@@ -2012,21 +2014,6 @@ ToolExpertises = [item for item, count in collections.Counter(ToolProficiencies)
 # ----------------------------------------------------PRINTING CHARATER--------------------------------------------------
 
 
-def print_msg_box(msg, indent=1, width=None, title=None):
-    """Print message-box with optional title."""
-    lines = msg.split('\n')
-    space = " " * indent
-    if not width:
-        width = max(map(len, lines))
-    box = f'╔{"═" * (width + indent * 2)}╗\n'  # upper_border
-    box += ''.join([f'║{space}{line:<{width}}{space}║\n' for line in lines])
-    if title:
-        box += f'║{space}{"-" * len(msg):<{width}}{space}║\n'  # underscore
-        box += f'║{space}{title:<{width}}{space}║\n'  # title
-    box += f'╚{"═" * (width + indent * 2)}╝'  # lower_border
-    print(box, flush=True)
-
-
 # Proficiencie bonus & Passive Perception
 if Level < 5:
     ProfBonus = 2
@@ -2046,10 +2033,8 @@ else:
 
 
 # TODO AC MISSING !!!!!!!
-# TODO calculate saving throws and skills
+# Studded Leather VS Studded Leather ARMOR !!!!! -.-
 # TODO reduce too long background texts/cut them in 2 lines if too long
-# TODO initiative
-# TODO Spell Attack Bonus, Spell save DC DC:8+profbon+SpellCastingAbilityMod   AttackBonus: ProfBonus+SCA
 
 # Spell Save DC and Spell Attack Bonus calculation
 if Class == "Cleric" or Class == "Druid" or Class == "Ranger":
