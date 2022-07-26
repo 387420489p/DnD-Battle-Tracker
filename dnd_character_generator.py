@@ -2142,7 +2142,6 @@ if FightingStyle == "Defense":
 if Subclass == "Forge Domain" and Level >= 6:
     AC += 1
 
-
 # TODO check ELIFs !
 space = " "
 print("╔════════════════════╦═════════════════════════════════════════════════════════════════════════════╗")
@@ -2153,7 +2152,7 @@ print('╠════════════════════╬══�
 print(f'║Initiative {DEXMOD}{space*(9-len(str(DEXMOD)))}║ Proficiency Bonus {ProfBonus}{space*(6-len(str(ProfBonus)))}║Fighting style {FightingStyle}{space*(51-len(f"Fighting style {FightingStyle}"))}║')
 print('╠════════════════════╬═════════════════════════╬════════════════╦══════════════════╦═══════════════╣')
 print(
-    f'║      STRENGHT      ║     SAVING THROWS{space*(21-len(" saving throws"))}║ AC {AC} {space*(16-7)}║ Initiative {DEXMOD}{space*(6-len(str(DEXMOD)))}║ Speed {Speed}{space*(8-len(str(Speed)))}║')
+    f'║      STRENGHT      ║     SAVING THROWS{space*(21-len(" saving throws"))}║ AC {AC} {space*(11-len(str(AC)))}║ Initiative {DEXMOD}{space*(6-len(str(DEXMOD)))}║ Speed {Speed}{space*(8-len(str(Speed)))}║')
 print(f'║{space*9}{STR}{space*(11-len(str(STR)))}║ {STRsave} Strenght{space*(15-len(str(STRsave)))}╠════════════════╩══════════════════╩═══════════════╣')
 print(f'║{space*9}{STRMOD}{space*(11-len(str(STRMOD)))}║ {DEXsave} Dexterity{space*(14-len(str(DEXsave)))}║                     HITPOINTS                     ║')
 print(
