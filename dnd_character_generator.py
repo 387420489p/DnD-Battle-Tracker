@@ -1168,13 +1168,13 @@ if Class == "Artificer":
     SpellCastingAbility = "INT"
     HP = HP + HitPoints(8)
     HitDie = 8
-    ArmourProficiencies.extend(["Light Armor", "Medium Armor", "Shields"])
+    ArmourProficiencies.extend(["Light Armuor", "Medium Armour", "Shields"])
     WeaponProficiencies.extend(["Simple Weapons"])
     SavingThrowProficiencies.extend(["CON", "INT"])
     SkillProficiencies.extend(random.sample(
         ["Arcana", "History", "Investigation", "Medicine", "Nature", "Perception", "Sleight of Hand"], 2))
     Equipment.extend([random.choice(SimpleWeapons), random.choice(SimpleWeapons), "Light Crossbow and 20 Bolts",
-                     random.choice(["Studded Leather", "Scale Mail"]), "Thieves' Tool", "Dungeoneer's Pack"])
+                     random.choice(["Studded Leather Armour", "Scale Mail"]), "Thieves' Tool", "Dungeoneer's Pack"])
     ToolProficiencies.extend(
         ["Thieves' Tools", "Tinker's Tool", random.choice(ArtisanTools)])
     if Level >= 3:
@@ -1240,8 +1240,8 @@ elif Class == "Blood Hunter":
         Equipment.extend(random.sample(SimpleWeapons, 2))
     Equipment.append(random.choice(
         ["Light Crossbow with 20 Bolts", "Hand Crossbow and 20 Bolts"]))
-    Equipment.extend([random.choice(["Studded Leather Armor",
-                     "Scale Mail Armor"]), "Explorer's Pack", "Alchemist's Supplies"])
+    Equipment.extend([random.choice(["Studded Leather Armour",
+                     "Scale Mail"]), "Explorer's Pack", "Alchemist's Supplies"])
     if Level >= 2:
         FightingStyle = ["Arcery", "Dueling",
                          "Great Weapon Fighting", "Two-Weapon Fighting"]
@@ -2032,8 +2032,6 @@ else:
     PassivePerception = 10 + ProfBonus
 
 
-# TODO AC MISSING !!!!!!!
-# Studded Leather VS Studded Leather ARMOR !!!!! -.-
 # TODO reduce too long background texts/cut them in 2 lines if too long
 
 # Spell Save DC and Spell Attack Bonus calculation
@@ -2117,6 +2115,33 @@ if "INT" in SavingThrowProficiencies:
 if "CON" in SavingThrowProficiencies:
     CONsave = CONMOD + ProfBonus
 
+# AC calculator
+AC = 10 + DEXMOD
+if Class == "Barbarian":
+    AC = 10 + DEXMOD + CONMOD
+if Class == "Monk":
+    AC = 10 + DEXMOD + WISMOD
+if "Leather Armour" in Equipment:
+    AC = 11 + DEXMOD
+if "Studded Leather Armour" in Equipment:
+    AC = 12 + DEXMOD
+if "Scale Mail" in Equipment:
+    if DEXMOD <= 2:
+        AC = 14 + DEXMOD
+    else:
+        AC = 16
+if "Chain Mail" in Equipment:
+    if STR >= 13:
+        AC = 16
+    else:
+        AC = 10 + DEXMOD
+if "Shield" in Equipment or "Wooden Shield" in Equipment:
+    AC += 2
+if FightingStyle == "Defense":
+    AC += 1
+if Subclass == "Forge Domain" and Level >= 6:
+    AC += 1
+
 
 # TODO check ELIFs !
 space = " "
@@ -2128,7 +2153,7 @@ print('╠════════════════════╬══�
 print(f'║Initiative {DEXMOD}{space*(9-len(str(DEXMOD)))}║ Proficiency Bonus {ProfBonus}{space*(6-len(str(ProfBonus)))}║Fighting style {FightingStyle}{space*(51-len(f"Fighting style {FightingStyle}"))}║')
 print('╠════════════════════╬═════════════════════════╬════════════════╦══════════════════╦═══════════════╣')
 print(
-    f'║      STRENGHT      ║     SAVING THROWS{space*(21-len(" saving throws"))}║ AC xx {space*(16-7)}║ Initiative {DEXMOD}{space*(6-len(str(DEXMOD)))}║ Speed {Speed}{space*(8-len(str(Speed)))}║')
+    f'║      STRENGHT      ║     SAVING THROWS{space*(21-len(" saving throws"))}║ AC {AC} {space*(16-7)}║ Initiative {DEXMOD}{space*(6-len(str(DEXMOD)))}║ Speed {Speed}{space*(8-len(str(Speed)))}║')
 print(f'║{space*9}{STR}{space*(11-len(str(STR)))}║ {STRsave} Strenght{space*(15-len(str(STRsave)))}╠════════════════╩══════════════════╩═══════════════╣')
 print(f'║{space*9}{STRMOD}{space*(11-len(str(STRMOD)))}║ {DEXsave} Dexterity{space*(14-len(str(DEXsave)))}║                     HITPOINTS                     ║')
 print(
