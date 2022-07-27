@@ -2143,6 +2143,8 @@ if Subclass == "Forge Domain" and Level >= 6:
     AC += 1
 
 # TODO check ELIFs !
+# TODO SpeelSaveDC, Spell Attack Mod
+# TODO ha N/A van, vegyük ki a printből.
 space = " "
 print("╔════════════════════╦═════════════════════════════════════════════════════════════════════════════╗")
 print(f'║{Name}{space*(20-len(Name))}║{Class} {Level}{space*(38-len(Class)-len(str(Level)))}{Background}{space*(38-len(Background))}║')
