@@ -3,7 +3,7 @@ import json
 from pprint import pprint
 import random
 Class = "Bard"
-Level = 3
+Level = 8
 
 KnownSpells = []
 spells = []
@@ -79,3 +79,6 @@ print()
 print(KnownSpells[1])
 print()
 print(KnownSpells[2])
+print()
+if KnownSpells[3] != []:
+    print(KnownSpells[3])
