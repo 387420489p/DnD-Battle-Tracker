@@ -14,7 +14,6 @@ def get_character(name, hp, ac, ini, pc):
                      "PC": pc,
                     })
 
-
 def get_started():
     global fighters
     while True:
@@ -83,7 +82,7 @@ def fight():
     print(r"""        \ """)
     if fighter["HP"] <= 0:
         fighter["HP"] = 0
-        print(f"             {name.capitalize()} DIED !")
+        print(f"            (✖╭╮✖) {name.capitalize()} DIED! (✖╭╮✖)")
     get_new_ini()
 
 def pc_character(name):
