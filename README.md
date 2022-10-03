@@ -6,6 +6,7 @@ Improved a bit and still improving
 
 fight_tracker:
 DnD Fight tracker for DMs. 
+You can hardcode your PCs to it, to make the start of the fight faster. 
 
 kockadobalo:
 Dice roller app. 

@@ -1,7 +1,5 @@
-#TODO földre kerülés PC-knek DONE
 #TODO exception handling
 #TODO npc darabszám szorzás
-#TODO ha megval valaki írja ki, hogy meghalt !!!!!!!
 from random import randint
 
 
