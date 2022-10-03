@@ -1304,6 +1304,8 @@ elif Class == "Druid":
             Land = random.choice(
                 ["(Arctic)", "(Coast)", "(Desert)", "(Forest)", "(Grassland)", "(Mountain)", "(Swamp)", "(Underdark)"])
             Subclass = "Circle of the Land " + Land
+        if Subclass == "Circle of the Shepherd":
+            SpokenLanguage.append("Sylvan")
     HP = HP + HitPoints(8)
     HitDie = 8
     ArmourProficiencies.extend(["Light Armour", "Medium Armour", "Shields"])
