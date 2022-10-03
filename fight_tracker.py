@@ -2,8 +2,10 @@
 #TODO exception handling
 #TODO neveket, dmg-nél capital-ba konvertálni
 #TODO npc darabszám szorzás
-#TODO npc random initiative
 #TODO ha megval valaki írja ki, hogy meghalt !!!!!!!
+from random import randint
+
+
 initiative = []
 fighters = []
 
@@ -32,7 +34,10 @@ def get_started():
             break
         hp = int(input("HP: "))
         ac = int(input("AC: "))
-        ini = int(input("Initiative: "))
+        if pc == False:
+            ini = randint(1, 20)
+        else:
+            ini = int(input("Initiative: "))
         get_character(nev, hp, ac, ini, pc)
 
 
@@ -67,7 +72,7 @@ def fight():
         if i[2] == True and i[1] <= 0:
             print(f"{i[0]}, PLAYER DOWN!||")
         else:
-            print(f"{i[0]}, HP: {i[1]}, AC: {i[3]} ||")
+            print(f"{i[0]}: HP: {i[1]}, AC: {i[3]}")
     print("\n")
     print("=============================" * len(fighters))
 
