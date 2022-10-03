@@ -74,18 +74,19 @@ def fight():
         else:
             print(f"{i[0]}: HP: {i[1]}, AC: {i[3]}")
     print("\n")
-    print("=============================" * len(fighters))
+    print("==============")
 
     name = input("Who got dmg? ")
     dmg = int(input("How much dmg? (Type negative for heal) "))
     for fighter in fighters:
         if fighter["Name"] == name:
             fighter["HP"] = fighter["HP"] - dmg
-            if fighter["HP"] < 0:
-                fighter["HP"] = 0
     print(r"""        /""")
     print(f"*//////[<>==================- {name} - {dmg}")
     print(r"""        \ """)
+    if fighter["HP"] <= 0:
+        fighter["HP"] = 0
+        print(f"          {name} DIED !")
     get_new_ini()
 
 def pc_character(name):
