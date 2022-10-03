@@ -1,6 +1,5 @@
 #TODO földre kerülés PC-knek DONE
 #TODO exception handling
-#TODO neveket, dmg-nél capital-ba konvertálni
 #TODO npc darabszám szorzás
 #TODO ha megval valaki írja ki, hogy meghalt !!!!!!!
 from random import randint
@@ -70,23 +69,23 @@ def fight():
     print("\nInitiative: ")
     for i in initiative:
         if i[2] == True and i[1] <= 0:
-            print(f"{i[0]}, PLAYER DOWN!||")
+            print(f"{i[0].capitalize()}, PLAYER DOWN!")
         else:
-            print(f"{i[0]}: HP: {i[1]}, AC: {i[3]}")
+            print(f"{i[0].capitalize()}: HP: {i[1]}, AC: {i[3]}")
     print("\n")
     print("==============")
 
-    name = input("Who got dmg? ")
+    name = input("Who got dmg? ").lower()
     dmg = int(input("How much dmg? (Type negative for heal) "))
     for fighter in fighters:
         if fighter["Name"] == name:
             fighter["HP"] = fighter["HP"] - dmg
     print(r"""        /""")
-    print(f"*//////[<>==================- {name} - {dmg}")
+    print(f"*//////[<>==================- {name.capitalize()} - {dmg}")
     print(r"""        \ """)
     if fighter["HP"] <= 0:
         fighter["HP"] = 0
-        print(f"          {name} DIED !")
+        print(f"             {name.capitalize()} DIED !")
     get_new_ini()
 
 def pc_character(name):
