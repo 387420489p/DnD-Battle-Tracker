@@ -62,7 +62,6 @@ def get_new_ini():
 
 def fight():
     global initiative, fighters
-    print("=============================" * len(fighters))
     print("\nInitiative: ")
     for i in initiative:
         if i[2] == True and i[1] <= 0:
@@ -70,19 +69,19 @@ def fight():
         else:
             print(f"{i[0].capitalize()}: HP: {i[1]}, AC: {i[3]}")
     print("\n")
-    print("==============")
+    print("==========================================================")
 
     name = input("Who got dmg? ").lower()
     dmg = int(input("How much dmg? (Type negative for heal) "))
-    for fighter in fighters:
-        if fighter["Name"] == name:
-            fighter["HP"] = fighter["HP"] - dmg
     print(r"""        /""")
     print(f"*//////[<>==================- {name.capitalize()} - {dmg}")
     print(r"""        \ """)
-    if fighter["HP"] <= 0:
-        fighter["HP"] = 0
-        print(f"            (✖╭╮✖) {name.capitalize()} DIED! (✖╭╮✖)")
+    for fighter in fighters:
+        if fighter["Name"] == name:
+            fighter["HP"] = fighter["HP"] - dmg
+            if fighter["HP"] <= 0:
+                fighter["HP"] = 0
+                print(f"            (✖╭╮✖) {name.upper()} DIED! (✖╭╮✖)")
     get_new_ini()
 
 def pc_character(name):
