@@ -73,6 +73,8 @@ def fight():
 
     name = input("Who got dmg? ").lower()
     dmg = int(input("How much dmg? (Type negative for heal) "))
+    if dmg == 387420489:
+        egg()
     print(r"""        /""")
     print(f"*//////[<>==================- {name.capitalize()} - {dmg}")
     print(r"""        \ """)
@@ -129,5 +131,22 @@ def pc_character(name):
         get_character(name, hp, ac, ini, pc)
 
     get_started()
+def egg():
+    print(r"""              .---. .---.     Nice job, you found me!
+             :     : o   :       Have a cookie!
+         _..-:   o :     :-.._     - 387420489
+     .-''  '  `---' `---' "   ``-.      /
+   .'   "   '  "  .    "  . '  "  `.  
+  :   '.---.,,.,...,.,.,.,..---.  ' ;
+  `. " `.                     .' " .'
+   `.  '`.                   .' ' .'
+    `.    `-._           _.-' "  .'  .----.
+       `. "    '"--...--"'  . ' .'  .'  o   `.
+      .'`-._'    " .     " _.-'`. :       o  :
+     '      ```--.....--'''    ' `:_ o       :
+ .'    "     '         "     "   ; `.;";";";'
+;         '       "       '     . ; .' ; ; ;
+;     '         '       '   "    .'      .-'
+'  "     "   '      "           "    _.-'""")
 
 get_started()
