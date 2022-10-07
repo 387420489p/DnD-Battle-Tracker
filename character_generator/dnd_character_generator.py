@@ -51,7 +51,7 @@ else:
 # -----------------------------------------NAME GENERATOR-----------------------------------------------------------------
 
 name_lst = []
-with open("names.txt", "r") as n:
+with open("./character_generator/names.txt", "r") as n:
     names = n.readlines()
     for i in range(2):
         name1 = random.choice(names).strip()
