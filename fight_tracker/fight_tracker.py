@@ -19,6 +19,8 @@ def get_started():
     global fighters
     while True:
         pc = input("PC or NPC? Type FIGHT to start the fight!")
+        while pc.lower() not in ["pc", "npc", "fight"]:
+            pc = input("PC or NPC? Type FIGHT to start the fight!")
         if pc.lower() == "fight":
             build_initiative()
         elif pc.lower() == 'pc':
