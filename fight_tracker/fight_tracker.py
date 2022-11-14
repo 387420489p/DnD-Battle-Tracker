@@ -1,4 +1,5 @@
-#TODO exception handling
+#TODO exception handling !!!!!!!!!!!
+#figth közben kidobott :'((((
 #TODO npc darabszám szorzás
 from random import randint
 
@@ -28,8 +29,18 @@ def get_started():
         if nev in ["baldwin", "bob", "bog", "luna", "doni", "urist", "beni"]:
             pc_character(nev)
             break
-        hp = int(input("HP: "))
-        ac = int(input("AC: "))
+        while True:
+            try:
+                hp = int(input("HP: "))
+                break
+            except ValueError:
+                print("HP must be a number!")
+        while True:
+            try:
+                ac = int(input("AC: "))
+                break
+            except ValueError:
+                print("AC must be a number!")
         if pc == False:
             ini = randint(1, 20)
         else:
@@ -72,7 +83,12 @@ def fight():
     print("==========================================================")
 
     name = input("Who got dmg? ").lower()
-    dmg = int(input("How much dmg? (Type negative for heal) "))
+    while True:
+        try:
+            dmg = int(input("How much dmg? (Type negative for heal) "))
+            break
+        except ValueError:
+            print("Only numbers are accepted!")
     if dmg == 387420489:
         egg()
     print(r"""        /""")
