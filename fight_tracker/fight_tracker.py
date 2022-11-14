@@ -83,6 +83,13 @@ def fight():
     print("==========================================================")
 
     name = input("Who got dmg? ").lower()
+    #validation of name. dead npc-s still accepted, but it's a feature not a bug :) 
+    names = []
+    for fighter in fighters:
+        names.append(fighter["Name"])
+    while name not in names:
+        print("There's no one with that name!")
+        name = input("Who got dmg? ").lower()
     while True:
         try:
             dmg = int(input("How much dmg? (Type negative for heal) "))
