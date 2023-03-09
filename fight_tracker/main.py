@@ -2,6 +2,7 @@
 #figth közben kidobott :'((((
 #TODO npc darabszám szorzás
 from random import randint
+from players import pc_stats, pc_names
 
 
 initiative = []
@@ -27,9 +28,9 @@ def get_started():
             pc = True
         else:
             pc = False
-        nev = input("Name: ").lower()
-        if nev in ["baldwin", "bob", "bog", "luna", "doni", "urist", "beni"]:
-            pc_character(nev)
+        name = input("Name: ").lower()
+        if name in pc_names:
+            pc_character(name, pc_stats)
             break
         while True:
             try:
@@ -47,7 +48,7 @@ def get_started():
             ini = randint(1, 20)
         else:
             ini = int(input("Initiative: "))
-        get_character(nev, hp, ac, ini, pc)
+        get_character(name, hp, ac, ini, pc)
 
 
 def build_initiative():
@@ -85,7 +86,7 @@ def fight():
     print("==========================================================")
 
     name = input("Who got dmg? ").lower()
-    #validation of name. dead npc-s still accepted, but it's a feature not a bug :) 
+    # validation of name. dead npc-s still accepted, but it's a feature not a bug :) 
     names = []
     for fighter in fighters:
         names.append(fighter["Name"])
@@ -111,49 +112,16 @@ def fight():
                 print(f"            (✖╭╮✖) {name.upper()} DIED! (✖╭╮✖)")
     get_new_ini()
 
-def pc_character(name):
-    if name == "baldwin":
-        ac = 19
-        hp = 79
+def pc_character(name, characters):
+    if name in characters:
+        ac = characters[name]["ac"]
+        hp = characters[name]["hp"]
         ini = int(input("Initiative: "))
         pc = True
         get_character(name, hp, ac, ini, pc)
-    elif name == "bob":
-        ac = 20
-        hp = 77
-        ini = int(input("Initiative: "))
-        pc = True
-        get_character(name, hp, ac, ini, pc)
-    elif name == "luna":
-        ac = 13
-        hp = 54
-        ini = int(input("Initiative: "))
-        pc = True
-        get_character(name, hp, ac, ini, pc)
-    elif name == "bog":
-        ac = 17
-        hp = 47
-        ini = int(input("Initiative: "))
-        pc = True
-        get_character(name, hp, ac, ini, pc)
-    elif name == "doni":
-        ac = 15
-        hp = 80
-        ini = int(input("Initiative: "))
-        pc = True
-        get_character(name, hp, ac, ini, pc)
-    elif name == "urist":
-        ac = 14
-        hp = 71
-        ini = int(input("Initiative: "))
-        pc = True
-        get_character(name, hp, ac, ini, pc)
-    elif name == "beni":
-        ac = 10
-        hp = 49
-        ini = int(input("Initiative: "))
-        pc = True
-        get_character(name, hp, ac, ini, pc)
+    else:
+        print(f"Error: character '{name}' not found.")
+
 
     get_started()
 def egg():
