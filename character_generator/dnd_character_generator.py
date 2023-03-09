@@ -2,14 +2,8 @@
 @author: terreratman, maxbotsis
 @the_guy_who_took_the_code_and_"improved"_it: 387420489
 """
-# TODO optimalize line 159 and under  !!!!!!!!!!
-# TODO CHARACTER NAMES!!!!!  https://www.reddit.com/r/DnDBehindTheScreen/comments/50pcg1/a_post_about_names_names_for_speakers_of_the/
-# TODO character sheet print formatting
-# =============================================================================
-#
 # TODO Does not have a seperate category for currency because I'm not sure how to account for adding from multiple sources
 # TODO missing classes: Cardcaster, Diabolist, Feywalker, Morph, Occultist
-# =============================================================================
 
 from pprint import pprint
 import random
