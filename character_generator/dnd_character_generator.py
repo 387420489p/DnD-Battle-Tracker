@@ -1,5 +1,5 @@
 """
-@author: terreratman
+@author: terreratman, maxbotsis
 @the_guy_who_took_the_code_and_"improved"_it: 387420489
 """
 # TODO optimalize line 159 and under  !!!!!!!!!!
