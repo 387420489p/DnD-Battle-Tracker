@@ -99,28 +99,8 @@ def StatDecrease(Stat, NumberofDecrease):
 
 
 def STATMOD(STAT):
-    if STAT == 1:
-        return -5
-    elif STAT == 2 or STAT == 3:
-        return -4
-    elif STAT == 4 or STAT == 5:
-        return -3
-    elif STAT == 6 or STAT == 7:
-        return -2
-    elif STAT == 8 or STAT == 9:
-        return -1
-    elif STAT == 10 or STAT == 11:
-        return 0
-    elif STAT == 12 or STAT == 13:
-        return 1
-    elif STAT == 14 or STAT == 15:
-        return 2
-    elif STAT == 16 or STAT == 17:
-        return 3
-    elif STAT == 18 or STAT == 19:
-        return 4
-    elif STAT == 20:
-        return 5
+    return (STAT - 10) // 2
+
 
 
 def RemoveDuplicates(List):
@@ -2069,29 +2049,29 @@ SkillMOD = {
     "Survival": WISMOD
 }
 
-for stat in SkillProficiencies:
-    if stat == "Acrobatics" or stat == "Sleight of Hand" or stat == "Stealth":
-        SkillMOD["{0}".format(stat)] = DEXMOD + ProfBonus
-    if stat == "Animal Handling" or stat == "Insight" or stat == "Medicine" or stat == "Perception" or stat == "Survival":
-        SkillMOD["{0}".format(stat)] = WISMOD + ProfBonus
-    if stat == "Arcana" or stat == "History" or stat == "Investigation" or stat == "Nature" or stat == "Religion":
-        SkillMOD["{0}".format(stat)] = INTMOD + ProfBonus
-    if stat == "Deception" or stat == "Intimidation" or stat == "Performance" or stat == "Persuasion":
-        SkillMOD["{0}".format(stat)] = CHAMOD + ProfBonus
-    if stat == "Athletics":
-        SkillMOD["{0}".format(stat)] = STRMOD + ProfBonus
+for STAT in SkillProficiencies:
+    if STAT == "Acrobatics" or STAT == "Sleight of Hand" or STAT == "Stealth":
+        SkillMOD["{0}".format(STAT)] = DEXMOD + ProfBonus
+    if STAT == "Animal Handling" or STAT == "Insight" or STAT == "Medicine" or STAT == "Perception" or STAT == "Survival":
+        SkillMOD["{0}".format(STAT)] = WISMOD + ProfBonus
+    if STAT == "Arcana" or STAT == "History" or STAT == "Investigation" or STAT == "Nature" or STAT == "Religion":
+        SkillMOD["{0}".format(STAT)] = INTMOD + ProfBonus
+    if STAT == "Deception" or STAT == "Intimidation" or STAT == "Performance" or STAT == "Persuasion":
+        SkillMOD["{0}".format(STAT)] = CHAMOD + ProfBonus
+    if STAT == "Athletics":
+        SkillMOD["{0}".format(STAT)] = STRMOD + ProfBonus
 
-for stat in SkillExpertises:
-    if stat == "Acrobatics" or stat == "Sleight of Hand" or stat == "Stealth":
-        SkillMOD["{0}".format(stat)] = DEXMOD + (ProfBonus * 2)
-    if stat == "Animal Handling" or stat == "Insight" or stat == "Medicine" or stat == "Perception" or stat == "Survival":
-        SkillMOD["{0}".format(stat)] = WISMOD + (ProfBonus * 2)
-    if stat == "Arcana" or stat == "History" or stat == "Investigation" or stat == "Nature" or stat == "Religion":
-        SkillMOD["{0}".format(stat)] = INTMOD + (ProfBonus * 2)
-    if stat == "Deception" or stat == "Intimidation" or stat == "Performance" or stat == "Persuasion":
-        SkillMOD["{0}".format(stat)] = CHAMOD + (ProfBonus * 2)
-    if stat == "Athletics":
-        SkillMOD["{0}".format(stat)] = STRMOD + (ProfBonus * 2)
+for STAT in SkillExpertises:
+    if STAT == "Acrobatics" or STAT == "Sleight of Hand" or STAT == "Stealth":
+        SkillMOD["{0}".format(STAT)] = DEXMOD + (ProfBonus * 2)
+    if STAT == "Animal Handling" or STAT == "Insight" or STAT == "Medicine" or STAT == "Perception" or STAT == "Survival":
+        SkillMOD["{0}".format(STAT)] = WISMOD + (ProfBonus * 2)
+    if STAT == "Arcana" or STAT == "History" or STAT == "Investigation" or STAT == "Nature" or STAT == "Religion":
+        SkillMOD["{0}".format(STAT)] = INTMOD + (ProfBonus * 2)
+    if STAT == "Deception" or STAT == "Intimidation" or STAT == "Performance" or STAT == "Persuasion":
+        SkillMOD["{0}".format(STAT)] = CHAMOD + (ProfBonus * 2)
+    if STAT == "Athletics":
+        SkillMOD["{0}".format(STAT)] = STRMOD + (ProfBonus * 2)
 WISsave = WISMOD
 DEXsave = DEXMOD
 STRsave = STRMOD
