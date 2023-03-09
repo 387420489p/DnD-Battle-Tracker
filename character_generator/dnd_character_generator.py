@@ -56,13 +56,13 @@ with open("./character_generator/names.txt", "r") as n:
 # ------------------------------------------HP, STAT, GENERATING---------------------------------------------------------
 
 
-def Normal(Min, Max):  # Not exactly sure how this one is working, but it gives a more realistic result for age, height and weight
+def normal(Min, Max):  # Not exactly sure how this one is working, but it gives a more realistic result for age, height and weight
     # Round gives us a whole number for a character's age
     r = round(random.triangular(low=Min, high=Max))
     return r
 
 
-def HitPoints(MaxDice):
+def hit_points(MaxDice):
     n = 1
     HITPOINTS = 0
     if Level == 1:
@@ -82,7 +82,7 @@ def HitPoints(MaxDice):
     return (HITPOINTS)
 
 
-def StatIncrease(Stat, NumberofIncrease):
+def stat_increase(Stat, NumberofIncrease):
     if Stat <= 20 - NumberofIncrease:
         Stat = Stat + NumberofIncrease
     else:
@@ -90,7 +90,7 @@ def StatIncrease(Stat, NumberofIncrease):
     return (Stat)
 
 
-def StatDecrease(Stat, NumberofDecrease):
+def stat_decrease(Stat, NumberofDecrease):
     if Stat >= 1 + NumberofDecrease:
         Stat = Stat - NumberofDecrease
     else:
@@ -98,12 +98,12 @@ def StatDecrease(Stat, NumberofDecrease):
     return (Stat)
 
 
-def STATMOD(STAT):
+def calculate_stat_modifier(STAT):
     return (STAT - 10) // 2
 
 
 
-def RemoveDuplicates(List):
+def remove_duplicates(List):
     final_list = []
     for num in List:
         if num not in final_list:
@@ -111,7 +111,7 @@ def RemoveDuplicates(List):
     return final_list
 
 
-def AddLanguage(num):
+def add_language(num):
     for i in range(0, num):
         plus_language = random.choice(Languages)
         while plus_language in SpokenLanguage:
@@ -129,7 +129,7 @@ WIS = 0
 CHA = 0
 
 
-def StatRoll():
+def roll_stat():
     global STR, DEX, CON, INT, WIS, CHA, all_stats
     all_stats = []
     for i in range(0, 6):
@@ -191,41 +191,41 @@ def StatRoll():
         CHA = all_stats[4]
 
 
-StatRoll()
+roll_stat()
 
 # Level 4, 8, 12, 16 stat increase (it's random, just like everything!)
 
 stats_for_incr = ["STR", "DEX", "CON", "INT", "WIS", "CHA"]
 
 
-def AbilityScoreImprovement(num):
+def ability_score_improvement(num):
     global STR, DEX, CON, INT, WIS, CHA, stats_for_incr
     for i in range(num):
         stat_to_incr = random.choice(stats_for_incr)
         if stat_to_incr == "STR":
-            STR = StatIncrease(STR, 1)
+            STR = stat_increase(STR, 1)
         if stat_to_incr == "DEX":
-            DEX = StatIncrease(DEX, 1)
+            DEX = stat_increase(DEX, 1)
         if stat_to_incr == "CON":
-            CON = StatIncrease(CON, 1)
+            CON = stat_increase(CON, 1)
         if stat_to_incr == "INT":
-            INT = StatIncrease(INT, 1)
+            INT = stat_increase(INT, 1)
         if stat_to_incr == "WIS":
-            WIS = StatIncrease(WIS, 1)
+            WIS = stat_increase(WIS, 1)
         if stat_to_incr == "CHA":
-            CHA = StatIncrease(CHA, 1)
+            CHA = stat_increase(CHA, 1)
 
 
 if Level >= 19:
-    AbilityScoreImprovement(10)
+    ability_score_improvement(10)
 elif Level >= 16:
-    AbilityScoreImprovement(8)
+    ability_score_improvement(8)
 elif Level >= 12:
-    AbilityScoreImprovement(6)
+    ability_score_improvement(6)
 elif Level >= 8:
-    AbilityScoreImprovement(4)
+    ability_score_improvement(4)
 elif Level >= 4:
-    AbilityScoreImprovement(2)
+    ability_score_improvement(2)
 # =============================================================================
 
 Stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"]  # this is for variant human
@@ -290,18 +290,18 @@ Languages = ["Common", "Dwarvish", "Elvish", "Giant", "Gnomish", "Goblin", "Half
 if Race == "Aasimar":
     Subrace = ["Fallen", "Protector", "Scourge"]
     Subrace = random.choice(Subrace)
-    CHA = StatIncrease(CHA, 2)
+    CHA = stat_increase(CHA, 2)
     if Subrace == "Fallen":
-        STR = StatIncrease(STR, 1)
+        STR = stat_increase(STR, 1)
     elif Subrace == "Protector":
-        WIS = StatIncrease(WIS, 1)
+        WIS = stat_increase(WIS, 1)
     elif Subrace == "Scourge":
-        CON = StatIncrease(CON, 1)
+        CON = stat_increase(CON, 1)
     SpokenLanguage.extend(["Common", "Celestial"])
-    Age = Normal(20, 140)
-    SizeMod = Normal(2, 20)
+    Age = normal(20, 140)
+    SizeMod = normal(2, 20)
     Height = 4 * 12 + 10 + SizeMod
-    Weight = 110 + SizeMod * Normal(2, 8)
+    Weight = 110 + SizeMod * normal(2, 8)
     Eyes = ["Pupil-less Pale White", "Pupil-less Gold",
             "Pupil-less Gray", "Pupil-less Topaz"]
     Eyes = random.choice(Eyes)
@@ -326,12 +326,12 @@ if Race == "Aasimar":
 # =============================================================================
 
 elif Race == "Bugbear":
-    STR = StatIncrease(STR, 2)
-    DEX = StatIncrease(DEX, 1)
-    Age = Normal(16, 60)
-    SizeMod = Normal(2, 16)
+    STR = stat_increase(STR, 2)
+    DEX = stat_increase(DEX, 1)
+    Age = normal(16, 60)
+    SizeMod = normal(2, 16)
     Height = 6 * 12 + 4 + SizeMod
-    Weight = 230 + SizeMod * Normal(2, 12)
+    Weight = 230 + SizeMod * normal(2, 12)
     SpokenLanguage.extend(["Common", "Goblin"])
     Eyes = ["Yellow", "Orange", "Red", "Brown", "Greenish White"]
     Eyes = random.choice(Eyes)
@@ -348,12 +348,12 @@ elif Race == "Dragonborn":
     Subrace = ["Red", "Green", "Blue", "White", "Black",
                "Gold", "Silver", "Brass", "Copper", "Bronze"]
     Subrace = random.choice(Subrace)
-    STR = StatIncrease(STR, 2)
-    CHA = StatIncrease(CHA, 1)
-    Age = Normal(15, 60)
-    SizeMod = Normal(2, 16)
+    STR = stat_increase(STR, 2)
+    CHA = stat_increase(CHA, 1)
+    Age = normal(15, 60)
+    SizeMod = normal(2, 16)
     Height = 5 * 12 + 6 + SizeMod
-    Weight = 175 + SizeMod * Normal(2, 12)
+    Weight = 175 + SizeMod * normal(2, 12)
     Eyes = ["Red", "Gold"]
     Eyes = random.choice(Eyes)
     Skin = Subrace + " Scales"
@@ -395,12 +395,12 @@ elif Race == "Dryad":
     # Leaving this as a list in case I can find a balanced version of the Guardian subclass
     Subrace = ["Watcher"]
     Subrace = random.choice(Subrace)
-    DEX = StatIncrease(DEX, 1)
-    WIS = StatIncrease(WIS, 2)
+    DEX = stat_increase(DEX, 1)
+    WIS = stat_increase(WIS, 2)
     Age = "N/A"
-    SizeMod = Normal(2, 6)
+    SizeMod = normal(2, 6)
     Height = 5 * 12 + 5 + SizeMod
-    Weight = 40 + SizeMod * Normal(2, 6)
+    Weight = 40 + SizeMod * normal(2, 6)
     SpokenLanguage.extend(["Common", "Sylvan", "Elvish"])
     Eyes = "Changes with the Seasons"
     Skin = ["Orange", "Green", "Yellowish Green"]
@@ -414,12 +414,12 @@ elif Race == "Dryad":
 elif Race == "Dwarf":
     Subrace = ["Duergar", "Hill", "Mountain"]
     Subrace = random.choice(Subrace)
-    CON = StatIncrease(CON, 2)
-    Age = Normal(20, 320)
+    CON = stat_increase(CON, 2)
+    Age = normal(20, 320)
     SpokenLanguage.extend(["Common", "Dwarvish"])
     if Subrace == "Duergar":
         SpokenLanguage.append("Undercommon")
-    SizeMod = Normal(2, 8)
+    SizeMod = normal(2, 8)
     Eyes = ["Brown", "Hazel", "Green"]
     Eyes = random.choice(Eyes)
     Skin = ["White/Fair", "Lightly Tanned", "Medium/Tanned", "Olive/Moderate Brown", "Brown", "Dark Brown",
@@ -432,21 +432,21 @@ elif Race == "Dwarf":
         ["Battleaxe", "Handaxe", "Throwing Hammer", "Warhammer"])
     Traits.extend(["Dwarven Resilience"])
     if Subrace == "Hill":
-        WIS = StatIncrease(WIS, 1)
+        WIS = stat_increase(WIS, 1)
         Height = 3 * 12 + 8 + SizeMod
-        Weight = 115 + SizeMod * Normal(2, 12)
+        Weight = 115 + SizeMod * normal(2, 12)
         HP = HP + Level
         Traits.extend(["Darkvision (60ft)"])
     elif Subrace == "Mountain":
-        STR = StatIncrease(STR, 2)
+        STR = stat_increase(STR, 2)
         Height = 4 * 12 + SizeMod
-        Weight = 130 + SizeMod * Normal(2, 12)
+        Weight = 130 + SizeMod * normal(2, 12)
         ArmourProficiencies.extend(["Light Armour", "Medium Armour"])
         Traits.extend(["Darkvision (60ft)"])
     elif Subrace == "Duergar":
-        STR = StatIncrease(STR, 1)
+        STR = stat_increase(STR, 1)
         Height = 3 * 12 + 8 + SizeMod
-        Weight = 115 + SizeMod * Normal(2, 12)
+        Weight = 115 + SizeMod * normal(2, 12)
         Traits.extend(["Darkvision (120ft)", "Duergar Resilience",
                       "Duergar Magic", "Sunlight Sensitivity"])
 
@@ -455,9 +455,9 @@ elif Race == "Elf":
     Subrace = ["Eladrin", "Drow", "High", "Sea", "Shadar-Kai", "Wood"]
     Subrace = random.choice(Subrace)
     if Subrace == "High":
-        AddLanguage(1)
-    Age = Normal(20, 700)
-    DEX = StatIncrease(DEX, 2)
+        add_language(1)
+    Age = normal(20, 700)
+    DEX = stat_increase(DEX, 2)
     Eyes = ["Blue", "Violet", "Green"]
     Eyes = random.choice(Eyes)
     Skin = ["Lightly Tanned", "Olive/Moderate Brown", "Brown", "Dark Brown"]
@@ -467,21 +467,21 @@ elif Race == "Elf":
     Speed = 30
     Traits.extend(["Keen Senses", "Fey Ancestry", "Trance"])
     if Subrace == "Eladrin" or Subrace == "Drow":
-        CHA = StatIncrease(CHA, 1)
+        CHA = stat_increase(CHA, 1)
     elif Subrace == "High":
-        INT = StatIncrease(INT, 1)
+        INT = stat_increase(INT, 1)
     elif Subrace == "Sea" or Subrace == "Shadar-Kai":
-        CON = StatIncrease(CON, 1)
+        CON = stat_increase(CON, 1)
     elif Subrace == "Wood":
-        WIS = StatIncrease(WIS, 1)
+        WIS = stat_increase(WIS, 1)
     if Subrace == "Eladrin":
-        SizeMod = Normal(2, 24)
+        SizeMod = normal(2, 24)
     elif Subrace == "Drow":
-        SizeMod = Normal(2, 12)
+        SizeMod = normal(2, 12)
     elif Subrace == "High" or Subrace == "Wood":
-        SizeMod = Normal(2, 20)
+        SizeMod = normal(2, 20)
     elif Subrace == "Sea" or Subrace == "Shadar-Kai":
-        SizeMod = Normal(2, 16)
+        SizeMod = normal(2, 16)
     if Subrace == "Eladrin":
         Height = 4 * 12 + 6 + SizeMod
         Weight = 90 + SizeMod * random.randint(1, 4)
@@ -529,12 +529,12 @@ elif Race == "Elf":
 
 elif Race == "Firbolg":
     SpokenLanguage.extend(["Common", "Giant", "Elvish"])
-    WIS = StatIncrease(WIS, 2)
-    STR = StatIncrease(STR, 1)
-    Age = Normal(30, 450)
-    SizeMod = Normal(2, 24)
+    WIS = stat_increase(WIS, 2)
+    STR = stat_increase(STR, 1)
+    Age = normal(30, 450)
+    SizeMod = normal(2, 24)
     Height = 6 * 12 + 4 + SizeMod
-    Weight = 210 + SizeMod * Normal(1, 4)
+    Weight = 210 + SizeMod * normal(1, 4)
     Eyes = ["Blue", "Violet", "Green"]
     Eyes = random.choice(Eyes)
     Skin = ["Light Pink", "Grayish Blue"]
@@ -549,20 +549,20 @@ elif Race == "Genasi":
     SpokenLanguage.extend(["Common", "Preordial"])
     Subrace = ["Air", "Earth", "Fire", "Water"]
     Subrace = random.choice(Subrace)
-    Age = Normal(20, 100)
-    SizeMod = Normal(2, 20)
+    Age = normal(20, 100)
+    SizeMod = normal(2, 20)
     Height = 4 * 12 + 8 + SizeMod
-    Weight = 110 + SizeMod * Normal(2, 8)
+    Weight = 110 + SizeMod * normal(2, 8)
     Speed = 30
-    CON = StatIncrease(CON, 2)
+    CON = stat_increase(CON, 2)
     if Subrace == "Air":
-        DEX = StatIncrease(DEX, 1)
+        DEX = stat_increase(DEX, 1)
     elif Subrace == "Earth":
-        STR = StatIncrease(STR, 1)
+        STR = stat_increase(STR, 1)
     elif Subrace == "Fire":
-        INT = StatIncrease(INT, 1)
+        INT = stat_increase(INT, 1)
     elif Subrace == "Water":
-        WIS = StatIncrease(WIS, 1)
+        WIS = stat_increase(WIS, 1)
     if Subrace == "Air":
         Eyes = "Pale Blue"
         Skin = "Blueish Silver"
@@ -593,8 +593,8 @@ elif Race == "Genasi":
 elif Race == "Gith":
     Subrace = ["Githyanki", "Githzerai"]
     Subrace = random.choice(Subrace)
-    Age = Normal(20, 80)
-    SizeMod = Normal(2, 24)
+    Age = normal(20, 80)
+    SizeMod = normal(2, 24)
     Eyes = "Yellow"
     Skin = ["Fair", "Pale Yellow with Green Tones",
             "Pale Yellow with Brown Tones"]
@@ -602,21 +602,21 @@ elif Race == "Gith":
     Hair = ["Russet", "Black", "Gray"]
     Hair = random.choice(Hair)
     Speed = 30
-    INT = StatIncrease(INT, 1)
+    INT = stat_increase(INT, 1)
     if Subrace == "Githyanki":
         SpokenLanguage.extend(["Githyanki", "Common"])
-        STR = StatIncrease(STR, 2)
+        STR = stat_increase(STR, 2)
         Height = 5 * 12 + SizeMod
-        Weight = 100 + SizeMod * Normal(2, 8)
+        Weight = 100 + SizeMod * normal(2, 8)
         ArmourProficiencies.extend(["Light Armour", "Medium Armour"])
         WeaponProficiencies.extend(
             ["Shortswords", "Longswords", "Greatswords"])
         Traits.extend(["Decadent Mastery", "Githyanki Psionics"])
     elif Subrace == "Githzerai":
         SpokenLanguage.extend(["Githzerai", "Common"])
-        WIS = StatIncrease(WIS, 2)
+        WIS = stat_increase(WIS, 2)
         Height = 4 * 12 + 11 + SizeMod
-        Weight = 90 + SizeMod * Normal(2, 8)
+        Weight = 90 + SizeMod * normal(2, 8)
         ArmourProficiencies.extend(["Light Armour", "Medium Armour"])
         WeaponProficiencies.extend(
             ["Shortswords", "Longswords", "Greatswords"])
@@ -626,8 +626,8 @@ elif Race == "Gnome":
     SpokenLanguage.extend(["Common", "Gnomish"])
     Subrace = ["Deep", "Forest", "Rock"]
     Subrace = random.choice(Subrace)
-    Age = Normal(20, 400)
-    SizeMod = Normal(2, 8)
+    Age = normal(20, 400)
+    SizeMod = normal(2, 8)
     Height = 2 * 12 + 11 + SizeMod
     Weight = 35 + SizeMod
     Eyes = ["Glittering Opaque Black", "Glittering Opaque Blue"]
@@ -641,11 +641,11 @@ elif Race == "Gnome":
     Speed = 25
     Traits.extend(["Gnome Cunning"])
 
-    INT = StatIncrease(INT, 2)
+    INT = stat_increase(INT, 2)
     if Subrace == "Deep" or Subrace == "Forest":
-        DEX = StatIncrease(DEX, 1)
+        DEX = stat_increase(DEX, 1)
     elif Subrace == "Rock":
-        CON = StatIncrease(CON, 1)
+        CON = stat_increase(CON, 1)
     if Subrace == "Deep":
         Traits.extend(["Darkvision (120ft)", "Stone Camoflage"])
     elif Subrace == "Forest":
@@ -657,10 +657,10 @@ elif Race == "Gnome":
 
 elif Race == "Goblin":
     SpokenLanguage.extend(["Common", "Goblin"])
-    DEX = StatIncrease(DEX, 2)
-    CON = StatIncrease(CON, 1)
-    Age = Normal(10, 35)
-    SizeMod = Normal(2, 8)
+    DEX = stat_increase(DEX, 2)
+    CON = stat_increase(CON, 1)
+    Age = normal(10, 35)
+    SizeMod = normal(2, 8)
     Height = 2 * 12 + 11 + SizeMod
     Weight = 40 + SizeMod
     Eyes = "Beady Black"
@@ -673,12 +673,12 @@ elif Race == "Goblin":
 
 elif Race == "Goliath":
     SpokenLanguage.extend(["Common", "Giant"])
-    STR = StatIncrease(STR, 2)
-    CON = StatIncrease(CON, 1)
-    Age = Normal(20, 80)
-    SizeMod = Normal(2, 20)
+    STR = stat_increase(STR, 2)
+    CON = stat_increase(CON, 1)
+    Age = normal(20, 80)
+    SizeMod = normal(2, 20)
     Height = 6 * 12 + 8 + SizeMod
-    Weight = 270 + SizeMod * Normal(2, 12)
+    Weight = 270 + SizeMod * normal(2, 12)
     Eyes = ["Blue", "Green"]
     Eyes = random.choice(Eyes)
     Skin = "Grey"
@@ -690,12 +690,12 @@ elif Race == "Goliath":
 
 elif Race == "Hobgoblin":
     SpokenLanguage.extend(["Common", "Goblin"])
-    CON = StatIncrease(CON, 2)
-    INT = StatIncrease(INT, 1)
-    Age = Normal(20, 80)
-    SizeMod = Normal(2, 16)
+    CON = stat_increase(CON, 2)
+    INT = stat_increase(INT, 1)
+    Age = normal(20, 80)
+    SizeMod = normal(2, 16)
     Height = 5 * 12 + 6 + SizeMod
-    Weight = 175 + SizeMod * Normal(2, 12)
+    Weight = 175 + SizeMod * normal(2, 12)
     Eyes = ["Black", "Red"]
     Eyes = random.choice(Eyes)
     Skin = ["Orange", "Dirty Orange", "Red", "Dull Red", "Reddish Brown"]
@@ -708,14 +708,14 @@ elif Race == "Hobgoblin":
 elif Race == "Half-Elf":
     # Keen Senses subrace removed because it is obsolete
     SpokenLanguage.extend(["Common", "Elvish"])
-    AddLanguage(1)
+    add_language(1)
     Subrace = ["N/A", "Drow", "Sun", "Moon", "Wood"]
     Subrace = random.choice(Subrace)
-    CHA = StatIncrease(CHA, 2)
-    Age = Normal(20, 160)
-    SizeMod = Normal(2, 16)
+    CHA = stat_increase(CHA, 2)
+    Age = normal(20, 160)
+    SizeMod = normal(2, 16)
     Height = 4 * 12 + 9 + SizeMod
-    Weight = 110 + SizeMod * Normal(2, 8)
+    Weight = 110 + SizeMod * normal(2, 8)
     Eyes = ["Blue", "Violet", "Green"]
     Eyes = random.choice(Eyes)
     Skin = ["Light/Pale White", "White/Fair", "Lightly Tanned", "Medium/Tanned", "Olive/Moderate Brown", "Brown",
@@ -741,8 +741,8 @@ elif Race == "Halfling":
     SpokenLanguage.extend(["Common", "Halfling"])
     Subrace = ["Ghostwise", "Lightfoot", "Stout"]
     Subrace = random.choice(Subrace)
-    Age = Normal(20, 200)
-    SizeMod = Normal(2, 8)
+    Age = normal(20, 200)
+    SizeMod = normal(2, 8)
     Height = 2 * 12 + 7 + SizeMod
     Weight = 35 + SizeMod
     Eyes = "Brown"
@@ -753,26 +753,26 @@ elif Race == "Halfling":
     Hair = random.choice(Hair)
     Speed = 25
     Traits.extend(["Lucky", "Brave", "Halfling Nimbleness"])
-    DEX = StatIncrease(DEX, 2)
+    DEX = stat_increase(DEX, 2)
     if Subrace == "Ghostwise":
-        WIS = StatIncrease(WIS, 1)
+        WIS = stat_increase(WIS, 1)
         Traits.extend(["Silent Speech"])
     elif Subrace == "Lightfoot":
-        CHA = StatIncrease(CHA, 1)
+        CHA = stat_increase(CHA, 1)
         Traits.extend(["Naturally Stealthy"])
     elif Subrace == "Stout":
-        CON = StatIncrease(CON, 1)
+        CON = stat_increase(CON, 1)
         Resistances.extend(["Poison"])
         Traits.extend(["Stout Resilience"])
 
 elif Race == "Half-Orc":
     SpokenLanguage.extend(["Common", "Orc"])
-    STR = StatIncrease(STR, 2)
-    CON = StatIncrease(CON, 1)
-    Age = Normal(14, 60)
-    SizeMod = Normal(2, 20)
+    STR = stat_increase(STR, 2)
+    CON = stat_increase(CON, 1)
+    Age = normal(14, 60)
+    SizeMod = normal(2, 20)
     Height = 4 * 12 + 10 + SizeMod
-    Weight = 140 + SizeMod * Normal(2, 12)
+    Weight = 140 + SizeMod * normal(2, 12)
     Eyes = ["Reddish Brown", "Reddish Blue", "Reddish Green", "Reddish Grey"]
     Eyes = random.choice(Eyes)
     Skin = "Greyish Green"
@@ -785,36 +785,36 @@ elif Race == "Half-Orc":
 
 elif Race == "Human":  # I have not accounted for the different Human ethnicities
     SpokenLanguage.extend(["Common"])
-    AddLanguage(1)
+    add_language(1)
     # Two chances for variant, just to spice things up
     Subrace = ["Stat Increase", "Variant", "Variant"]
     Subrace = random.choice(Subrace)
     if Subrace == "Stat Increase":
-        STR = StatIncrease(STR, 1)
-        DEX = StatIncrease(DEX, 1)
-        CON = StatIncrease(CON, 1)
-        INT = StatIncrease(INT, 1)
-        WIS = StatIncrease(WIS, 1)
-        CHA = StatIncrease(CHA, 1)
+        STR = stat_increase(STR, 1)
+        DEX = stat_increase(DEX, 1)
+        CON = stat_increase(CON, 1)
+        INT = stat_increase(INT, 1)
+        WIS = stat_increase(WIS, 1)
+        CHA = stat_increase(CHA, 1)
     elif Subrace == "Variant":
         # Stats list is found on line 101 above the STR/DEX/CON/INT/WIS/CHA = 0
         Choices = random.sample(Stats, 2)
         if "STR" in Choices:
-            STR = StatIncrease(STR, 1)
+            STR = stat_increase(STR, 1)
         if "DEX" in Choices:
-            DEX = StatIncrease(DEX, 1)
+            DEX = stat_increase(DEX, 1)
         if "CON" in Choices:
-            CON = StatIncrease(CON, 1)
+            CON = stat_increase(CON, 1)
         if "INT" in Choices:
-            INT = StatIncrease(INT, 1)
+            INT = stat_increase(INT, 1)
         if "WIS" in Choices:
-            WIS = StatIncrease(WIS, 1)
+            WIS = stat_increase(WIS, 1)
         if "CHA" in Choices:
-            CHA = StatIncrease(CHA, 1)
-    Age = Normal(20, 60)
-    SizeMod = Normal(2, 20)
+            CHA = stat_increase(CHA, 1)
+    Age = normal(20, 60)
+    SizeMod = normal(2, 20)
     Height = 4 * 12 + 8 + SizeMod
-    Weight = 110 + SizeMod * Normal(2, 8)
+    Weight = 110 + SizeMod * normal(2, 8)
     Eyes = ["Brown", "Hazel", "Blue", "Green", "Grey", "Amber"]
     Eyes = random.choice(Eyes)
     Skin = ["Light/Pale White", "White/Fair", "Lightly Tanned", "Medium/Tanned", "Olive/Moderate Brown", "Brown",
@@ -831,10 +831,10 @@ elif Race == "Juiblexian":
     SpokenLanguage.extend(["all, telepathy 120 ft."])
     Subrace = ["Corrosive", "Blasphemy", "Mnemonic"]
     Subrace = random.choice(Subrace)
-    Age = Normal(100, 200)
-    SizeMod = Normal(2, 20)
+    Age = normal(100, 200)
+    SizeMod = normal(2, 20)
     Height = 4 * 12 + 10 + SizeMod
-    Weight = 80 + SizeMod * Normal(2, 8)
+    Weight = 80 + SizeMod * normal(2, 8)
     Eyes = "N/A"
     Skin = "Transparent " + \
         random.choice(["Green", "Blueish White",
@@ -843,13 +843,13 @@ elif Race == "Juiblexian":
     Speed = 30
     Immunities.extend(["Poison", "Poisoned"])
     Traits.extend(["Amorphous Ooze", "Blind Vision", "Gelatinous Trance"])
-    CON = StatIncrease(CON, 2)
+    CON = stat_increase(CON, 2)
     if Subrace == "Corrosive":
-        DEX = StatIncrease(DEX, 1)
+        DEX = stat_increase(DEX, 1)
     elif Subrace == "Blasphemy":
-        CHA = StatIncrease(CHA, 1)
+        CHA = stat_increase(CHA, 1)
     elif Subrace == "Mnemonic":
-        INT = StatIncrease(INT, 1)
+        INT = stat_increase(INT, 1)
     if Subrace == "Corrosive":
         Traits.extend(["Caustic Touch", "Corrosive Body"])
         Resistances.extend(["Acid"])
@@ -861,10 +861,10 @@ elif Race == "Juiblexian":
 elif Race == "Kender":  # Extra Race I found https://www.dndbeyond.com/races/670-kender
     SpokenLanguage.extend(["Common"])
     SpokenLanguage.append(random.choice(["Gnomish", "Dwarvish", "Halfling"]))
-    DEX = StatIncrease(DEX, 2)
-    CHA = StatIncrease(CHA, 1)
-    Age = Normal(15, 80)
-    SizeMod = Normal(2, 8)
+    DEX = stat_increase(DEX, 2)
+    CHA = stat_increase(CHA, 1)
+    Age = normal(15, 80)
+    SizeMod = normal(2, 8)
     Height = 3 * 12 + 4 + SizeMod
     Weight = 50 + SizeMod * random.randint(1, 4)
     Eyes = ["Brown", "Hazel", "Blue", "Green", "Grey", "Amber"]
@@ -882,10 +882,10 @@ elif Race == "Kender":  # Extra Race I found https://www.dndbeyond.com/races/670
 elif Race == "Kenku":
     SpokenLanguage.extend(
         ["Common", "Auran", "you can speak only by using your Mimicry trait"])
-    DEX = StatIncrease(DEX, 2)
-    WIS = StatIncrease(WIS, 1)
-    Age = Normal(12, 45)
-    SizeMod = Normal(2, 16)
+    DEX = stat_increase(DEX, 2)
+    WIS = stat_increase(WIS, 1)
+    Age = normal(12, 45)
+    SizeMod = normal(2, 16)
     Height = 4 * 12 + 4 + SizeMod
     Weight = 50 + SizeMod * random.randint(1, 6)
     Eyes = "Beady Black"
@@ -898,10 +898,10 @@ elif Race == "Kenku":
 
 elif Race == "Kobold":
     SpokenLanguage.extend(["Common", "Draconic"])
-    DEX = StatIncrease(DEX, 2)
-    STR = StatDecrease(STR, 2)
-    Age = Normal(8, 80)
-    SizeMod = Normal(2, 8)
+    DEX = stat_increase(DEX, 2)
+    STR = stat_decrease(STR, 2)
+    Age = normal(8, 80)
+    SizeMod = normal(2, 8)
     Height = 2 * 12 + 1 + SizeMod
     Weight = 25 + SizeMod
     Eyes = ["Burnt Orange", "Red"]
@@ -915,12 +915,12 @@ elif Race == "Kobold":
 
 elif Race == "Lizardfolk":
     SpokenLanguage.extend(["Common", "Draconic"])
-    CON = StatIncrease(CON, 2)
-    WIS = StatIncrease(WIS, 1)
-    Age = Normal(14, 45)
-    SizeMod = Normal(2, 20)
+    CON = stat_increase(CON, 2)
+    WIS = stat_increase(WIS, 1)
+    Age = normal(14, 45)
+    SizeMod = normal(2, 20)
     Height = 4 * 12 + 9 + SizeMod
-    Weight = 120 + SizeMod * Normal(2, 12)
+    Weight = 120 + SizeMod * normal(2, 12)
     Eyes = ["Red", "Green", "Gold", "Orange", "Blue"]
     Eyes = random.choice(Eyes)
     Skin = ["Green Scales", "Greenish Brown", "Brown Scales",
@@ -937,11 +937,11 @@ elif Race == "Lizardfolk":
 
 elif Race == "Mousefolk":  # Extra Race I found https://www.dndbeyond.com/races/61879-mousefolk
     SpokenLanguage.extend(["Common"])
-    AddLanguage(1)
-    DEX = StatIncrease(DEX, 2)
-    CHA = StatIncrease(CHA, 1)
-    Age = Normal(10, 45)
-    SizeMod = Normal(2, 8)
+    add_language(1)
+    DEX = stat_increase(DEX, 2)
+    CHA = stat_increase(CHA, 1)
+    Age = normal(10, 45)
+    SizeMod = normal(2, 8)
     Height = 2 * 12 + 11 + SizeMod
     Weight = 40 + SizeMod
     Eyes = ["Pink", "Black"]
@@ -956,13 +956,13 @@ elif Race == "Mousefolk":  # Extra Race I found https://www.dndbeyond.com/races/
 
 elif Race == "Orc":
     SpokenLanguage.extend(["Common", "Orc"])
-    STR = StatIncrease(STR, 2)
-    CON = StatIncrease(CON, 1)
-    INT = StatDecrease(INT, 2)
-    Age = Normal(12, 30)
-    SizeMod = Normal(2, 16)
+    STR = stat_increase(STR, 2)
+    CON = stat_increase(CON, 1)
+    INT = stat_decrease(INT, 2)
+    Age = normal(12, 30)
+    SizeMod = normal(2, 16)
     Height = 5 * 12 + 4 + SizeMod
-    Weight = 175 + SizeMod * Normal(2, 12)
+    Weight = 175 + SizeMod * normal(2, 12)
     Eyes = "Red"
     Skin = ["Greenish Grey", "Light Grey", "Dark Grey"]
     Skin = random.choice(Skin)
@@ -974,11 +974,11 @@ elif Race == "Orc":
 elif Race == "Succubus":  # Extra class I found https://www.dndbeyond.com/races/1524-succubus
     SpokenLanguage.extend(["Common", "Draconic"])
     SpokenLanguage.append(random.choice(["Abyssal", "Infernal"]))
-    CHA = StatIncrease(CHA, 1)
-    Age = Normal(20, 1000)
-    SizeMod = Normal(2, 20)
+    CHA = stat_increase(CHA, 1)
+    Age = normal(20, 1000)
+    SizeMod = normal(2, 20)
     Height = 4 * 12 + 8 + SizeMod
-    Weight = 110 + SizeMod * Normal(2, 8)
+    Weight = 110 + SizeMod * normal(2, 8)
     Eyes = ["Glowing Red", "Glowing Blue", "Glowing Brown", "Glowing Green"]
     Eyes = random.choice(Eyes)
     Skin = ["Tan", "Olive", "White"]
@@ -993,13 +993,13 @@ elif Race == "Succubus":  # Extra class I found https://www.dndbeyond.com/races/
 
 elif Race == "Tabaxi":
     SpokenLanguage.extend(["Common"])
-    AddLanguage(1)
-    DEX = StatIncrease(DEX, 2)
-    CHA = StatIncrease(CHA, 1)
-    Age = Normal(20, 60)
-    SizeMod = Normal(2, 20)
+    add_language(1)
+    DEX = stat_increase(DEX, 2)
+    CHA = stat_increase(CHA, 1)
+    Age = normal(20, 60)
+    SizeMod = normal(2, 20)
     Height = 4 * 12 + 10 + SizeMod
-    Weight = 90 + SizeMod * Normal(2, 8)
+    Weight = 90 + SizeMod * normal(2, 8)
     Eyes = ["Green", "Yellow"]
     Eyes = random.choice(Eyes)
     Skin = "Pink"
@@ -1015,10 +1015,10 @@ elif Race == "Tiefling":
     Subrace = ["Asmodeus", "Baalzebul", "Devil's Tongue", "Dispater", "Feral", "Fierna", "Glasya", "Hellfire",
                "Levistus", "Mammon", "Mephistopheles", "Zariel"]
     Subrace = random.choice(Subrace)
-    Age = Normal(20, 60)
-    SizeMod = Normal(2, 16)
+    Age = normal(20, 60)
+    SizeMod = normal(2, 16)
     Height = 4 * 12 + 9 + SizeMod
-    Weight = 110 + SizeMod * Normal(2, 8)
+    Weight = 110 + SizeMod * normal(2, 8)
     Eyes = ["Solid Orb of Red", "Solid Orb of Black",
             "Solid Orb of White", "Solid Orb of Silver", "Solid Orb of Gold"]
     Eyes = random.choice(Eyes)
@@ -1031,23 +1031,23 @@ elif Race == "Tiefling":
     Traits.extend(["Darkvision (60ft)"])
     Resistances.extend(["Fire"])
     if Subrace == "Asmodeus" or Subrace == "Baalzebul" or Subrace == "Devil's Tongue" or Subrace == "Hellfire" or Subrace == "Mammon" or Subrace == "Mephistopheles":
-        CHA = StatIncrease(CHA, 2)
-        INT = StatIncrease(INT, 1)
+        CHA = stat_increase(CHA, 2)
+        INT = stat_increase(INT, 1)
     elif Subrace == "Dispater" or Subrace == "Glasya":
-        CHA = StatIncrease(CHA, 2)
-        DEX = StatIncrease(DEX, 1)
+        CHA = stat_increase(CHA, 2)
+        DEX = stat_increase(DEX, 1)
     elif Subrace == "Feral":
-        DEX = StatIncrease(DEX, 2)
-        INT = StatIncrease(INT, 1)
+        DEX = stat_increase(DEX, 2)
+        INT = stat_increase(INT, 1)
     elif Subrace == "Fierna":
-        CHA = StatIncrease(CHA, 2)
-        WIS = StatIncrease(WIS, 1)
+        CHA = stat_increase(CHA, 2)
+        WIS = stat_increase(WIS, 1)
     elif Subrace == "Livistus":
-        CHA = StatIncrease(CHA, 2)
-        CON = StatIncrease(CON, 1)
+        CHA = stat_increase(CHA, 2)
+        CON = stat_increase(CON, 1)
     elif Subrace == "Zariel":
-        CHA = StatIncrease(CHA, 2)
-        STR = StatIncrease(STR, 1)
+        CHA = stat_increase(CHA, 2)
+        STR = stat_increase(STR, 1)
     if Subrace == "Asmodeus" or Subrace == "Feral":
         Traits.extend(["Infernal Legacy"])
     elif Subrace == "Baalzebul":
@@ -1073,12 +1073,12 @@ elif Race == "Tiefling":
 
 elif Race == "Tortle":
     SpokenLanguage.extend(["Common", "Aquan"])
-    STR = StatIncrease(STR, 2)
-    WIS = StatIncrease(WIS, 1)
-    Age = Normal(30, 320)
-    SizeMod = Normal(2, 20)
+    STR = stat_increase(STR, 2)
+    WIS = stat_increase(WIS, 1)
+    Age = normal(30, 320)
+    SizeMod = normal(2, 20)
     Height = 4 * 12 + 8 + SizeMod
-    Weight = 350 + SizeMod * Normal(2, 12)
+    Weight = 350 + SizeMod * normal(2, 12)
     Eyes = ["Yellow", "Green", "Red", "Orange", "Brown", "Brownish Yellow"]
     Eyes = random.choice(Eyes)
     Skin = ["Olive Green", "Blueish Green"]
@@ -1090,13 +1090,13 @@ elif Race == "Tortle":
 
 elif Race == "Triton":
     SpokenLanguage.extend(["Common", "Primordial"])
-    STR = StatIncrease(STR, 1)
-    CON = StatIncrease(CON, 1)
-    CHA = StatIncrease(CHA, 1)
-    Age = Normal(15, 170)
-    SizeMod = Normal(2, 20)
+    STR = stat_increase(STR, 1)
+    CON = stat_increase(CON, 1)
+    CHA = stat_increase(CHA, 1)
+    Age = normal(15, 170)
+    SizeMod = normal(2, 20)
     Height = 4 * 12 + 6 + SizeMod
-    Weight = 90 + SizeMod * Normal(2, 8)
+    Weight = 90 + SizeMod * normal(2, 8)
     Eyes = ["Brown", "Hazel", "Blue", "Green", "Grey", "Amber"]
     Eyes = random.choice(Eyes)
     Skin = ["Silver", "Blueish Silver"]
@@ -1109,13 +1109,13 @@ elif Race == "Triton":
 
 elif Race == "Yuan-Ti Pureblood":
     SpokenLanguage.extend(["Common"])
-    AddLanguage(1)
-    CHA = StatIncrease(CHA, 2)
-    INT = StatIncrease(INT, 1)
-    Age = Normal(20, 60)
-    SizeMod = Normal(2, 20)
+    add_language(1)
+    CHA = stat_increase(CHA, 2)
+    INT = stat_increase(INT, 1)
+    Age = normal(20, 60)
+    SizeMod = normal(2, 20)
     Height = 4 * 12 + 8 + SizeMod
-    Weight = 110 + SizeMod * Normal(2, 8)
+    Weight = 110 + SizeMod * normal(2, 8)
     Eyes = ["Red", "Orange", "Silver", "Copper", "Green", "Yellow"]
     Eyes = random.choice(Eyes)
     Skin = ["Light/Pale White", "White/Fair", "Lightly Tanned", "Medium/Tanned", "Olive/Moderate Brown", "Brown",
@@ -1128,19 +1128,19 @@ elif Race == "Yuan-Ti Pureblood":
     Traits.extend(
         ["Darkvision (60ft)", "Innate Spellcasting", "Magic Resistance"])
 
-STRMOD = STATMOD(STR)
-DEXMOD = STATMOD(DEX)
-CONMOD = STATMOD(CON)
-INTMOD = STATMOD(INT)
-WISMOD = STATMOD(WIS)
-CHAMOD = STATMOD(CHA)
+STRMOD = calculate_stat_modifier(STR)
+DEXMOD = calculate_stat_modifier(DEX)
+CONMOD = calculate_stat_modifier(CON)
+INTMOD = calculate_stat_modifier(INT)
+WISMOD = calculate_stat_modifier(WIS)
+CHAMOD = calculate_stat_modifier(CHA)
 
 # -----------------------------------------------CLASS GENERATOR---------------------------------------------------------
 
 # =============================================================================
 if Class == "Artificer":
     SpellCastingAbility = "INT"
-    HP = HP + HitPoints(8)
+    HP = HP + hit_points(8)
     HitDie = 8
     ArmourProficiencies.extend(["Light Armuor", "Medium Armour", "Shields"])
     WeaponProficiencies.extend(["Simple Weapons"])
@@ -1167,7 +1167,7 @@ elif Class == "Barbarian":
         Subclass = ["Path of the Ancestral Guardian", "Path of the Battlerager", "Path of the Berserker",
                     "Path of the Storm Herald", "Path of the Totem Warrior", "Path of the Zealot"]
         Subclass = random.choice(Subclass)
-    HP = HP + HitPoints(12)
+    HP = HP + hit_points(12)
     HitDie = 12
     ArmourProficiencies.extend(["Light Armour", "Medium Armour", "Shields"])
     WeaponProficiencies.extend(["Simple Weapons", "Martial Weapons"])
@@ -1184,7 +1184,7 @@ elif Class == "Bard":
         Subclass = ["College of Glamour", "College of Lore", "College of Satire", "College of Swords",
                     "College of Valor", "College of Whispers"]
         Subclass = random.choice(Subclass)
-    HP = HP + HitPoints(8)
+    HP = HP + hit_points(8)
     HitDie = 8
     ArmourProficiencies.extend(["Light Armour"])
     WeaponProficiencies.extend(
@@ -1200,7 +1200,7 @@ elif Class == "Blood Hunter":
     if Level >= 3:
         Subclass = ["Ghostslayer", "Lycan", "Mutant", "Profane Soul"]
         Subclass = random.choice(Subclass)
-    HP = HP + HitPoints(8)
+    HP = HP + hit_points(8)
     HitDie = 8
     ArmourProficiencies.extend(["Light Armour", "Medium Armour", "Shields"])
     WeaponProficiencies.extend(["Simple Weapons", "Martial Weapons"])
@@ -1245,7 +1245,7 @@ elif Class == "Cleric":
             while extra_language in SpokenLanguage:
                 extra_language = random.choice(Languages)
             SpokenLanguage.append(extra_language)
-    HP = HP + HitPoints(8)
+    HP = HP + hit_points(8)
     HitDie = 8
     ArmourProficiencies.extend(["Light Armour", "Medium Armour", "Shields"])
     WeaponProficiencies.extend(["Simple Weapons"])
@@ -1280,7 +1280,7 @@ elif Class == "Druid":
             Subclass = "Circle of the Land " + Land
         if Subclass == "Circle of the Shepherd":
             SpokenLanguage.append("Sylvan")
-    HP = HP + HitPoints(8)
+    HP = HP + hit_points(8)
     HitDie = 8
     ArmourProficiencies.extend(["Light Armour", "Medium Armour", "Shields"])
     WeaponProficiencies.extend(
@@ -1306,7 +1306,7 @@ elif Class == "Fighter":
         Subclass = ["Arcane Archer", "Battle Master", "Brute", "Cavalier", "Champion", "Eldritch Knight",
                     "Purple Dragon Knight", "Samurai", "Scout", "Sharpshooter"]
         Subclass = random.choice(Subclass)
-    HP = HP + HitPoints(10)
+    HP = HP + hit_points(10)
     HitDie = 10
     ArmourProficiencies.extend(
         ["Light Armour, Medium Armour, Heavy Armour", "Shields"])
@@ -1333,7 +1333,7 @@ elif Class == "Monk":
                     "Way of the Long Death", "Way of the Open Hand", "Way of Shadow", "Way of the Sun Soul",
                     "Way of Tranquility"]
         Subclass = random.choice(Subclass)
-    HP = HP + HitPoints(8)
+    HP = HP + hit_points(8)
     HitDie = 8
     WeaponProficiencies.extend(["Simple Weapons", "Shortswords"])
     ToolProficiencies.extend([random.choice(
@@ -1361,7 +1361,7 @@ elif Class == "Paladin":
         Subclass = ["Oath of the Ancients", "Oath of Conquests", "Oath of the Crown", "Oath of Devotion",
                     "Oath of Redemption", "Oath of Vengeance", "Oathbreaker", "Oath of Treachery"]
         Subclass = random.choice(Subclass)
-    HP = HP + HitPoints(10)
+    HP = HP + hit_points(10)
     HitDie = 10
     ArmourProficiencies.extend(
         ["Light Armour", "Medium Armour", "Heavy Armour", "Shields"])
@@ -1386,7 +1386,7 @@ elif Class == "Ranger":
                     "Hunter", "Monster Slayer", "Primeval Guardian"]
         Subclass = random.choice(Subclass)
         print(Subclass)
-    HP = HP + HitPoints(10)
+    HP = HP + hit_points(10)
     HitDie = 10
     ArmourProficiencies.extend(["Light Armour", "Medium Armour", "Shields"])
     WeaponProficiencies.extend(["Simple Weapons", "Martial Weapons"])
@@ -1405,7 +1405,7 @@ elif Class == "Rogue":
         Subclass = ["Arcane Trickster", "Assassin", "Inquisitive",
                     "Mastermind", "Scout", "Swashbuckler", "Thief"]
         Subclass = random.choice(Subclass)
-    HP = HP + HitPoints(8)
+    HP = HP + hit_points(8)
     HitDie = 8
     ArmourProficiencies.extend(["Light Armour"])
     WeaponProficiencies.extend(
@@ -1424,7 +1424,7 @@ elif Class == "Sorcerer":
     Subclass = ["Divine Soul", "Draconic Bloodline", "Giant Soul", "Pheonix Sorcery", "Pyromancer", "Sea Sorcery",
                 "Shadow Magic", "Stone Soercery", "Storm Sorcery", "Wild Magic"]
     Subclass = random.choice(Subclass)
-    HP = HP + HitPoints(6)
+    HP = HP + hit_points(6)
     HitDie = 6
     WeaponProficiencies.extend(
         ["Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows"])
@@ -1443,7 +1443,7 @@ elif Class == "Warlock":
         FightingStyle = ["Pact of the Chain",
                          "Pact of the Blade", "Pact of the Tome"]
         FightingStyle = random.choice(FightingStyle)
-    HP = HP + HitPoints(8)
+    HP = HP + hit_points(8)
     HitDie = 8
     ArmourProficiencies.extend(["Light Armour"])
     WeaponProficiencies.extend(["Simple Weapons"])
@@ -1463,7 +1463,7 @@ elif Class == "Wizard":
                     "School of Invention", "School of Necromancy", "School of Transmutation", "Technomancy", "Theurgy",
                     "War Magic"]
         Subclass = random.choice(Subclass)
-    HP = HP + HitPoints(6)
+    HP = HP + hit_points(6)
     HitDie = 6
     WeaponProficiencies.extend(
         ["Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows"])
@@ -1486,19 +1486,19 @@ Background = ["Acolyte", "Anthropologist", "Archaeologist", "Black Fist Double A
 Background = random.choice(Background)
 
 if Background == "Acolyte":
-    AddLanguage(2)
+    add_language(2)
     SkillProficiencies.extend(["Insight", "Religion"])
     Equipment.extend(["Holy Symbol", random.choice(["Prayer Book", "Prayer Wheel"]), "5 Sticks of Incense", "Vestments",
                       "Common Clothes", "15 gp"])
 
 elif Background == "Anthropologist":
-    AddLanguage(2)
+    add_language(2)
     SkillProficiencies.extend(["Insight", "Religion"])
     Equipment.extend(["Leather-Bound Diary", "Bottle of Ink", "Ink Pen", "Set of Traveler's Clothes",
                       "One Trinket of Special Significance", "10 gp"])
 
 elif Background == "Archaeologist":
-    AddLanguage(1)
+    add_language(1)
     SkillProficiencies.extend(["History", "Survival"])
     ToolProficiencies.extend(
         [random.choice(["Cartographer's Tools", "Navigator's Tools"])])
@@ -1517,7 +1517,7 @@ elif Background == "Black Fist Double Agent":
          BlackFistDoubleAgentTool, "15 gp"])
 
 elif Background == "Caravan Specialist":
-    AddLanguage(1)
+    add_language(1)
     SkillProficiencies.extend(["Animal Handling", "Survival"])
     ToolProficiencies.extend(["Land Vehicles"])
     Equipment.extend(["Whip", "Tent", "Regional Map",
@@ -1531,7 +1531,7 @@ elif Background == "Charlatan":
          "Signet Ring of an Imaginary Duke"]), "15 gp"])
 
 elif Background == "City Watch":
-    AddLanguage(2)
+    add_language(2)
     Background = random.choice(
         ["City Watch Patrol", "City Watch Investigator"])
     SkillProficiencies.extend(["Insight"])
@@ -1543,7 +1543,7 @@ elif Background == "City Watch":
                       "Set of Manacles", "10 gp"])
 
 elif Background == "Clan Crafter":
-    AddLanguage(1)
+    add_language(1)
     SkillProficiencies.extend(["History", "Insight"])
     ClanCrafterArtisanTools = random.choice(ArtisanTools)
     ToolProficiencies.extend([ClanCrafterArtisanTools])
@@ -1551,7 +1551,7 @@ elif Background == "Clan Crafter":
                      "Traveler's Clothes", "Gem Worth 10 gp", "5 gp"])
 
 elif Background == "Cloistered Scholar":
-    AddLanguage(2)
+    add_language(2)
     SkillProficiencies.extend(
         ["History", random.choice(["Arcana", "Nature", "Religion"])])
     Equipment.extend(
@@ -1569,7 +1569,7 @@ elif Background == "Cormanthor Refugee":
                      "Holy Symbol", "Traveler's Clothes", "5 gp"])
 
 elif Background == "Courtier":
-    AddLanguage(2)
+    add_language(2)
     SkillProficiencies.extend(["Insight", "Persuasion"])
     Equipment.extend(["Set of Fine Clothes", "5 gp"])
 
@@ -1641,7 +1641,7 @@ elif Background == "Entertainer":
         Equipment.extend([GladiatorWeapon])
 
 elif Background == "Faction Agent":
-    AddLanguage(2)
+    add_language(2)
     Faction = random.choice(
         ["The Emerald Enclave", "The Harpers", "The Lord's Alliance", "The Order of the Gauntlet", "The Zhentarim"])
     Background = "Faction Agent of " + Faction
@@ -1664,7 +1664,7 @@ elif Background == "Faction Agent":
                      "Emblem of " + Faction]), "Set of Common Clothes", "15 gp"])
 
 elif Background == "Far Traveler":
-    AddLanguage(1)
+    add_language(1)
     Reason = random.choice(
         ["Emissary", "Exile", "Fugitive", "Pilgrim", "Sightseer", "Wanderer"])
     Origin = random.choice(["Evermeet", "Halruaa", "Kara-Tur",
@@ -1695,7 +1695,7 @@ elif Background == "Gate Urchin":
                       "Set of Common Clothes", "10 gp"])
 
 elif Background == "Guild Artisan":
-    AddLanguage(1)
+    add_language(1)
     SkillProficiencies.extend(["Insight", "Persuasion"])
     GuildArtisanTools = random.choice(ArtisanTools)
     ToolProficiencies.extend([GuildArtisanTools])
@@ -1717,7 +1717,7 @@ elif Background == "Haunted One":
     Equipment.extend(["Monster Hunter's Pack", "Gothic Trinket"])
 
 elif Background == "Hermit":
-    AddLanguage(1)
+    add_language(1)
     SkillProficiencies.extend(["Medicine", "Religion"])
     ToolProficiencies.extend(["Herbalism Kit"])
     Equipment.extend(
@@ -1731,7 +1731,7 @@ elif Background == "Hillsfar Merchant":
         ["Set of Clothes", "Signet Ring", "Letter of Introduction from Your Family's Trading House", "25 gp"])
 
 elif Background == "Hillsfar Smuggler":
-    AddLanguage(1)
+    add_language(1)
     SkillProficiencies.extend(["Perception", "Stealth"])
     ToolProficiencies.extend(["Forgery Kit"])
     Equipment.extend(["Forgery Kit", "Set of Common Clothes", "5 gp"])
@@ -1805,7 +1805,7 @@ elif Background == "Iron Route Bandit":
                      "Pack Saddle", "Burglar's Pack", "5 gp"])
 
 elif Background == "Knight of the Order":
-    AddLanguage(1)
+    add_language(1)
     Order = random.choice(
         ["the Unicorn", "Myth Drannor", "the Silver Chalice"])
     Background = "Knight of the Order of " + Order
@@ -1843,14 +1843,14 @@ elif Background == "Mulmaster Aristocrat":
          "10 gp"])
 
 elif Background == "Noble":
-    AddLanguage(1)
+    add_language(1)
     SkillProficiencies.extend(["History", "Persuasion"])
     ToolProficiencies.extend([random.choice(GamingSets)])
     Equipment.extend(["Set of Fine Clothes", "Signet Ring",
                      "Scroll of Pedigree", "25 gp"])
 
 elif Background == "Outlander":
-    AddLanguage(1)
+    add_language(1)
     Origin = random.choice(
         ["Forester", "Trapper", "Homesteader", "Guide", "Exile", "Outcast", "Bounty Hunter", "Pilgrim", "Tribal Nomad",
          "Hunter-Gatherer", "Tribal Marauder"])
@@ -1867,7 +1867,7 @@ elif Background == "Phlan Insurgent":
         ["Bag of 20 Caltrops", "Small Trinket from Your Home", "Healer's Kit", "Set of Dark Common Clothes", "5 gp"])
 
 elif Background == "Phlan Refugee":
-    AddLanguage(1)
+    add_language(1)
     SkillProficiencies.extend(["Athletics", "Insight"])
     PhlanRefugeeTool = random.choice(ArtisanTools)
     ToolProficiencies.extend([PhlanRefugeeTool])
@@ -1875,7 +1875,7 @@ elif Background == "Phlan Refugee":
                      "Set of Traveler's Clothes", "15 gp"])
 
 elif Background == "Sage":
-    AddLanguage(2)
+    add_language(2)
     Specialty = random.choice(
         ["Alchemist", "Astronomer", "Discredited Academic", "Librarian", "Professor", "Researcher",
          "Wizard's Apprentice", "Scribe"])
@@ -1954,7 +1954,7 @@ elif Background == "Urchin":
          "10 gp"])
 
 elif Background == "Uthgardt Tribe Member":
-    AddLanguage(1)
+    add_language(1)
     SkillProficiencies.extend(["Athletics", "Survival"])
     ToolProficiencies.extend([random.choice(
         [random.choice(ArtisanTools), random.choice(MusicalInstruments)])])
@@ -1971,7 +1971,7 @@ elif Background == "Vizier":
                       "Vizier's Cartouche", "Set of Fine Clothes", "25 gp"])
 
 elif Background == "Waterdhavian Noble":
-    AddLanguage(1)
+    add_language(1)
     SkillProficiencies.extend(["History", "Persuasion"])
     ToolProficiencies.extend(
         [random.choice([random.choice(GamingSets), random.choice(MusicalInstruments)])])
@@ -2240,6 +2240,6 @@ print(f'║{", ".join(sorted(ToolProficiencies))}{space*(98-len(", ".join(sorted
 print("╠══════════════════════════════════════════════════════════════════════════════════════════════════╣")
 print(f'║Height: {"%.2f" % (Height/12)} Feet, Weight: {Weight} Pounds, Eye Color: {Eyes}, Skin Color: {Skin}{space*(98-len(f"Height: xxxx Feet, Weight: {Weight} Pounds, Eye Color: {Eyes}, Skin Color: {Skin}"))}║')
 print(f'║Hair Color: {Hair}{space*(98-len(f"Hair Color: {Hair}"))}║')
-print(f'║Traits: {", ".join(sorted(RemoveDuplicates(Traits)))}{space*(90-len(", ".join(RemoveDuplicates(Traits))))}║')
+print(f'║Traits: {", ".join(sorted(remove_duplicates(Traits)))}{space*(90-len(", ".join(remove_duplicates(Traits))))}║')
 print("╚══════════════════════════════════════════════════════════════════════════════════════════════════╝")
 print()
