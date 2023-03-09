@@ -1,47 +1,45 @@
-["═", "║", "╔", "╗", "╚", "╝", "╠", "╣", "╦", "╩", "╬"]
-
 ╔════════════════════╦═════════════════════════════════════════════════════════════════════════════╗
-║  Kovács Béla       ║   Class                                Background                           ║
-║  -----------       ║    Subclass                            proficiency Bonus                    ║
-║  Name              ║   Race/Subrace                         Alignment                            ║
-╠════════════════════╬═════════════════════════╦════════════════╦══════════════════╦═══════════════╣
-║     STRENGHT       ║      SAVING THROWS      ║       AC 20    ║   Initiative 3   ║  Speed 25     ║
-║       19           ║ Strenght +3             ╠════════════════╩══════════════════╩═══════════════╣
-║       +3           ║ Dextreity +3            ║                     HITPOINTS                     ║
-╠════════════════════╣ Constitution +3         ║                        35                         ║
-║    DEXTERITY       ║ Itelligence +3          ╠═══════════════════════════════════════════════════╣
-║        19          ║ Wisdom +3               ║                 TEMOPRARY HITPOINTS               ║
-║        +3          ║ Charisma +3             ║                        8                          ║
-╠════════════════════╬═════════════════════════╬═════════════════╦═════════════════════════════════╣
-║    CONSTITUTION    ║       SKILLS            ║HIT DICE   1D10  ║  DEATH SAVES   O-O-O   O-O-O    ║
-║       19           ║o +3 Acrobatics          ╠═════════════════╩═════════════════════════════════╣
-║       +3           ║o +3 Animal Handling     ║                   EQUIPMENT                       ║
-╠════════════════════╣o +3 Arcana              ║                                                   ║
-║    INTELLIGENCE    ║o +3 Athletics           ║                                                   ║
-║       19           ║o +3 Deception           ║                                                   ║
-║       +3           ║o +3 History             ║                                                   ║
-╠════════════════════╣o +3 Insight             ║                                                   ║
-║      WISDOM        ║o +3 Intimidation        ║                                                   ║
-║       19           ║o +3 Investigation       ║                                                   ║
-║       +3           ║o +3 Medicine            ║                                                   ║
-╠════════════════════╣o +3 Nature              ║                                                   ║
-║      CHARISMA      ║o +3 Perception          ║                                                   ║
-║       19           ║o +3 Performance         ║                                                   ║
-║       +3           ║o +3 Persuation          ║                                                   ║
-╠════════════════════╣o +3 Religion            ║                                                   ║
-║                    ║o +3 Sleight of Hand     ║                                                   ║
-║ Passive Perception ║o +3 Stealth             ║                                                   ║
-║         11         ║o +3 Survival            ║                                                   ║
+║Raber Shain         ║Monk 9                                 Trade Sheriff                         ║
+║-----------         ║Subclass: Way of Shadow                                                      ║
+║Name                ║Fire Genasi                            Chaotic Neutral                       ║
+╠════════════════════╬═════════════════════════╦═══════════════════════════════════════════════════╣
+║Initiative 3        ║ Proficiency Bonus 4     ║Fighting style N/A                                 ║
+╠════════════════════╬═════════════════════════╬════════════════╦══════════════════╦═══════════════╣
+║      STRENGHT      ║     SAVING THROWS       ║ AC 13          ║ Initiative 3     ║ Speed 30      ║
+║         13         ║ 5 Strenght              ╠════════════════╩══════════════════╩═══════════════╣
+║         1          ║ 7 Dexterity             ║                     HITPOINTS                     ║
+╠════════════════════╣ 2 Constitution          ║                         84                        ║
+║     DEXTERITY      ║ 0 Intelligence          ╠═══════════════════════════════════════════════════╣
+║         17         ║ 0 Wisdom                ║                 TEMOPRARY HITPOINTS               ║
+║         3          ║ 0 Charisma              ║                                                   ║
+╠════════════════════╬═════════════════════════╬════════════════╦══════════════════════════════════╣
+║    CONSTITUTION    ║          SKILLS         ║ HIT DICE 8     ║   DEATH SAVES   O-O-O   O-O-O    ║
+║         15         ║ 7 Acrobatics            ╠════════════════╩══════════════════════════════════╣
+║         2          ║ 0 Animal Handling       ║                EQUIPMENT & WEAPONS                ║
+╠════════════════════╣ 0 Arcana                ║ Shortsword                                        ║
+║    INTELLIGENCE    ║ 1 Athletics             ║ Dungeoneer's Pack                                 ║
+║         11         ║ 0 Deception             ║ 10 Darts                                          ║
+║         0          ║ 0 History               ║ Thieves' Kit                                      ║
+╠════════════════════╣ 0 Insight               ║ Gray Cloak                                        ║
+║       WISDOM       ║ 0 Intimidation          ║ Sherrif's Insignia                                ║
+║         11         ║ 4 Investigation         ║ Set of Fine Clothes                               ║
+║         0          ║ 0 Medicine              ║ 17 gp                                             ║
+╠════════════════════╣ 0 Nature                ║                                                   ║
+║      CHARISMA      ║ 0 Perception            ║                                                   ║
+║         11         ║ 0 Performance           ║                                                   ║
+║         0          ║ 4 Persuation            ║                                                   ║
+╠════════════════════╣ 4 Religion              ║                                                   ║
+║                    ║ 3 Sleight of Hand       ║                                                   ║
+║ Passive Perception ║ 3 Stealth               ║                                                   ║
+║         14         ║ 0 Survival              ║                                                   ║
 ╠════════════════════╩═════════════════════════╩═══════════════════════════════════════════════════╣
-║Other proficiencies & Languages:                                                                  ║
-║LANG                                                                                              ║
-║weapon                                                                                            ║
-║armor                                                                                             ║
-║tool                                                                                              ║
-╠══════════════════════════════════════════════════════════════════════════════════════════════════╣
-║OTHERS:  Height: 6' 7"   Weight: 318 Pounds    Eye Colour: Gold     Skin Colour: White Scales     ║
-║ Hair Colour: N/A                                                                                 ║
+║Languages, Armor Proficiencies, Weapon Proficiencies, Tool Proficiencies:                         ║
+║Common, Elvish, Preordial                                                                         ║
 ║                                                                                                  ║
-║Traits:                                                                                           ║
+║Shortswords, Simple Weapons                                                                       ║
+║Lyre, Thieves' Tools                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════════════════════════╣
+║Height: 5.67 Feet, Weight: 182 Pounds, Eye Color: Reddish Orange, Skin Color: Bronze              ║
+║Hair Color: Orange                                                                                ║
+║Traits: Darkvision(60ft), Reach to the Blaze                                                      ║
 ╚══════════════════════════════════════════════════════════════════════════════════════════════════╝
-fighting style/subclass, immunities,  
